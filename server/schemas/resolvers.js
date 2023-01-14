@@ -4,30 +4,37 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
+    
     users: async () => {
       return User.find().populate('courses').populate({
         path: 'courses',
         populate: 'assignments'
       });
     },
+
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('courses').populate({
         path: 'courses',
         populate: 'assignments'
       });
     },
+    
     courses: async () => {
     return Course.find().populate('assignments')
     },
+    
     course: async (parent, { courseId }) => {
       return Course.findOne({ _id: courseId });
     },
+    
     assignments: async () => {
       return Assignment.find()
     },
+    
     assignment: async (parent, { assignmentID }) => {
       return Course.findOne({ _id: assignmentId });
     },
+    
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('courses').populate({
@@ -37,6 +44,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+
   },
 
   Mutation: {
@@ -82,6 +90,7 @@ const resolvers = {
     //   }
     //   throw new AuthenticationError('You need to be logged in!');
     // },
+
     // addComment: async (parent, { thoughtId, commentText }, context) => {
     //   if (context.user) {
     //     return Thought.findOneAndUpdate(
@@ -99,6 +108,7 @@ const resolvers = {
     //   }
     //   throw new AuthenticationError('You need to be logged in!');
     // },
+
     // removeThought: async (parent, { thoughtId }, context) => {
     //   if (context.user) {
     //     const thought = await Thought.findOneAndDelete({
@@ -115,6 +125,7 @@ const resolvers = {
     //   }
     //   throw new AuthenticationError('You need to be logged in!');
     // },
+    
     // removeComment: async (parent, { thoughtId, commentId }, context) => {
     //   if (context.user) {
     //     return Thought.findOneAndUpdate(

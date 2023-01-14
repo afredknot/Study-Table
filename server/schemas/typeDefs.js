@@ -29,22 +29,10 @@ const typeDefs = gql`
     createdAt: String
   }
 
-  # ------------------------------------------------------------------------------------------
-
   type Auth {
     token: ID!
     user: User
   }
-
-  # type Query {
-  #   users: [User]
-  #   user(username: String!): User
-  #   thoughts(username: String): [Thought]
-  #   thought(thoughtId: ID!): Thought
-  #   me: User
-  # }
-
-  # ------------------------------------------------------------------------------------------
 
   type Query {
     users: [User]
@@ -55,8 +43,6 @@ const typeDefs = gql`
     assignment(assignmentTitle: String!): Assignment
     me: User
   }
-
-
 
   # ------------------------------------------------------------------------------------------
 
@@ -71,16 +57,6 @@ const typeDefs = gql`
 
   # ------------------------------------------------------------------------------------------
 
-  # type Mutation {
-  #   addUser(username: String!, email: String!, password: String!): Auth
-  #   login(email: String!, password: String!): Auth
-  #   addThought(thoughtText: String!): Thought
-  #   addComment(thoughtId: ID!, commentText: String!): Thought
-  #   removeThought(thoughtId: ID!): Thought
-  #   removeComment(thoughtId: ID!, commentId: ID!): Thought
-  # }
-
-  # ------------------------------------------------------------------------------------------
 `;
 
 module.exports = typeDefs;

@@ -21,7 +21,7 @@ const courseSchema = new Schema({
     ref: 'User',
   },
   teachingAssistant: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: 'User',
   },
   assignments: [
