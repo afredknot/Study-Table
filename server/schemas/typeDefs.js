@@ -1,34 +1,12 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  # type User {
-  #   _id: ID
-  #   username: String
-  #   email: String
-  #   password: String
-  #   thoughts: [Thought]!
-  # }
-
-  # type Thought {
-  #   _id: ID
-  #   thoughtText: String
-  #   thoughtAuthor: String
-  #   createdAt: String
-  #   comments: [Comment]!
-  # }
-
-  # type Comment {
-  #   _id: ID
-  #   commentText: String
-  #   commentAuthor: String
-  #   createdAt: String
-  # }
-
-  # ------------------------------------------------------------------------------------------
 
   type User {
     _id: ID
     username: String
+    firstName: String
+    lastName: String
     email: String
     password: String
     courses: [Course]!
@@ -37,10 +15,9 @@ const typeDefs = gql`
   type Course {
     _id: ID
     courseTitle: String
-    courseInstructor: [User]
-    students: [User]
-    teachingAssistant: [User]
-    assignments: [Assignment]
+    instructor: User
+    teachingAssistant: [User]!
+    assignments: [Assignment]!
     createdAt: String
   }
 
@@ -72,9 +49,10 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(username: String!): User
-    course(courseId: ID!): Course
-    assignments: (courseTitle: String): [Assignment]
-    assignment:(assignmentId: ID!): Assignment
+    courses: [Course]
+    course(courseTitle: String!): Course
+    assignments: [Assignment]
+    assignment(assignmentTitle: String!): Assignment
     me: User
   }
 
@@ -85,10 +63,10 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addThought(thoughtText: String!): Thought
-    addComment(thoughtId: ID!, commentText: String!): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+    # addThought(thoughtText: String!): Thought
+    # addComment(thoughtId: ID!, commentText: String!): Thought
+    # removeThought(thoughtId: ID!): Thought
+    # removeComment(thoughtId: ID!, commentId: ID!): Thought
   }
 
   # ------------------------------------------------------------------------------------------

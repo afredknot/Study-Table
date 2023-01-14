@@ -14,19 +14,15 @@ const courseSchema = new Schema({
     required: true,
     trim: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
-  },
   instructor: {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: 'User',
+    type: String,
+    required: true,
+    trim: true,
+    ref: 'User',
   },
   teachingAssistant: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
   assignments: [
     {
@@ -34,6 +30,11 @@ const courseSchema = new Schema({
       ref: 'Assignment',
     },
   ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    get: (timestamp) => dateFormat(timestamp),
+  },
 });
 
 const Course = model('Course', courseSchema);

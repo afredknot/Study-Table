@@ -7,7 +7,6 @@ const assignmentSeeds = require('./assignmentSeeds.json');
 db.once('open', async () => {
   try {
 
-    await Thought.deleteMany({});
     await Assignment.deleteMany({});
     await Course.deleteMany({});
     await User.deleteMany({});

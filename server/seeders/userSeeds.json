@@ -2,42 +2,42 @@
   {
     "username": "Tom",
     "firstName": "Tom",
-    "lastname": "Fallara",
+    "lastName": "Fallara",
     "email": "tom@gmail.com",
     "password": "password"
   },
   {
     "username": "Fritz",
     "firstName": "Nathaniel",
-    "lastname": "Fritz",
+    "lastName": "Fritz",
     "email": "fritz@gmail.com",
     "password": "password"
   },
   {
     "username": "Daniel",
     "firstName": "Daniel",
-    "lastname": "Nelson",
+    "lastName": "Nelson",
     "email": "daniel@gmail.com",
     "password": "password"
   },
   {
     "username": "Michael",
     "firstName": "Michael",
-    "lastname": "Frabott",
+    "lastName": "Frabott",
     "email": "michael@gmail.com",
     "password": "password"
   },
   {
     "username": "Rich",
     "firstName": "Rich",
-    "lastname": "Widtmann",
+    "lastName": "Widtmann",
     "email": "rjw1@gmail.com",
     "password": "password"
   },
   {
     "username": "Nate",
     "firstName": "Nate",
-    "lastname": "Russell",
+    "lastName": "Russell",
     "email": "nate@gmail.com",
     "password": "password"
   }

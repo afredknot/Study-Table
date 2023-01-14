@@ -5,21 +5,35 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('courses');
+      return User.find().populate('courses').populate({
+        path: 'courses',
+        populate: 'assignments'
+      });
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('courses');
+      return User.findOne({ username }).populate('courses').populate({
+        path: 'courses',
+        populate: 'assignments'
+      });
     },
-   courses: async (parent, { instructor }) => {
-      const params = instructor ? { instructor } : {};
-      return Course.find(params).sort({ createdAt: -1 });
+    courses: async () => {
+    return Course.find().populate('assignments')
     },
     course: async (parent, { courseId }) => {
       return Course.findOne({ _id: courseId });
     },
+    assignments: async () => {
+      return Assignment.find()
+    },
+    assignment: async (parent, { assignmentID }) => {
+      return Course.findOne({ _id: assignmentId });
+    },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('courses');
+        return User.findOne({ _id: context.user._id }).populate('courses').populate({
+          path: 'courses',
+          populate: 'assignments'
+        });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
