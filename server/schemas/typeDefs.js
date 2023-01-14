@@ -1,41 +1,86 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+  # type User {
+  #   _id: ID
+  #   username: String
+  #   email: String
+  #   password: String
+  #   thoughts: [Thought]!
+  # }
+
+  # type Thought {
+  #   _id: ID
+  #   thoughtText: String
+  #   thoughtAuthor: String
+  #   createdAt: String
+  #   comments: [Comment]!
+  # }
+
+  # type Comment {
+  #   _id: ID
+  #   commentText: String
+  #   commentAuthor: String
+  #   createdAt: String
+  # }
+
+  # ------------------------------------------------------------------------------------------
+
   type User {
     _id: ID
     username: String
     email: String
     password: String
-    thoughts: [Thought]!
+    courses: [Course]!
   }
 
-  type Thought {
+  type Course {
     _id: ID
-    thoughtText: String
-    thoughtAuthor: String
+    courseTitle: String
+    courseInstructor: [User]
+    students: [User]
+    teachingAssistant: [User]
+    assignments: [Assignment]
     createdAt: String
-    comments: [Comment]!
   }
 
-  type Comment {
+  type Assignment {
     _id: ID
-    commentText: String
-    commentAuthor: String
+    assignmentTitle: String
+    assignmentDescription: String
+    assignmentDueDate: String
     createdAt: String
   }
+
+  # ------------------------------------------------------------------------------------------
 
   type Auth {
     token: ID!
     user: User
   }
 
+  # type Query {
+  #   users: [User]
+  #   user(username: String!): User
+  #   thoughts(username: String): [Thought]
+  #   thought(thoughtId: ID!): Thought
+  #   me: User
+  # }
+
+  # ------------------------------------------------------------------------------------------
+
   type Query {
     users: [User]
     user(username: String!): User
-    thoughts(username: String): [Thought]
-    thought(thoughtId: ID!): Thought
+    course(courseId: ID!): Course
+    assignments: (courseTitle: String): [Assignment]
+    assignment:(assignmentId: ID!): Assignment
     me: User
   }
+
+
+
+  # ------------------------------------------------------------------------------------------
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
@@ -45,6 +90,19 @@ const typeDefs = gql`
     removeThought(thoughtId: ID!): Thought
     removeComment(thoughtId: ID!, commentId: ID!): Thought
   }
+
+  # ------------------------------------------------------------------------------------------
+
+  type Mutation {
+    addUser(username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+    addThought(thoughtText: String!): Thought
+    addComment(thoughtId: ID!, commentText: String!): Thought
+    removeThought(thoughtId: ID!): Thought
+    removeComment(thoughtId: ID!, commentId: ID!): Thought
+  }
+
+  # ------------------------------------------------------------------------------------------
 `;
 
 module.exports = typeDefs;
