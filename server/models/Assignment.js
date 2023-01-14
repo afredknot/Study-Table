@@ -19,6 +19,11 @@ const assignmentSchema = new Schema({
     required: true,
     trim: true,
   },
+  course: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Course',
+},
   createdAt: {
     type: Date,
     default: Date.now,

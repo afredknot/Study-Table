@@ -19,18 +19,15 @@ const courseSchema = new Schema({
     default: Date.now,
     get: (timestamp) => dateFormat(timestamp),
   },
-  instructor: [
-    {
+  instructor: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+  },
+  teachingAssistant: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-    },
-  ],
-  teachingAssistant: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
-  ],
+  },
   assignments: [
     {
       type: Schema.Types.ObjectId,
