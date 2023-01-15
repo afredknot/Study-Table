@@ -74,6 +74,31 @@ const resolvers = {
     },
 
 
+
+
+
+    // createCourse
+    
+    // addStudentToCourse
+    // removeStudentFromCourse
+
+    // createAssignment
+    // updateAssignment
+    // removeAssignment
+
+    // addTeachingAssistant
+    // updateTeachingAssistant
+    // removeTeachingAssistant
+
+    // updateInstructor
+    // removeInstructor
+
+    // updateAssignmentStatus
+
+
+
+    
+
     // addThought: async (parent, { thoughtText }, context) => {
     //   if (context.user) {
     //     const thought = await Thought.create({

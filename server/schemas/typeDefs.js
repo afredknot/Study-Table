@@ -26,6 +26,9 @@ const typeDefs = gql`
     assignmentTitle: String
     assignmentDescription: String
     assignmentDueDate: String
+    studentDefaultStatus: [User]
+    requestingHelp: [User]
+    offeringAssistance: [User]
     createdAt: String
   }
 
@@ -53,6 +56,33 @@ const typeDefs = gql`
     # addComment(thoughtId: ID!, commentText: String!): Thought
     # removeThought(thoughtId: ID!): Thought
     # removeComment(thoughtId: ID!, commentId: ID!): Thought
+
+
+    # createCourse
+    
+    # addStudentToCourse
+    # removeStudentFromCourse
+
+    # createAssignment
+    # updateAssignment
+    # removeAssignment
+
+    # addTeachingAssistant
+    # updateTeachingAssistant
+    # removeTeachingAssistant
+
+    # updateInstructor
+    # removeInstructor
+
+    # updateAssignmentStatus
+
+
+
+
+
+
+
+    
   }
 
   # ------------------------------------------------------------------------------------------

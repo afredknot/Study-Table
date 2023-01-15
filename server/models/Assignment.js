@@ -23,7 +23,43 @@ const assignmentSchema = new Schema({
     type: String,
     required: true,
     ref: 'Course',
-},
+  },
+  studentDefaultStatus: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+  requestingHelp: [
+    {
+      student: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+      },      
+      githubRepo: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 280,
+      },
+      problemDescription: {
+        type: String,
+        required: true,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+      },
+    }
+  ],
+  offeringAssistance: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
