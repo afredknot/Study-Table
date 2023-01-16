@@ -1,26 +1,34 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+
   type User {
     _id: ID
     username: String
+    firstName: String
+    lastName: String
     email: String
     password: String
-    thoughts: [Thought]!
+    courses: [Course]!
   }
 
-  type Thought {
+  type Course {
     _id: ID
-    thoughtText: String
-    thoughtAuthor: String
+    courseTitle: String
+    instructor: User
+    teachingAssistant: [User]!
+    assignments: [Assignment]!
     createdAt: String
-    comments: [Comment]!
   }
 
-  type Comment {
+  type Assignment {
     _id: ID
-    commentText: String
-    commentAuthor: String
+    assignmentTitle: String
+    assignmentDescription: String
+    assignmentDueDate: String
+    studentDefaultStatus: [User]
+    requestingHelp: [User]
+    offeringAssistance: [User]
     createdAt: String
   }
 
@@ -32,19 +40,58 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(username: String!): User
-    thoughts(username: String): [Thought]
-    thought(thoughtId: ID!): Thought
+    courses: [Course]
+    course(courseTitle: String!): Course
+    assignments: [Assignment]
+    assignment(assignmentTitle: String!): Assignment
     me: User
   }
+
+  # ------------------------------------------------------------------------------------------
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addThought(thoughtText: String!): Thought
-    addComment(thoughtId: ID!, commentText: String!): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+
+
+
+    # addThought(thoughtText: String!): Thought
+    # addComment(thoughtId: ID!, commentText: String!): Thought
+    # removeThought(thoughtId: ID!): Thought
+    # removeComment(thoughtId: ID!, commentId: ID!): Thought
+
+
+
+
+    # createCourse
+    
+    # addStudentToCourse
+    # removeStudentFromCourse
+
+    # createAssignment
+    # updateAssignment
+    # removeAssignment
+
+    # addTeachingAssistant
+    # updateTeachingAssistant
+    # removeTeachingAssistant
+
+    # updateInstructor
+    # removeInstructor
+
+    # updateAssignmentStatus
+
+
+
+
+
+
+
+    
   }
+
+  # ------------------------------------------------------------------------------------------
+
 `;
 
 module.exports = typeDefs;
