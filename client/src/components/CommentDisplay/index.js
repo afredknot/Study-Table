@@ -4,6 +4,7 @@ const CommentDisplay = ({ comment }) => {
 
     return (
         <div>
+            <button onClick={createComment}>Create Comment</button>
             {comment.map((comment) => (
                 <div>
                     <div>
