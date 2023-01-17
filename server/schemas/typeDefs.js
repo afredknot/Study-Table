@@ -70,7 +70,7 @@ const typeDefs = gql`
 
     updateAssignment(assignmentId: ID!, assignmentTitle: String!, assignmentDescription: String!, assignmentDueDate: String!): Assignment
 
-    # removeAssignment
+    removeAssignment(assignmentId: ID!, courseId: ID!): Assignment
 
     # addTeachingAssistant
     # updateTeachingAssistant
