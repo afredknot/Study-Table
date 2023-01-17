@@ -61,14 +61,15 @@ const typeDefs = gql`
     # removeComment(thoughtId: ID!, commentId: ID!): Thought
 
 
-
-
     createCourse(courseTitle:String!, courseDescription:String!, instructor:String!, teachingAssistant: String): Course
     
     addStudentToCourse(userId: ID!, courseId: ID!): User
     removeStudentFromCourse(userId: ID!, courseId: ID!): User
-    # createAssignment
-    # updateAssignment
+    
+    createAssignment(courseId: ID!, course:String!, assignmentTitle: String!, assignmentDescription: String!, assignmentDueDate: String!): Assignment
+
+    updateAssignment(assignmentId: ID!, assignmentTitle: String!, assignmentDescription: String!, assignmentDueDate: String!): Assignment
+
     # removeAssignment
 
     # addTeachingAssistant
