@@ -64,10 +64,10 @@ function App() {
                 path="/me" 
                 element={<Profile />}
               />
-              <Route 
+              {/* <Route 
                 path="/profiles/:username" 
                 element={<Profile />}
-              />
+              /> */}
               <Route 
                 path="/thoughts/:thoughtId" 
                 element={<SingleThought />}
