@@ -68,7 +68,8 @@ const typeDefs = gql`
     # addStudentToCourse
     # removeStudentFromCourse
 
-    # createAssignment
+    createAssignment(courseId: ID!, assignmentTitle: String!, assignmentDescription: String!, assignmentDueDate: String!): Assignment
+
     # updateAssignment
     # removeAssignment
 
