@@ -1,11 +1,3 @@
-import React from 'react';
+// LIGHT AND DARK MODE
 
-const ProfileIcon = ({iconUrl, onClick}) => {
-  return (
-    <div onClick={onClick}>
-      <img src={iconUrl} alt="Profile Icon" />
-    </div>
-  );
-}
-
-export default ProfileIcon;
+// 
