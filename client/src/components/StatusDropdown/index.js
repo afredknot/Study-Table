@@ -15,7 +15,6 @@ const StatusDropdown = () => {
         <option value="Not Started" style={{ color: "red" }}>Not Started</option>
         <option value="In Progress" style={{ color: "orange" }}>In Progress</option>
         <option value="Completed" style={{ color: "green" }}>Completed</option>
-        <option value="Willing to Help" style={{ color: "blue" }}>Willing to Help</option>
       </select>
     </div>
   );
