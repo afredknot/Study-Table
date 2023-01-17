@@ -165,7 +165,23 @@ const resolvers = {
         );
       // }
       throw new AuthenticationError('You need to be logged in!');
-    }, 
+    },
+    //removeAssignment
+    removeAssignment: async (parent, { courseId, assignmentId}, context) => {
+      // if (context.user) {
+        const assignment = await Assignment.findOneAndDelete({
+          _id: assignmentId
+        });
+
+        await Course.findOneAndUpdate(
+          { _id: courseId },
+          { $pull: { assignments: assignment._id } }
+        );
+
+        return assignment;
+      // }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     // removeComment: async (parent, { thoughtId, commentId }, context) => {
     //   if (context.user) {
     //     return Thought.findOneAndUpdate(
