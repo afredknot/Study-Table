@@ -153,11 +153,13 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     //  TODO: updateAssignment
-    updateAssignment: async (parent, { id, assignmentTitle, assignmentDescription, assignmentDueDate }, context) => {
+    updateAssignment: async (parent, { assignmentId, assignmentTitle, assignmentDescription, assignmentDueDate }, context) => {
       // if (context.user) {
        return await Assignment.findOneAndUpdate(
-        { _id: id},
+        { _id: assignmentId},
         {
+          assignmentTitle,
+          assignmentDescription,
           assignmentDueDate,
         },
         {new: true}
