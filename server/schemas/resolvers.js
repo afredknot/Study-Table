@@ -99,7 +99,7 @@ const resolvers = {
 
     //  TODO: addStudentToCourse
         addStudentToCourse: async (parent, { courseId, userId }, context) => {
-      if (context.user) {
+      // if (context.user) {
         return User.findOneAndUpdate(
           { _id: userId },
           {
@@ -112,7 +112,7 @@ const resolvers = {
             runValidators: true,
           }
         );
-      }
+      // }
       throw new AuthenticationError('You need to be logged in!');
     },
 
@@ -136,7 +136,7 @@ const resolvers = {
     
 
     //  TODO: createAssignment
-      // addThought: async (parent, { thoughtText }, context) => {
+    //   addThought: async (parent, { thoughtText }, context) => {
     //   if (context.user) {
     //     const thought = await Thought.create({
     //       thoughtText,

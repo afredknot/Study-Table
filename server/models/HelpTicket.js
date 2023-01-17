@@ -30,6 +30,6 @@ const helpTicketSchema = new Schema({
   },
 });
 
-const HelpTicket = model('Assignment', helpTicketSchema);
+const HelpTicket = model('HelpTicket', helpTicketSchema);
 
 module.exports = HelpTicket;
