@@ -49,8 +49,8 @@ const resolvers = {
 
   Mutation: {
     
-    addUser: async (parent, { username, firstName, lastName, email, password }) => {
-      const user = await User.create({ username, firstName, lastName, email, password });
+    addUser: async (parent, { username, role, firstName, lastName, email, password }) => {
+      const user = await User.create({ username, role, firstName, lastName, email, password });
       const token = signToken(user);
       return { token, user };
     },
@@ -97,7 +97,7 @@ const resolvers = {
 
     //  TODO: addStudentToCourse
     addStudentToCourse: async (parent, { userId, courseId }) => {
-      if (context.user) {
+      // if (context.user) {
         return User.findOneAndUpdate(
           { _id: userId },
           {
@@ -108,7 +108,7 @@ const resolvers = {
             runValidators: true,
           }
         );
-      }
+      // }
          throw new AuthenticationError('You need to be logged in!');
     },
 
@@ -130,7 +130,7 @@ const resolvers = {
          throw new AuthenticationError('You need to be logged in!');
     },
 
-    
+
   //createAssignment
     createAssignment: async (parent, { course, courseId, assignmentTitle, assignmentDescription, assignmentDueDate }, context) => {
     // if (context.user) {
@@ -303,46 +303,48 @@ const resolvers = {
 
     //  TODO: updateAssignmentStatus
     
-    updateAssignmentStatus: async (parent, { thoughtId, commentId }, context) => {
-      // if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
-          {
-            $pull: {
-              comments: {
-                _id: commentId,
-                commentAuthor: context.user.username,
-              },
-            },
-          },
-          { new: true }
-        );
-      // }
-      throw new AuthenticationError('You need to be logged in!');
-    },
+    // updateAssignmentStatus: async (parent, { thoughtId, commentId }, context) => {
+    //   // if (context.user) {
+    //     return Thought.findOneAndUpdate(
+    //       { _id: thoughtId },
+    //       {
+    //         $pull: {
+    //           comments: {
+    //             _id: commentId,
+    //             commentAuthor: context.user.username,
+    //           },
+    //         },
+    //       },
+    //       { new: true }
+    //     );
+    //   // }
+    //   throw new AuthenticationError('You need to be logged in!');
+    // },
 
     //  TODO: addHelpTicket
     
-    addHelpTicket: async (parent, { student, githubRepo, problemDescription }, context) => {
+    addHelpTicket: async (parent, { assignmentId, topic, githubRepo, problemDescription }, context) => {
       // if (context.user) {
         const helpTicket = await helpTicket.create({
           student: context.user._id, 
+          topic,
           githubRepo, 
           problemDescription, 
           ticketStatus: True
         });
 
         await Assignment.findOneAndUpdate(
-          { _id: assignment._id },
-          { $addToSet: { requestingHelp: user._id } }
-          { $addToSet: { requestingHelp: user._id } }
+          { _id: assignmentId },
+          { $addToSet: { requestingHelp: helpTicket._id } },
+          { $pull: { studentDefaultStatus: user._id } },
+          { $pull: { offeringAssistance: user._id } },
 
         );
 
         return helpTicket;
       // }
       throw new AuthenticationError('You need to be logged in!');
-
+    },
 
     // addThought: async (parent, { thoughtText }, context) => {
     //   if (context.user) {
@@ -412,7 +414,7 @@ const resolvers = {
     //     );
     //   }
     //   throw new AuthenticationError('You need to be logged in!');
-    // },
+    
   },
 };
 

@@ -65,7 +65,7 @@ const typeDefs = gql`
   # ------------------------------------------------------------------------------------------
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(username: String!, role: String!, firstName: String!, lastName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
 
 
@@ -95,7 +95,7 @@ const typeDefs = gql`
     # removeInstructor
 
     # updateAssignmentStatus
-    addHelpTicket(student: ID!, githubRepo: String!, problemDescription: String!, ticketStatus: Boolean!)
+    addHelpTicket(topic: String, githubRepo: String!, problemDescription: String!, ticketStatus: Boolean!): HelpTicket
 
 
 
