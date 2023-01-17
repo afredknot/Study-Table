@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import ProfileIcon from './ProfileIcon';
 
-const Header = ({iconUrl, onIconClick, title}) => {
+const Header = ({title}) => {
 
   const [searchValue, setSearchValue] = useState('');
 
@@ -17,8 +16,8 @@ const Header = ({iconUrl, onIconClick, title}) => {
   
   return (
     <header>
-      <ProfileIcon iconUrl={iconUrl} onClick={onIconClick} />
       <h1>{title}</h1>
+      
       <form onSubmit={handleSubmit}>
         <input type="text" value={searchValue} onChange={handleSearch} placeholder="Search..."/>
         <button type="submit">Search</button>
