@@ -18,10 +18,9 @@ const helpTicketSchema = new Schema({
     type: String,
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
+  ticketStatus: {
+    type: Boolean,
+    required: true,
   },
   createdAt: {
     type: Date,

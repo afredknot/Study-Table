@@ -79,7 +79,7 @@ const typeDefs = gql`
     # removeInstructor
 
     # updateAssignmentStatus
-
+    addHelpTicket(student: ID!, githubRepo: String!, problemDescription: String!, ticketStatus: Boolean!)
 
 
 
