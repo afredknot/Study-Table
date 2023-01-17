@@ -75,8 +75,6 @@ const resolvers = {
 
 
 
-
-
     // TODO: createCourse
       createCourse: async (parent, { courseTitle, courseDescription, instructor, teachingAssistant }, context) => {
       if (context.user) {
@@ -135,25 +133,38 @@ const resolvers = {
     },
     
 
-    //  TODO: createAssignment
-    //   addThought: async (parent, { thoughtText }, context) => {
-    //   if (context.user) {
-    //     const thought = await Thought.create({
-    //       thoughtText,
-    //       thoughtAuthor: context.user.username,
-    //     });
+    //createAssignment
+      createAssignment: async (parent, { course, courseId, assignmentTitle, assignmentDescription, assignmentDueDate }, context) => {
+      // if (context.user) {
+        const assignment = await Assignment.create({
+          assignmentTitle,
+          assignmentDescription,
+          assignmentDueDate,
+          course
+        });
 
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $addToSet: { thoughts: thought._id } }
-    //     );
+        await Course.findOneAndUpdate(
+          { _id: courseId },
+          { $addToSet: { assignments: assignment._id } }
+        );
 
-    //     return thought;
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+        return assignment;
+      // }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     //  TODO: updateAssignment
-        
+    updateAssignment: async (parent, { id, assignmentTitle, assignmentDescription, assignmentDueDate }, context) => {
+      // if (context.user) {
+       return await Assignment.findOneAndUpdate(
+        { _id: id},
+        {
+          assignmentDueDate,
+        },
+        {new: true}
+        );
+      // }
+      throw new AuthenticationError('You need to be logged in!');
+    }, 
     // removeComment: async (parent, { thoughtId, commentId }, context) => {
     //   if (context.user) {
     //     return Thought.findOneAndUpdate(
