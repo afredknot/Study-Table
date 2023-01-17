@@ -7,7 +7,12 @@ const helpTicketSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-  },      
+  },    
+  topic: {
+    type: String,
+    minlength: 1,
+    maxlength: 280,
+  },  
   githubRepo: {
     type: String,
     required: true,

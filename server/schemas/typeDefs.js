@@ -3,21 +3,23 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
 
   type User {
-    _id: ID
-    username: String
-    firstName: String
-    lastName: String
-    email: String
+    _id: ID!
+    username: String!
+    firstName: String!
+    lastName: String!
+    avatar: String
+    role: String
+    email: String!
     password: String
-    courses: [Course]!
+    courses: [Course]
   }
 
   type Course {
     _id: ID
     courseTitle: String
     instructor: User
-    teachingAssistant: [User]!
-    assignments: [Assignment]!
+    teachingAssistant: [User]
+    assignments: [Assignment]
     createdAt: String
   }
 
@@ -26,9 +28,22 @@ const typeDefs = gql`
     assignmentTitle: String
     assignmentDescription: String
     assignmentDueDate: String
+    studentProgressNotStarted: [User]
+    studentProgressWorking: [User]
+    studentProgressCompleted: [User]
     studentDefaultStatus: [User]
     requestingHelp: [User]
     offeringAssistance: [User]
+    createdAt: String
+  }
+
+  type HelpTicket {
+    _id: ID!
+    student: User!
+    topic: String
+    githubRepo: String!
+    problemDescription: String!
+    ticketStatus: Boolean!
     createdAt: String
   }
 

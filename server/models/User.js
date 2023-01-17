@@ -18,6 +18,15 @@ const userSchema = new Schema({
     required: true,
     trim: true,
   },
+  avatar: {
+    type: String,
+    trim: true,
+  },
+  role: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   email: {
     type: String,
     required: true,
