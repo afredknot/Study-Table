@@ -78,59 +78,61 @@ const resolvers = {
 
 
     // TODO: createCourse
-      // addThought: async (parent, { thoughtText }, context) => {
-    //   if (context.user) {
-    //     const thought = await Thought.create({
-    //       thoughtText,
-    //       thoughtAuthor: context.user.username,
-    //     });
+      createCourse: async (parent, { courseTitle, courseDescription, instructor, teachingAssistant }, context) => {
+      if (context.user) {
+        const course = await Course.create({
+          courseTitle, 
+          courseDescription, 
+          instructor, 
+          teachingAssistant,
+        });
 
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $addToSet: { thoughts: thought._id } }
-    //     );
+        // await User.findOneAndUpdate(
+        //   { _id: context.user._id },
+        //   { $addToSet: { thoughts: thought._id } }
+        // );
 
-    //     return thought;
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+        return course;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
 
     //  TODO: addStudentToCourse
-        // addComment: async (parent, { thoughtId, commentText }, context) => {
-    //   if (context.user) {
-    //     return Thought.findOneAndUpdate(
-    //       { _id: thoughtId },
-    //       {
-    //         $addToSet: {
-    //           comments: { commentText, commentAuthor: context.user.username },
-    //         },
-    //       },
-    //       {
-    //         new: true,
-    //         runValidators: true,
-    //       }
-    //     );
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+        addStudentToCourse: async (parent, { courseId, userId }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: userId },
+          {
+            $addToSet: {
+              courses: { courseId },
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
 
     //  TODO: removeStudentFromCourse
-    // removeThought: async (parent, { thoughtId }, context) => {
-    //   if (context.user) {
-    //     const thought = await Thought.findOneAndDelete({
-    //       _id: thoughtId,
-    //       thoughtAuthor: context.user.username,
-    //     });
-
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $pull: { thoughts: thought._id } }
-    //     );
-
-    //     return thought;
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+    removeStudentFromCourse: async (parent, { courseId, userId }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: userId },
+          {
+            $pull: {
+              courses: {
+                _id: courseId,
+              },
+            },
+          },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     
 
     //  TODO: createAssignment

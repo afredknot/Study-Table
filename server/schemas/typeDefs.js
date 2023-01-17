@@ -63,10 +63,10 @@ const typeDefs = gql`
 
 
 
-    # createCourse
+    createCourse(courseTitle:String!, courseDescription:String!, instructor:String!, teachingAssistant: String)
     
-    # addStudentToCourse
-    # removeStudentFromCourse
+    addStudentToCourse(studentId: ID!, courseId: ID!)
+    removeStudentFromCourse(userId: ID!, courseId: ID!)
 
     # createAssignment
     # updateAssignment
