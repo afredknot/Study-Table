@@ -75,6 +75,7 @@ const resolvers = {
       return { token, user };
     },
 
+
     updateUserProfile: async (parent, { userId, role, firstName, lastName, email, avatar, password }, context) => {
       // if (context.user) {
        return await User.findOneAndUpdate(
@@ -92,6 +93,7 @@ const resolvers = {
       // }
       throw new AuthenticationError('You need to be logged in!');
     },
+
 
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -113,16 +115,13 @@ const resolvers = {
 
 
     createCourse: async (parent, { courseTitle, courseDescription, instructor, teachingAssistant }, context) => {
-
       // if (context.user) {
-
       const course = await Course.create({
         courseTitle, 
         courseDescription, 
         instructor, 
         teachingAssistant,
       });
-
       return course;
     // }
       throw new AuthenticationError('You need to be logged in!');
@@ -130,7 +129,6 @@ const resolvers = {
 
 
     addStudentToCourse: async (parent, { userId, courseId }) => {
-      
       // if (context.user) {
          await User.findOneAndUpdate(
           { _id: userId },
@@ -140,7 +138,6 @@ const resolvers = {
             runValidators: true,
           }
         );
-
         const course = await Course.findOneAndUpdate(
           { _id: courseId },
           { $addToSet: { students: userId } },
@@ -149,7 +146,6 @@ const resolvers = {
             runValidators: true,
           }
         );
-
         return course;
       // }
          throw new AuthenticationError('You need to be logged in!');
@@ -171,7 +167,6 @@ const resolvers = {
          throw new AuthenticationError('You need to be logged in!');
     },
 
-
   
     createAssignment: async (parent, { courseId, assignmentTitle, assignmentDescription, assignmentDueDate }, context) => {
     // if (context.user) {
@@ -180,7 +175,6 @@ const resolvers = {
         assignmentDescription,
         assignmentDueDate,
       });
-
       const course = await Course.findOneAndUpdate(
         { _id: courseId },
         { $addToSet: { assignments: assignment._id } }
@@ -221,12 +215,10 @@ const resolvers = {
         const assignment = await Assignment.findOneAndDelete({
           _id: assignmentId
         });
-
         await Course.findOneAndUpdate(
           { _id: courseId },
           { $pull: { assignments: assignment._id } }
         );
-
         return assignment;
       // }
       throw new AuthenticationError('You need to be logged in!');
@@ -242,7 +234,6 @@ const resolvers = {
           courseDescription,
           teachingAssistant
         },
-
         {new: true}
         );
       // }
