@@ -135,13 +135,12 @@ const resolvers = {
 
 
   //createAssignment
-    createAssignment: async (parent, { course, courseId, assignmentTitle, assignmentDescription, assignmentDueDate }, context) => {
+    createAssignment: async (parent, { courseId, assignmentTitle, assignmentDescription, assignmentDueDate }, context) => {
     // if (context.user) {
       const assignment = await Assignment.create({
         assignmentTitle,
         assignmentDescription,
         assignmentDueDate,
-        // course
       });
 
       await Course.findOneAndUpdate(
