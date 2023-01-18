@@ -3,8 +3,8 @@ import React from "react";
 const TicketSelector = ({tickets, handleTicketSelect}) => {
 
     return (
-      <div className="container">
-        <div className ="card align-content-center col-6">
+      
+        <div className ="card align-content-center col-3">
             <ul>
               <p>this is the card for holding the ticket selectors</p>
             {/* {tickets.map((ticket, index) => (
@@ -17,7 +17,7 @@ const TicketSelector = ({tickets, handleTicketSelect}) => {
             ))}   */}
             </ul>
         </div>
-        </div>
+        
     )
 }
 

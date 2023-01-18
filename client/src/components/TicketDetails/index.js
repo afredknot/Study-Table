@@ -3,17 +3,18 @@ import CommentDisplay from "../CommentDisplay";
 
 const TicketDetails = ({ticket, user}) => {
 
-    const [status, changeStatus] = useState("Unresolved");
+    // const [status, changeStatus] = useState("Unresolved");
 
-    function handleChange(e) {
-        changeStatus(e.target.value);
-        //MUTATION ON DB
-    }
+    // function handleChange(e) {
+    //     changeStatus(e.target.value);
+    //     //MUTATION ON DB
+    // }
 
     return (
         <div className ="container">
         <div className ="card col-6">
-            <h2>{ticket.subject}</h2>
+            <p> this is the container for the ticket details</p>
+            {/* <h2>{ticket.subject}</h2>
 
             <p>{ticket.author}</p>
 
@@ -28,7 +29,7 @@ const TicketDetails = ({ticket, user}) => {
 
             <a href={ticket.repo}>Repo Link</a>
 
-            <p>{ticket.body}</p>
+            <p>{ticket.body}</p> */}
 
             <CommentDisplay />
         </div>

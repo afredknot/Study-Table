@@ -1,9 +1,23 @@
-import React from "react";
-import AssignmentSelector from "../components/AssignmentSelector";
+import React from 'react';
+import AssignmentSelector from '../components/AssignmentSelector'
+import AssignmentDetails from "../components/AssignmentDetails";
 
-function AssignmentView (){
-  return(
-<AssignmentSelector />
-  )
-}
-export default AssignmentView;
+
+
+
+const AssignmentView = ({course}) => {
+
+  return (
+    <main className="flex-row justify-center mb-4">
+      <AssignmentSelector />
+       <AssignmentDetails/>
+       
+       
+        
+
+       
+    </main>
+  );
+};
+
+export default AssignmentView

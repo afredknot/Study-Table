@@ -21,7 +21,9 @@ nav {
   padding-top: 20px;
 }
 
-
+.view{
+  margin-left: 200px;
+}
 .main {
   margin-left: 160px;
   padding: 0px 10px;

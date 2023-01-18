@@ -15,6 +15,8 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Header from './components/Header';
 import LeftNav from "./components/LeftNav";
+import TicketView from "./pages/TicketView"
+import AssignmentView from './pages/AssignmentView';
 // import ThemeProvider from 'react-bootstrap/ThemeProvider';
 
 // Construct our main GraphQL API endpoint
@@ -48,13 +50,16 @@ function App() {
         <div className="flex-column justify-flex-start min-100-vh">
           <Header /> 
           <LeftNav />
-          <div className="container mb-2">
+          <div className="view container mb-2">
            
             <Routes>
               <Route 
                 path="/"
                 element={<Dashboard />}
               />
+                <Route path="/tickets" element={<TicketView />}/>
+                <Route path="/assignments" element={<AssignmentView />}/>
+              
               <Route 
                 path="/login" 
                 element={<Login />}

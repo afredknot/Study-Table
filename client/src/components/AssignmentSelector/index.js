@@ -4,7 +4,7 @@ const AssignmentSelector = ({assignments, handleAssignmentSelect}) => {
 
   // ADD STATUS INDICATIOR
   return (
-   <div className="container">
+  
     <div className="card align-content-center col-3">
       <ul>
         <p>this is a card for the assignments</p>
@@ -17,7 +17,7 @@ const AssignmentSelector = ({assignments, handleAssignmentSelect}) => {
       </ul>
     
     </div>
-    </div>
+    
   )
 }
 
