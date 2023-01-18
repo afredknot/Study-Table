@@ -1,18 +1,20 @@
 [
   {
+    "courseID": "",
     "courseTitle": "JavaScript Full Stack Bootcamp",
     "courseDescription": "Passing the Football like Patrick Mahomes",
-    "instructor": "Rich",
-    "teachingAssistant": "Nate"
+    "instructor": "",
+    "teachingAssistant": ""
   },
   {
-    "courseTitle": "CSS3",
-    "courseDescription": "Very Stylish",
-    "instructor": "Rich"
+    "courseID": "",
+    "courseTitle": "Databases",
+    "courseDescription": "We'll answer all your queries",
+    "instructor": ""
   },
   {
-    "courseTitle": "HTML",
-    "courseDescription": "Hello, World!",
-    "instructor": "Rich"
+    "courseTitle": "React",
+    "courseDescription": "A new state of mind",
+    "instructor": ""
   }
 ]
