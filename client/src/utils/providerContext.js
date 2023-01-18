@@ -27,8 +27,10 @@ export const contextProvider = ({ children }) => {
         console.log(reply);
     };
 
-    function changeStatus(status) {
-        console.log(status);
+    function changeStatus() {
+        // QUERY assignment -> status buckets -> find user
+        // REMOVE User -> assignment -> status bucket
+        // ADD User -> assignment -> new status bucket
     };
 
     function viewProfile(user) {

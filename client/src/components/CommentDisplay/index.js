@@ -2,6 +2,7 @@ import React from "react";
 
 const CommentDisplay = ({ comment }) => {
 
+    // add delete buttons?
     return (
         <div>
             <button onClick={createComment}>Create Comment</button>
