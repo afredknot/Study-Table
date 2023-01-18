@@ -33,18 +33,18 @@ const typeDefs = gql`
     studentProgressWorking: [User]
     studentProgressCompleted: [User]
     studentDefaultStatus: [User]
-    requestingHelp: [User]
+    requestingHelp: [HelpTicket]
     offeringAssistance: [User]
     createdAt: String
   }
 
   type HelpTicket {
-    _id: ID!
-    student: User!
+    _id: ID
+    student: User
     topic: String
-    githubRepo: String!
-    problemDescription: String!
-    ticketStatus: Boolean!
+    githubRepo: String
+    problemDescription: String
+    ticketStatus: Boolean
     createdAt: String
   }
 
@@ -85,7 +85,7 @@ const typeDefs = gql`
     updateAssignment(assignmentId: ID!, assignmentTitle: String!, assignmentDescription: String!, assignmentDueDate: String!): Assignment
     removeAssignment(assignmentId: ID!, courseId: ID!): Assignment
 
-    addHelpTicket(topic: String, githubRepo: String!, problemDescription: String!, ticketStatus: Boolean!): HelpTicket
+    addHelpTicket(assignmentId: ID!, topic: String, githubRepo: String!, problemDescription: String!): HelpTicket
     # updateHelpTicket
 
     # changeProgressStatus

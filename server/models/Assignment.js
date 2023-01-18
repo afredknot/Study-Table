@@ -19,18 +19,24 @@ const assignmentSchema = new Schema({
     required: true,
     trim: true,
   },
-  studentProgressNotStarted:     {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
-  studentProgressWorking:     {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
-  studentProgressCompleted:    {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  }, 
+  studentProgressNotStarted: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+  studentProgressWorking: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+  studentProgressCompleted: [   
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    }, 
+  ],
   studentDefaultStatus: [
     {
       type: Schema.Types.ObjectId,

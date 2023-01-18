@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Course, Assignment } = require('../models');
+const { User, Course, Assignment, HelpTicket } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -28,8 +28,12 @@ const resolvers = {
       return Course.findOne({ _id: courseId });
     },
     
+    
     assignments: async () => {
-      return Assignment.find()
+      return Assignment.find().populate('requestingHelp').populate('studentProgressNotStarted').populate('studentDefaultStatus').populate({
+        path: 'requestingHelp',
+        populate: 'student'
+      });
     },
     
     assignment: async (parent, { assignmentID }) => {
@@ -143,11 +147,20 @@ const resolvers = {
         assignmentDueDate,
       });
 
-      await Course.findOneAndUpdate(
+      const course = await Course.findOneAndUpdate(
         { _id: courseId },
         { $addToSet: { assignments: assignment._id } }
       );
+      
+      
 
+      for(i=0; i<course.students.length; i++){
+        console.log(course.students[i])
+        await Assignment.findOneAndUpdate(
+          { _id: assignment._id  },
+          { $addToSet: { studentProgressNotStarted: course.students[i], studentDefaultStatus: course.students[i] } },
+        );
+      }
       return assignment;
     // }
     throw new AuthenticationError('You need to be logged in!');
@@ -327,20 +340,18 @@ const resolvers = {
     
     addHelpTicket: async (parent, { assignmentId, topic, githubRepo, problemDescription }, context) => {
       // if (context.user) {
-        const helpTicket = await helpTicket.create({
+        const helpTicket = await HelpTicket.create({
           student: context.user._id, 
           topic,
           githubRepo, 
           problemDescription, 
-          ticketStatus: True
+          ticketStatus: true
         });
 
         await Assignment.findOneAndUpdate(
           { _id: assignmentId },
           { $addToSet: { requestingHelp: helpTicket._id } },
-          { $pull: { studentDefaultStatus: user._id } },
-          { $pull: { offeringAssistance: user._id } },
-
+          { $pull: { studentDefaultStatus: context.user._id, offeringAssistance: context.user._id } },
         );
 
         return helpTicket;
