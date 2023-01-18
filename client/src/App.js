@@ -7,13 +7,17 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Dashboard from './pages/Dashboard';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Header from './components/Header';
-
+import LeftNav from "./components/LeftNav";
+import TicketView from "./pages/TicketView"
+import AssignmentView from './pages/AssignmentView';
+// import ThemeProvider from 'react-bootstrap/ThemeProvider';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -44,13 +48,18 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div className="flex-column justify-flex-start min-100-vh">
-          <Header />
-          <div className="container">
+          <Header /> 
+          <LeftNav />
+          <div className="view container mb-2">
+           
             <Routes>
               <Route 
                 path="/"
                 element={<Dashboard />}
               />
+                <Route path="/tickets" element={<TicketView />}/>
+                <Route path="/assignments" element={<AssignmentView />}/>
+              
               <Route 
                 path="/login" 
                 element={<Login />}

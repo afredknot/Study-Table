@@ -4,7 +4,7 @@ const CommentDisplay = ({ comment }) => {
 
     return (
         <div>
-            <button onClick={createComment}>Create Comment</button>
+            {/* <button onClick={createComment}>Create Comment</button>
             {comment.map((comment) => (
                 <div>
                     <div>
@@ -23,7 +23,7 @@ const CommentDisplay = ({ comment }) => {
                         </div>
                     }) : false}
                 </div>
-            ))}
+            ))} */}
         </div>
     );
 };
