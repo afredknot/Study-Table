@@ -15,19 +15,26 @@ const courseSchema = new Schema({
     trim: true,
   },
   instructor: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
     trim: true,
     ref: 'User',
   },
   teachingAssistant: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    trim: true,
     ref: 'User',
   },
   assignments: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Assignment',
+    },
+  ],
+  students: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
   ],
   createdAt: {

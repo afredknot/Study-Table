@@ -19,11 +19,11 @@ const assignmentSchema = new Schema({
     required: true,
     trim: true,
   },
-  course: {
-    type: String,
-    required: true,
-    ref: 'Course',
-  },
+  // course: {
+  //   type: Schema.Types.ObjectId,
+  //   required: true,
+  //   ref: 'Course',
+  // },
   studentProgressNotStarted:     {
     type: Schema.Types.ObjectId,
     ref: 'User',

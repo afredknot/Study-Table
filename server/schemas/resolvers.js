@@ -3,6 +3,7 @@ const { User, Course, Assignment } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
+ 
   Query: {
     
     users: async () => {
@@ -20,7 +21,7 @@ const resolvers = {
     },
     
     courses: async () => {
-    return Course.find().populate('assignments')
+    return Course.find().populate('assignments').populate('instructor').populate('students')
     },
     
     course: async (parent, { courseId }) => {
@@ -73,11 +74,10 @@ const resolvers = {
       return { token, user };
     },
 
-
-
     // TODO: createCourse
     createCourse: async (parent, { courseTitle, courseDescription, instructor, teachingAssistant }, context) => {
-    // if (context.user) {
+
+      // if (context.user) {
       const course = await Course.create({
         courseTitle, 
         courseDescription, 
@@ -85,29 +85,34 @@ const resolvers = {
         teachingAssistant,
       });
 
-      // await User.findOneAndUpdate(
-      //   { _id: context.user._id },
-      //   { $addToSet: { thoughts: thought._id } }
-      // );
-
       return course;
     // }
-    throw new AuthenticationError('You need to be logged in!');
-  },
+      throw new AuthenticationError('You need to be logged in!');
+    },
 
     //  TODO: addStudentToCourse
     addStudentToCourse: async (parent, { userId, courseId }) => {
+      
       // if (context.user) {
-        return User.findOneAndUpdate(
+         await User.findOneAndUpdate(
           { _id: userId },
-          {
-            $addToSet: { courses: courseId },
-          },
+          { $addToSet: { courses: courseId } },
           {
             new: true,
             runValidators: true,
           }
         );
+
+        const course = await Course.findOneAndUpdate(
+          { _id: courseId },
+          { $addToSet: { students: userId } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+
+        return course;
       // }
          throw new AuthenticationError('You need to be logged in!');
     },
@@ -118,9 +123,7 @@ const resolvers = {
       // if (context.user) {
         return User.findOneAndUpdate(
           { _id: userId },
-          {
-            $pull: { courses: courseId },
-          },
+          { $pull: { courses: courseId } },
           {
             new: true,
             runValidators: true,
@@ -138,7 +141,7 @@ const resolvers = {
         assignmentTitle,
         assignmentDescription,
         assignmentDueDate,
-        course
+        // course
       });
 
       await Course.findOneAndUpdate(

@@ -4,12 +4,12 @@ const typeDefs = gql`
 
   type User {
     _id: ID!
-    username: String!
-    firstName: String!
-    lastName: String!
+    username: String
+    firstName: String
+    lastName: String
     avatar: String
     role: String
-    email: String!
+    email: String
     password: String
     courses: [Course]
   }
@@ -20,6 +20,7 @@ const typeDefs = gql`
     instructor: User
     teachingAssistant: [User]
     assignments: [Assignment]
+    students: [User]
     createdAt: String
   }
 
@@ -68,24 +69,29 @@ const typeDefs = gql`
     addUser(username: String!, role: String!, firstName: String!, lastName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
 
+    #updateUserProfile
 
 
-    # addThought(thoughtText: String!): Thought
-    # addComment(thoughtId: ID!, commentText: String!): Thought
-    # removeThought(thoughtId: ID!): Thought
-    # removeComment(thoughtId: ID!, commentId: ID!): Thought
+
+    createCourse(courseTitle:String!, courseDescription:String!, instructor:ID!, teachingAssistant: String): Course
+    # updateCourse
+    # deleteCourse
 
 
-    createCourse(courseTitle:String!, courseDescription:String!, instructor:String!, teachingAssistant: String): Course
-    
-    addStudentToCourse(userId: ID!, courseId: ID!): User
+    addStudentToCourse(userId: ID!, courseId: ID!): Course
     removeStudentFromCourse(userId: ID!, courseId: ID!): User
     
-    createAssignment(courseId: ID!, course:String!, assignmentTitle: String!, assignmentDescription: String!, assignmentDueDate: String!): Assignment
-
+    createAssignment(courseId: ID!, assignmentTitle: String!, assignmentDescription: String!, assignmentDueDate: String!): Assignment
     updateAssignment(assignmentId: ID!, assignmentTitle: String!, assignmentDescription: String!, assignmentDueDate: String!): Assignment
-
     removeAssignment(assignmentId: ID!, courseId: ID!): Assignment
+
+    addHelpTicket(topic: String, githubRepo: String!, problemDescription: String!, ticketStatus: Boolean!): HelpTicket
+    # updateHelpTicket
+
+    # changeProgressStatus
+
+
+# -------------------------------------------------------------------------------
 
     # addTeachingAssistant
     # updateTeachingAssistant
@@ -95,13 +101,11 @@ const typeDefs = gql`
     # removeInstructor
 
     # updateAssignmentStatus
-    addHelpTicket(topic: String, githubRepo: String!, problemDescription: String!, ticketStatus: Boolean!): HelpTicket
 
-
-
-
-
-
+    # addThought(thoughtText: String!): Thought
+    # addComment(thoughtId: ID!, commentText: String!): Thought
+    # removeThought(thoughtId: ID!): Thought
+    # removeComment(thoughtId: ID!, commentId: ID!): Thought
     
   }
 

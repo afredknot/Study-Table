@@ -13,29 +13,29 @@ db.once('open', async () => {
 
     await User.create(userSeeds);
 
-    for (let i = 0; i < courseSeeds.length; i++) {
-      const { _id, instructor } = await Course.create(courseSeeds[i]);
-      const user = await User.findOneAndUpdate(
-        { username: instructor },
-        {
-          $addToSet: {
-            courses: _id,
-          },
-        }
-      );
-    }
+    // for (let i = 0; i < courseSeeds.length; i++) {
+    //   const { _id, instructor } = await Course.create(courseSeeds[i]);
+    //   const user = await User.findOneAndUpdate(
+    //     { username: instructor },
+    //     {
+    //       $addToSet: {
+    //         courses: _id,
+    //       },
+    //     }
+    //   );
+    // }
 
-    for (let i = 0; i < assignmentSeeds.length; i++) {
-      const { _id, course } = await Assignment.create(assignmentSeeds[i]);
-      const courseName = await Course.findOneAndUpdate(
-        { courseTitle: course },
-        {
-          $addToSet: {
-            assignments: _id,
-          },
-        }
-      );
-    }
+    // for (let i = 0; i < assignmentSeeds.length; i++) {
+    //   const { _id, course } = await Assignment.create(assignmentSeeds[i]);
+    //   const courseName = await Course.findOneAndUpdate(
+    //     { courseTitle: course },
+    //     {
+    //       $addToSet: {
+    //         assignments: _id,
+    //       },
+    //     }
+    //   );
+    // }
 
 
   } catch (err) {
