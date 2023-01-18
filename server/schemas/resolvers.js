@@ -238,16 +238,17 @@ const resolvers = {
 
     deleteCourse: async (parent, { courseId }, context) => {
       // if (context.user) {
-        course = Course.findOne(
+        const course = Course.findOne(
           {_id : courseId}
           )
-          for(i=0; i<course.students.length; i++) {
+          if(course.students<0){
+          for(i=0; i<course.students; i++) {
         await User.findOneUpdate(
           { _id: course.students[i] },
           { $pull: { courses: course._id } }
         )};
-
-        const course = await Course.findOneAndDelete({
+        }
+        await Course.findOneAndDelete({
           _id: courseId
         });
       // }
