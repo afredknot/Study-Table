@@ -1,13 +1,17 @@
 import React from "react";
 
-const AssignmentSelector = ({assignments, handleAssignmentSelect}) => {
+import { useProviderContext } from "../../utils/providerContext";
+
+const AssignmentSelector = ({assignments}) => {
+
+    const { context } = useProviderContext();
 
   // ADD STATUS INDICATIOR
   return (
     <card>
       <ul>
         {assignments.map((assignment) => (
-              <li key={assignment.assignmentTitle} onClick={handleAssignmentSelect}>
+              <li key={assignment.assignmentTitle} onClick={context.handleAssignmentSelect()}>
                 <h3>{assignment.assignmentTitle}</h3>
                 <p>{assignment.assignmentDueDate}</p>
               </li>
