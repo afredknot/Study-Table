@@ -16,7 +16,7 @@ const Header = ({title}) => {
   
   return (
     <header>
-      <h1>{title}</h1>
+      <h1 className ="col-3">{title}</h1>
       
       <form onSubmit={handleSubmit}>
         <input type="text" value={searchValue} onChange={handleSearch} placeholder="Search..."/>

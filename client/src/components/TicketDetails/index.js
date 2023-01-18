@@ -11,7 +11,8 @@ const TicketDetails = ({ticket, user}) => {
     }
 
     return (
-        <card>
+        <div className ="container">
+        <div className ="card col-6">
             <h2>{ticket.subject}</h2>
 
             <p>{ticket.author}</p>
@@ -30,7 +31,8 @@ const TicketDetails = ({ticket, user}) => {
             <p>{ticket.body}</p>
 
             <CommentDisplay />
-        </card>
+        </div>
+        </div>
     )
 }
 

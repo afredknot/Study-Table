@@ -4,16 +4,20 @@ const AssignmentSelector = ({assignments, handleAssignmentSelect}) => {
 
   // ADD STATUS INDICATIOR
   return (
-    <card>
+   <div className="container">
+    <div className="card align-content-center col-3">
       <ul>
-        {assignments.map((assignment) => (
+        <p>this is a card for the assignments</p>
+        {/* {assignments.map((assignment) => (
               <li key={assignment.assignmentTitle} onClick={handleAssignmentSelect}>
                 <h3>{assignment.assignmentTitle}</h3>
                 <p>{assignment.assignmentDueDate}</p>
-              </li>
-            ))}  
+              </li> */}
+            {/* ))}   */}
       </ul>
-    </card>
+    
+    </div>
+    </div>
   )
 }
 

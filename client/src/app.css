@@ -1,0 +1,75 @@
+.app {
+  text-align: center;
+}
+
+header {
+  height: 100px;
+  width: 88%;
+  background-color: #8f8f67;
+  align-self: flex-end;
+}
+
+nav {
+  height: 100%; 
+  width: 160px; 
+  position: fixed; 
+  z-index: 0; 
+  top: 0; 
+  left: 0;
+  background-color: rgb(72, 77, 84); 
+  overflow-x: hidden; 
+  padding-top: 20px;
+}
+
+
+.main {
+  margin-left: 160px;
+  padding: 0px 10px;
+}
+
+
+@media screen and (max-height: 450px) {
+  nav {padding-top: 15px;}
+}
+
+footer{
+ background-color:cadetblue;
+  width:auto;
+  height:auto
+  
+}
+ul {
+  list-style: none;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.student-list {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background: lightgreen;
+  padding: 10px;
+}
+
+th,
+td {
+  border: 1px solid grey;
+}
+
+.add-student {
+  margin: 20px 0;
+}
+
+.add-student button,
+.add-student input,
+.add-student select {
+  height: 40px;
+}
