@@ -8,6 +8,25 @@ const userSchema = new Schema({
     unique: true,
     trim: true,
   },
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  avatar: {
+    type: String,
+    trim: true,
+  },
+  role: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   email: {
     type: String,
     required: true,
@@ -17,12 +36,12 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    minlength: 5,
+    minlength: 8,
   },
-  thoughts: [
+  courses: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Thought',
+      ref: 'Course',
     },
   ],
 });

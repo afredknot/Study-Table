@@ -1,52 +1,50 @@
 [
   {
-    "username": "Brian Kernighan",
-    "email": "bkernighan@techfriends.dev",
-    "password": "password01"
+    "username": "Tom",
+    "firstName": "Tom",
+    "lastName": "Fallara",
+    "role": "student",
+    "email": "tom@gmail.com",
+    "password": "password"
   },
   {
-    "username": "Max Kanat-Alexander",
-    "email": "mkanatalexander@techfriends.dev",
-    "password": "password02"
+    "username": "Fritz",
+    "firstName": "Nathaniel",
+    "lastName": "Fritz",
+    "role": "student",
+    "email": "fritz@gmail.com",
+    "password": "password"
   },
   {
-    "username": "Why The Lucky Stiff",
-    "email": "wtls@techfriends.dev",
-    "password": "password03"
+    "username": "Daniel",
+    "firstName": "Daniel",
+    "lastName": "Nelson",
+    "role": "student",
+    "email": "daniel@gmail.com",
+    "password": "password"
   },
   {
-    "username": "Kent Beck",
-    "email": "kbeck@techfriends.dev",
-    "password": "password04"
+    "username": "Michael",
+    "firstName": "Michael",
+    "lastName": "Frabott",
+    "role": "student",
+    "email": "michael@gmail.com",
+    "password": "password"
   },
   {
-    "username": "Edward V. Berard",
-    "email": "evberard@techfriends.dev",
-    "password": "password05"
+    "username": "Rich",
+    "firstName": "Rich",
+    "lastName": "Widtmann",
+    "role": "instructor",
+    "email": "rjw1@gmail.com",
+    "password": "password"
   },
   {
-    "username": "Alan Kay",
-    "email": "akay@techfriends.dev",
-    "password": "password06"
-  },
-  {
-    "username": "C.A.R. Hoare",
-    "email": "choare@techfriends.dev",
-    "password": "password07"
-  },
-  {
-    "username": "David Thomas",
-    "email": "dthomas@techfriends.dev",
-    "password": "password08"
-  },
-  {
-    "username": "Donald Knuth",
-    "email": "dknuth@techfriends.dev",
-    "password": "password09"
-  },
-  {
-    "username": "Lernantino",
-    "email": "lernantino@techfriends.dev",
-    "password": "password10"
+    "username": "Nate",
+    "firstName": "Nate",
+    "lastName": "Russell",
+    "role": "instructor",
+    "email": "nate@gmail.com",
+    "password": "password"
   }
 ]

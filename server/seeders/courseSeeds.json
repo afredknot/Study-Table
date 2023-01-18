@@ -1,0 +1,20 @@
+[
+  {
+    "courseID": "",
+    "courseTitle": "JavaScript Full Stack Bootcamp",
+    "courseDescription": "Passing the Football like Patrick Mahomes",
+    "instructor": "",
+    "teachingAssistant": ""
+  },
+  {
+    "courseID": "",
+    "courseTitle": "Databases",
+    "courseDescription": "We'll answer all your queries",
+    "instructor": ""
+  },
+  {
+    "courseTitle": "React",
+    "courseDescription": "A new state of mind",
+    "instructor": ""
+  }
+]
