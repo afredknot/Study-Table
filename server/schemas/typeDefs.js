@@ -69,7 +69,7 @@ const typeDefs = gql`
     addUser(username: String!, role: String!, firstName: String!, lastName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
 
-    #updateUserProfile
+    updateUserProfile(userId: ID!, role: String, firstName: String, lastName: String, email: String, avatar: String, password: String): User
 
 
 
@@ -82,7 +82,7 @@ const typeDefs = gql`
     removeStudentFromCourse(userId: ID!, courseId: ID!): User
     
     createAssignment(courseId: ID!, assignmentTitle: String!, assignmentDescription: String!, assignmentDueDate: String!): Assignment
-    updateAssignment(assignmentId: ID!, assignmentTitle: String!, assignmentDescription: String!, assignmentDueDate: String!): Assignment
+    updateAssignment(assignmentId: ID!, assignmentTitle: String, assignmentDescription: String, assignmentDueDate: String): Assignment
     removeAssignment(assignmentId: ID!, courseId: ID!): Assignment
 
     addHelpTicket(topic: String, githubRepo: String!, problemDescription: String!, ticketStatus: Boolean!): HelpTicket

@@ -56,6 +56,24 @@ const resolvers = {
       return { token, user };
     },
 
+    updateUserProfile: async (parent, { userId, role, firstName, lastName, email, avatar, password }, context) => {
+      // if (context.user) {
+       return await User.findOneAndUpdate(
+        { _id: userId},
+        {
+          role,
+          firstName,
+          lastName,
+          email,
+          avatar,
+          password
+        },
+        {new: true}
+        );
+      // }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
