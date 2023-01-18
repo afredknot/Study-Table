@@ -7,7 +7,12 @@ const helpTicketSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-  },      
+  },    
+  topic: {
+    type: String,
+    minlength: 1,
+    maxlength: 280,
+  },  
   githubRepo: {
     type: String,
     required: true,
@@ -18,10 +23,9 @@ const helpTicketSchema = new Schema({
     type: String,
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
+  ticketStatus: {
+    type: Boolean,
+    required: true,
   },
   createdAt: {
     type: Date,
