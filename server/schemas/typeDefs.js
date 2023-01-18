@@ -18,7 +18,7 @@ const typeDefs = gql`
     _id: ID
     courseTitle: String
     instructor: User
-    teachingAssistant: [User]
+    teachingAssistant: User
     assignments: [Assignment]
     students: [User]
     createdAt: String
@@ -74,8 +74,8 @@ const typeDefs = gql`
 
 
     createCourse(courseTitle:String!, courseDescription:String!, instructor:ID!, teachingAssistant: String): Course
-    # updateCourse
-    # deleteCourse
+    updateCourse(courseId: ID!, courseTitle:String, courseDescription:String, teachingAssistant: ID): Course
+    deleteCourse(courseId: ID!): Course
 
 
     addStudentToCourse(userId: ID!, courseId: ID!): Course
