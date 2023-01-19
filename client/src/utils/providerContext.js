@@ -41,6 +41,10 @@ export const contextProvider = ({ children }) => {
         console.log(event.target);
     };
 
+
+    
+
+
     return (
         <providerContext.Provider value={{ navigate, handleAssignmentSelect, handleTicketSelect, createComment, createReply, changeStatus, viewProfile, handleChange }} >
             {children}
