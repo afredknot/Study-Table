@@ -17,6 +17,7 @@ import Header from './components/Header';
 import LeftNav from "./components/LeftNav";
 import TicketView from "./pages/TicketView"
 import AssignmentView from './pages/AssignmentView';
+import { ContextProvider } from './utils/providerContext';
 // import ThemeProvider from 'react-bootstrap/ThemeProvider';
 
 // Construct our main GraphQL API endpoint
@@ -46,11 +47,12 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+      <ContextProvider>
       <Router>
-        <div className="flex-column justify-flex-start min-100-vh">
+        <div className="appContainer flex-column justify-flex-start min-100-vh">
           <Header /> 
           <LeftNav />
-          <div className="view container mb-2">
+          <div className="view">
            
             <Routes>
               <Route 
@@ -68,14 +70,15 @@ function App() {
                 path="/signup" 
                 element={<Signup />}
               />
-              <Route 
+              {/* <Route 
                 path="/me" 
-                element={<Profile />}
-              />
+                // element={<Profile />}
+              /> */}
             </Routes>
           </div>
         </div>
       </Router>
+      </ContextProvider>
     </ApolloProvider>
   );
 }
