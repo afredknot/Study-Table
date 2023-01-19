@@ -5,36 +5,40 @@ import { useMutation, useQuery } from '@apollo/client';
 import { ADD_STUDENT_TO_COURSE } from '../utils/mutations';
 import { QUERY_USERS } from '../utils/mutations';
 
-import Auth from '../utils/auth';
 
-const AddStudentToCourse = () => {
+const AddStudentToCourse = (courseId) => {
 
-  const [formState, setFormState] = useState({
-    courseID: '',
-    userID: '',
-  });
+  const [userSelected, setUserSelected] = useState();
 
-  // const [users, { error, data }] = useQuery(QUERY_USERS);
+  const [users] = useQuery(QUERY_USERS);
 
+
+  // query all users and get back id and first and last name
+     // const results = users()
+
+  //take results and make objects with     <option value="Student Name">
+  // get studentid from name selected
+  // setUserSelected(studentId)
+  
 
   const [addStudentToCourse, { error, data }] = useMutation(ADD_STUDENT_TO_COURSE);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setFormState({
-      ...formState,
+    setUserSelected({
       [name]: value,
     });
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
 
     try {
-      const { data } = await addStudentToCourse({
-        variables: { ...formState },
+      const { allStudents } = await addStudentToCourse({
+        variables: { 
+          courseId, 
+          userId: userSelected },
       });
 
     } catch (e) {
@@ -46,39 +50,27 @@ const AddStudentToCourse = () => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Create a Course</h4>
+          <h4 className="card-header bg-dark text-light p-2">Add a Student to the Course</h4>
           <div className="card-body">
             {data ? (
               <p>
-                Success! You have added a new course.
+                Success! You have added a new student to the course.
                 {/* <Link to="/">back to the homepage.</Link> */}
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Course Name"
-                  name="courseTitle"
-                  type="text"
-                  value={formState.courseTitle}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Course Description"
-                  name="courseDescription"
-                  type="text"
-                  value={formState.courseDescription}
-                  onChange={handleChange}
-                />
-               <input
-                  className="form-input"
-                  placeholder="Teaching Assistant"
-                  name="teachingAssistant"
-                  type="text"
-                  value={formState.teachingAssistant}
-                  onChange={handleChange}
-                />
+                <input 
+                  list="students"
+                  name="students"
+                  placeholder="Student"
+                  className="dropdown-input"
+                  />
+                  <datalist id="students"
+
+        // TODO
+                  {...options}
+                  
+                  />
                 <button
                   className="btn btn-block btn-primary"
                   style={{ cursor: 'pointer' }}

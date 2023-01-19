@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { createContext, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import { useMutation, useQuery } from '@apollo/client';
 
 import { CHANGE_ASSISTANCE_STATUS, CHANGE_PROGRESS_STATUS } from './mutations';
-import { QUERY_ME} from './queries';
+
 
 const ProviderContext = createContext();
 
@@ -19,10 +19,19 @@ export const ContextProvider = ({ children }) => {
         // FUNCTIONS GO HERE
         handleAssignmentSelect: function() {
             console.log("Clicked Assignment!");
+
+            // query individual assignment and assignment tickets
+        },
+
+        handleCourseSelect: function() {
+            console.log("Clicked Assignment!");
+
+            // query individual course populate assignments and tickets
         },
 
         handleTicketSelect: function() {
             console.log("Clicked Ticket");
+            // query individual ticket and get details
         },
 
         createComment: function(comment) {
@@ -83,7 +92,7 @@ export const ContextProvider = ({ children }) => {
         // REMOVE User -> assignment -> status bucket
         // ADD User -> assignment -> new status bucket
 
-        viewProfile: function(user) {
+        viewProfile: function() {
             console.log(user);
         },
 
