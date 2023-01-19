@@ -13,15 +13,18 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
-        _id
-        username
-      }
+mutation addUser($username: String!, $role: String!, $firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+  addUser(username: $username, role: $role, firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
+    user {
+      username
+      role
+      password
+      firstName
+      lastName
+      email
     }
   }
+}
 `;
 
 
@@ -42,17 +45,20 @@ export const ADD_USER = gql`
 // `;
 
 export const UPDATE_PROFILE = gql`
-mutation updateUserProfile(firstName: $firstName, lastName: $lastName, email: $email, avatar: $avatar, password: $password, role: $role, username: $username) {
-    username
-    firstName
-    lastName
-    email
-    role
+  mutation updateUserProfile($firstName: String, $lastName: String, $email: String, $avatar: String, $password: String, $role: String, $username: String) {
+    updateUserProfile(firstName: $firstName, lastName: $lastName, email: $email, avatar: $avatar, password: $password, role: $role, username: $username) {
+      username
+      firstName
+      lastName
+      email
+      role
+    }
   }
 `;
 
 export const CREATE_COURSE = gql`
-  mutation createCourse(courseTitle: $courseTitle, courseDescription: $courseDescription, teachingAssistant: $teachingAssistant) {
+  mutation createCourse($courseTitle: String!, $courseDescription: String!, $teachingAssistant: ID, ) {
+  createCourse(courseTitle: $courseTitle, courseDescription: $courseDescription, teachingAssistant: $teachingAssistant) {
     _id
     courseTitle
     courseDescription
@@ -65,10 +71,12 @@ export const CREATE_COURSE = gql`
       username
     }
   }
+}
 `;
 
 export const UPDATE_COURSE = gql`
-  mutation updateCourse(courseId: $courseId, courseTitle: $courseTitle, teachingAssistant: $teachingAssistant, courseDescription: $courseDescription) {
+  mutation updateCourse($courseId: ID!, $courseTitle: String, $teachingAssistant: ID, $courseDescription: String) {
+  updateCourse(courseId: $courseId, courseTitle: $courseTitle, teachingAssistant: $teachingAssistant, courseDescription: $courseDescription) {
     _id
     courseTitle
     courseDescription
@@ -84,13 +92,16 @@ export const UPDATE_COURSE = gql`
 `;
 
 export const DELETE_COURSE = gql`
-  mutation deleteCourse(courseId: $courseId) {
+  mutation deleteCourse($courseId: ID!) {
+  deleteCourse(courseId: $courseId) {
     _id
   }
+}
 `;
 
 export const ADD_STUDENT_TO_COURSE = gql`
-  mutation addStudentToCourse(userId: $userId, courseId: $courseId) {
+  mutation addStudentToCourse($userId: ID!, $courseId: ID!) {
+  addStudentToCourse(userId: $userId, courseId: $courseId) {
     _id
     courseTitle
     students {
@@ -98,45 +109,49 @@ export const ADD_STUDENT_TO_COURSE = gql`
       username
     }
   }
+}
 `;
 
 export const REMOVE_STUDENT_FROM_COURSE = gql`
-  mutation removeStudentFromCourse(userId: $userId, courseId: $courseId){
+  mutation removeStudentFromCourse($userId: ID!, $courseId: ID!) {
+  removeStudentFromCourse(userId: $userId, courseId: $courseId) {
     _id
-    username
-    courses {
-      _id
-      courseTitle
-    }
   }
+}
 `;
     
 export const CREATE_ASSIGNMENT = gql`
-  mutation createAssignment(courseId: $courseId, assignmentTitle: $assignmentTitle, assignmentDescription: $assignmentDescription, assignmentDueDate: $assignmentDueDate) {
+  mutation createAssignment($courseId: ID!, $assignmentTitle: String!, $assignmentDescription: String!, $assignmentDueDate: String!) {
+  createAssignment(courseId: $courseId, assignmentTitle: $assignmentTitle, assignmentDescription: $assignmentDescription, assignmentDueDate: $assignmentDueDate) {
     _id
     assignmentDescription
     assignmentTitle
     assignmentDueDate
   }
+}
 `;
     
 export const UPDATE_ASSIGNMENT = gql`
-  mutation updateAssignment(assignmentId: $assignmentId, assignmentTitle: $assignmentTitle, assignmentDescription: $assignmentDescription, assignmentDueDate: $assignmentDueDate) {
-    _id
+  mutation updateAssignment($assignmentId: ID!, $assignmentTitle: String, $assignmentDescription: String, $assignmentDueDate: String) {
+  updateAssignment(assignmentId: $assignmentId, assignmentTitle: $assignmentTitle, assignmentDescription: $assignmentDescription, assignmentDueDate: $assignmentDueDate) {
     assignmentTitle
     assignmentDescription
     assignmentDueDate
   }
+}
 `;
 
 export const REMOVE_ASSIGNMENT = gql`
-mutation removeAssignment(assignmentId: $assignmentId, courseId: $courseId) {
+mutation removeAssignment($assignmentId: ID!, $courseId: ID!) {
+  removeAssignment(assignmentId: $assignmentId, courseId: $courseId) {
     _id
   }
+}
 `;
 
 export const ADD_HELP_TICKET = gql`
-mutation addHelpTicket(assignmentId: $assignmentId, githubRepo: $githubRepo, problemDescription: $problemDescription, topic: $topic) {
+mutation addHelpTicket($assignmentId: ID!, $githubRepo: String!, $problemDescription: String!, $topic: String) {
+  addHelpTicket(assignmentId: $assignmentId, githubRepo: $githubRepo, problemDescription: $problemDescription, topic: $topic) {
     _id
     student {
       _id
@@ -147,10 +162,12 @@ mutation addHelpTicket(assignmentId: $assignmentId, githubRepo: $githubRepo, pro
     ticketStatus
     createdAt
   }
+}
 `;
    
 export const UPDATE_HELP_TICKET = gql`
-  mutation updateHelpTicket(helpTicketId: $helpTicketId, topic: $topic, githubRepo: $githubRepo, problemDescription: $problemDescription, ticketStatus: $ticketStatus) {
+  mutation updateHelpTicket($helpTicketId: ID!, $topic: String, $githubRepo: String, $problemDescription: String, $ticketStatus: Boolean) {
+  updateHelpTicket(helpTicketId: $helpTicketId, topic: $topic, githubRepo: $githubRepo, problemDescription: $problemDescription, ticketStatus: $ticketStatus) {
     _id
     student {
       _id
@@ -160,36 +177,19 @@ export const UPDATE_HELP_TICKET = gql`
     ticketStatus
     topic
   }
+}
 `;
 
 export const CHANGE_PROGRESS_STATUS= gql`
-mutation changeProgressStatus(assignmentId: $assignmentId, currentStatus: $currentStatus, newStatus: $newStatus) {
-    _id
+mutation changeProgressStatus($assignmentId: ID!, $currentStatus: String!, $newStatus: String!) {
+  changeAssistanceStatus(assignmentId: $assignmentId, currentStatus: $currentStatus, newStatus: $newStatus) {
     assignmentTitle
-    studentProgressNotStarted {
-      _id
-    }
-    studentProgressWorking {
-      _id
-    }
-    studentProgressCompleted {
-      _id
-    }
-  }
+}
 `;
    
 export const CHANGE_ASSISTANCE_STATUS = gql` 
-mutation changeAssistanceStatus(assignmentId: $assignmentId, currentStatus: $currentStatus, newStatus: $newStatus) {
-    _id
+mutation changeAssistanceStatus($assignmentId: ID!, $currentStatus: String!, $newStatus: String!) {
+  changeProgressStatus(assignmentId: $assignmentId, currentStatus: $currentStatus, newStatus: $newStatus) {
     assignmentTitle
-    studentDefaultStatus {
-      _id
-    }
-    requestingHelp {
-      _id
-    }
-    offeringAssistance {
-      _id
-    }
-  }
+}
 `;
