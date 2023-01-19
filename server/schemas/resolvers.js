@@ -26,6 +26,18 @@ const resolvers = {
     user: async (parent, { _id }) => {
       return User.findOne({ _id: _id })
       .populate('courses')
+      .populate({
+        path: 'courses', 
+        populate: {
+          path: "instructor"
+        }
+      })
+      .populate({
+        path: 'courses', 
+        populate: {
+          path: "teachingAssistant"
+        }
+      });
     },
     
 
@@ -70,9 +82,21 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('courses')
         .populate({
-          path: 'courses',
-          populate: 'assignments'})
-        .populate('instructor')
+          path: 'courses', 
+          populate: {
+            path: "instructor"
+          }
+        }).populate({
+          path: 'courses', 
+          populate: {
+            path: "teachingAssistant"
+          }
+        }).populate({
+          path: 'courses', 
+          populate: {
+            path: "assignments"
+          }
+        })
       }
       throw new AuthenticationError('You need to be logged in!');
     },

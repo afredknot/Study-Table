@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/client';
 import { createContext, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -41,8 +42,13 @@ export const ContextProvider = ({ children }) => {
         function handleChange(event) {
             console.log(event.target);
         }
-    ]}
-
+    ]}   
+        
+    function veiwCourses(){
+       const me = useQuery(QUERY_ME);
+       const courses = me?.courses || [];
+        console.log(courses);
+    }
 
 
 return (
