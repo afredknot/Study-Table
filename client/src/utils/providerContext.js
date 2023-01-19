@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 
 import { CHANGE_ASSISTANCE_STATUS, CHANGE_PROGRESS_STATUS } from './mutations';
+import { QUERY_ME} from './queries';
 
 const ProviderContext = createContext();
 
@@ -11,28 +12,28 @@ export const useProviderContext = () => useContext(ProviderContext);
 
 export const ContextProvider = ({ children }) => {
 
-    const globalVar = { functions:[
+    const globalVar = { functions: {
         // global variable here
         // const navigate = useNavigate();
 
         // FUNCTIONS GO HERE
-        function handleAssignmentSelect() {
+        handleAssignmentSelect: function() {
             console.log("Clicked Assignment!");
         },
 
-        function handleTicketSelect() {
+        handleTicketSelect: function() {
             console.log("Clicked Ticket");
         },
 
-        function createComment(comment) {
+        createComment: function(comment) {
             console.log(comment);
         },
 
-        function createReply(reply) {
+        createReply: function(reply) {
             console.log(reply);
         },
 
-        function ChangeProgressStatus( {currentProgressStatus, assignmentId} ) {
+        ChangeProgressStatus: function( {currentProgressStatus, assignmentId} ) {
             const [newProgressStatus, setNewProgressStatus] = useState('');
 
             const [changeProgressStatus, { error }] = useMutation(CHANGE_PROGRESS_STATUS);
@@ -56,8 +57,8 @@ export const ContextProvider = ({ children }) => {
         },
 
     
-        function ChangeAssistanceStatus( {currentAssistanceStatus, assignmentId} ) {
-            const [newAssitanceStatus, setNewAssistanceStatus] = useState('');
+        ChangeAssistanceStatus: function( {currentAssistanceStatus, assignmentId} ) {
+            const [newAssistanceStatus, setNewAssistanceStatus] = useState('');
 
             const [changeAssistanceStatus, { error }] = useMutation(CHANGE_ASSISTANCE_STATUS);
 
@@ -82,21 +83,20 @@ export const ContextProvider = ({ children }) => {
         // REMOVE User -> assignment -> status bucket
         // ADD User -> assignment -> new status bucket
 
-        function viewProfile(user) {
+        viewProfile: function(user) {
             console.log(user);
         },
 
-        function handleChange(event) {
+        handleChange: function(event) {
             console.log(event.target);
         },
 
-        function veiwCourses(){
-            const me = useQuery(QUERY_ME);
-            const courses = me?.courses || [];
-            console.log(courses);
+        useAQuery: function (query){
+            const result = useQuery(query);
+            return result
         }
-    ]}   
-        
+    }   
+  }     
   
 
 
