@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 
 import { useProviderContext } from "../../utils/providerContext";
 
@@ -9,9 +10,11 @@ const AssignmentSelector = ({assignments}) => {
   // ADD STATUS INDICATIOR
   return (
   
-    <div className="card align-content-center col-3">
+    <div className="card1 align-content-center col-3">
+      <h3>Assignments</h3>
       <ul>
-        <p>this is a card for the assignments</p>
+        <li>This is one</li>
+        <li>This is another</li>
         {/* {assignments.map((assignment) => (
               <li key={assignment.assignmentTitle} onClick={handleAssignmentSelect}>
                 <h3>{assignment.assignmentTitle}</h3>
@@ -19,7 +22,6 @@ const AssignmentSelector = ({assignments}) => {
               </li> */}
             {/* ))}   */}
       </ul>
-    
     </div>
     
   )
