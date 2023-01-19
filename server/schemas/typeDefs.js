@@ -37,6 +37,7 @@ const typeDefs = gql`
     requestingHelp: [User]
     helpTickets: [HelpTicket]
     offeringAssistance: [User]
+    comments: [Comment]
     createdAt: String
   }
 
@@ -47,15 +48,15 @@ const typeDefs = gql`
     githubRepo: String
     problemDescription: String
     ticketStatus: Boolean
+    comments: [Comment]
     createdAt: String
   }
 
   type Comment {
     _id: ID
-    CommenttText: String
-    CommentAuthor: String
+    commentText: String
+    commentAuthor: String
     createdAt: String
-    Replies: [Replies]!
   }
 
   type Auth {
@@ -106,8 +107,8 @@ const typeDefs = gql`
     addComment(commentText: String!, assignmentId:ID helpTicketId: ID ): Comment
     removeComment(commentId: ID!, assignmentId:ID helpTicketId: ID ): Comment
 
-    addReply(commentId: ID!, replyText: String!): Reply
-    removeReply(commentId: ID!, replyId: ID!): Reply
+    addReply(commentId: ID!, replyText: String!): Comment
+    removeReply(commentId: ID!, replyId: ID!): Comment
 
    # ------------------------------------------------------------------------------------------   
 
