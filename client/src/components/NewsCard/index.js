@@ -3,7 +3,7 @@ import React from "react";
 const NewsCard = ({announcements}) => {
 
     return (
-        <div className= "card col-3"> 
+        <div className= "card1 col-3"> 
         <p> this is the card for the news feed</p>
             {/* {announcements.map((announcement) => {
                 <div>
