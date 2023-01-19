@@ -8,11 +8,8 @@ const resolvers = {
     
     users: async () => {
       return User.find({})
-        .populate('courses')
-        .populate({
-          path: 'courses',
-          populate: 'assignments'
-        });
+      .populate('courses')
+      .populate({path: 'courses', populate: {path: "instructor"}}).populate({path: 'courses', populate: {path: "teachingAssistant"}});
     },
 
 
@@ -65,10 +62,11 @@ const resolvers = {
 
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('courses').populate({
+        return User.findOne({ _id: context.user._id }).populate('courses')
+        .populate({
           path: 'courses',
-          populate: 'assignments',
-        });
+          populate: 'assignments'})
+        .populate('instructor')
       }
       throw new AuthenticationError('You need to be logged in!');
     },
