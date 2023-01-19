@@ -26,6 +26,18 @@ const resolvers = {
     user: async (parent, { _id }) => {
       return User.findOne({ _id: _id })
       .populate('courses')
+      .populate({
+        path: 'courses', 
+        populate: {
+          path: "instructor"
+        }
+      })
+      .populate({
+        path: 'courses', 
+        populate: {
+          path: "teachingAssistant"
+        }
+      });
     },
     
 

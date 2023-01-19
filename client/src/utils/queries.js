@@ -29,8 +29,22 @@ export const QUERY_USER = gql`
   query user($id: ID!) {
     user(_id: $id) {
       username
+      role
       firstName
       lastName
+      email
+      courses {
+        courseTitle
+        courseDescription
+        instructor {
+          username
+          email
+        }
+        teachingAssistant {
+          username
+          email
+        }
+      }
     }
   }
 `;
