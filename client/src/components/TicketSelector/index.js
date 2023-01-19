@@ -4,7 +4,7 @@ const TicketSelector = ({tickets, handleTicketSelect}) => {
 
     return (
       
-        <div className ="card align-content-center col-3">
+        <div className ="card1 align-content-center col-3">
             <ul>
               <p>this is the card for holding the ticket selectors</p>
             {/* {tickets.map((ticket, index) => (
