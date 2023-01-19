@@ -1,10 +1,42 @@
 // import { gql } from '@apollo/client';
 
-// export const LOGIN_USER = gql`
-//   mutation login($email: String!, $password: String!) {
-//     login(email: $email, password: $password) {
-//       token
-//       user {
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const ADD_USER = gql`
+mutation addUser($username: String!, $role: String!, $firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+  addUser(username: $username, role: $role, firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
+    user {
+      username
+      role
+      password
+      firstName
+      lastName
+      email
+    }
+  }
+}
+`;
+
+
+
+// export const ADD_COMMENT = gql`
+//   mutation addComment($thoughtId: ID!, $commentText: String!) {
+//     addComment(thoughtId: $thoughtId, commentText: $commentText) {
+//       _id
+//       thoughtText
+//       thoughtAuthor
+//       createdAt
+//       comments {
 //         _id
 //         username
 //       }
@@ -74,22 +106,23 @@
 // }
 // `;
 
-// export const UPDATE_COURSE = gql`
-//   mutation updateCourse($courseId: ID!, $courseTitle: String, $teachingAssistant: ID, $courseDescription: String) {
-//   updateCourse(courseId: $courseId, courseTitle: $courseTitle, teachingAssistant: $teachingAssistant, courseDescription: $courseDescription) {
-//     _id
-//     courseTitle
-//     courseDescription
-//     instructor {
-//       _id
-//       username
-//     }
-//     teachingAssistant {
-//       _id
-//       username
-//     }
-//   }
-// `;
+export const UPDATE_COURSE = gql`
+  mutation updateCourse($courseId: ID!, $courseTitle: String, $teachingAssistant: ID, $courseDescription: String) {
+  updateCourse(courseId: $courseId, courseTitle: $courseTitle, teachingAssistant: $teachingAssistant, courseDescription: $courseDescription) {
+    _id
+    courseTitle
+    courseDescription
+    instructor {
+      _id
+      username
+    }
+    teachingAssistant {
+      _id
+      username
+    }
+  }
+  }
+`;
 
 // export const DELETE_COURSE = gql`
 //   mutation deleteCourse($courseId: ID!) {
@@ -180,16 +213,18 @@
 // }
 // `;
 
-// export const CHANGE_PROGRESS_STATUS= gql`
-// mutation changeProgressStatus($assignmentId: ID!, $currentStatus: String!, $newStatus: String!) {
-//   changeAssistanceStatus(assignmentId: $assignmentId, currentStatus: $currentStatus, newStatus: $newStatus) {
-//     assignmentTitle
-// }
-// `;
+export const CHANGE_PROGRESS_STATUS= gql`
+mutation changeProgressStatus($assignmentId: ID!, $currentStatus: String!, $newStatus: String!) {
+  changeAssistanceStatus(assignmentId: $assignmentId, currentStatus: $currentStatus, newStatus: $newStatus) {
+    assignmentTitle
+}
+}
+`;
    
-// export const CHANGE_ASSISTANCE_STATUS = gql` 
-// mutation changeAssistanceStatus($assignmentId: ID!, $currentStatus: String!, $newStatus: String!) {
-//   changeProgressStatus(assignmentId: $assignmentId, currentStatus: $currentStatus, newStatus: $newStatus) {
-//     assignmentTitle
-// }
-// `;
+export const CHANGE_ASSISTANCE_STATUS = gql` 
+mutation changeAssistanceStatus($assignmentId: ID!, $currentStatus: String!, $newStatus: String!) {
+  changeProgressStatus(assignmentId: $assignmentId, currentStatus: $currentStatus, newStatus: $newStatus) {
+    assignmentTitle
+}
+}
+`;
