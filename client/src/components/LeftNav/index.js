@@ -8,7 +8,7 @@ import "./style.css";
 // iconUrl={iconUrl} onClick={onIconClick}
 // TODO CREATE LOGO ICON AND INSERT HERE
 const LeftNav = ({ user }) => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(true);
     const [initialPosition, setInitialPosition] = useState(0)
 
     const handleMenuClick = () => {
@@ -21,12 +21,16 @@ const LeftNav = ({ user }) => {
     };
 
     const handleTouchMove = (event) => {
-        // Compare the current position of the touch event with the initial position
+        // Save the current position of the user's touch
         const currentPosition = event.touches[0].clientX;
-        if (initialPosition - currentPosition > 50) {
+
+        // Compare the current position of the touch event with the initial position
+        if (initialPosition - currentPosition < -50) {
             // The user has swiped right, open the navbar
             setIsMenuOpen(true);
+            console.log("opening menu");
         }
+
     };
 
     return (
@@ -36,20 +40,25 @@ const LeftNav = ({ user }) => {
             onTouchMove={handleTouchMove}
         >
 
-            <button onClick={handleMenuClick}> {isMenuOpen ? 'Close' : 'Open'} menu </button>
             {isMenuOpen && (
-                <ul>
-                    <li><ProfileIcon user={user} /></li>
-                    <NotificationHandler />
-                    <li>Menu item 1</li>
-                    <li>Menu item 2</li>
-                    {/* {user.classes.map(({icon, name}) => (
-                   <li>
+                <div className='navContent'>
+                    <div className='navButtons'>
+                        <ProfileIcon user={user} />
+                        <NotificationHandler />
+                        <SettingsMenu />
+                        <button onClick={handleMenuClick}> x </button>
+                    </div>
+                    <ul className='courseList'>
+                        <li className='course'>Menu item 1</li>
+                        <li className='course'>Menu item 2</li>
+                        {/* {user.classes.map(({icon, name}) => (
+                   <li className='course'>
                     <ClassSelector icon={icon} name={name}/>
                    </li> 
                 ))} */}
-                    <li><SettingsMenu /></li>
-                </ul>
+                    </ul>
+                    <button> DOWNLOAD??? </button>
+                </div>
             )}
 
         </nav>

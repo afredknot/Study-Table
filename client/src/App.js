@@ -68,10 +68,10 @@ function App() {
                 path="/signup" 
                 element={<Signup />}
               />
-              <Route 
+              {/* <Route 
                 path="/me" 
-                element={<Profile />}
-              />
+                // element={<Profile />}
+              /> */}
             </Routes>
           </div>
         </div>

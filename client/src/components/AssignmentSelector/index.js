@@ -4,7 +4,7 @@ import { useProviderContext } from "../../utils/providerContext";
 
 const AssignmentSelector = ({assignments}) => {
 
-    const { context } = useProviderContext();
+    // const { context } = useProviderContext();
 
   // ADD STATUS INDICATIOR
   return (
