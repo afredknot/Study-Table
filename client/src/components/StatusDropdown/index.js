@@ -6,6 +6,7 @@ const StatusDropdown = () => {
   const handleChange = (e) => {
     setStatus(e.target.value);
     // POTENTIAL MUTATION TO ASSIGNMENT STATUS ON DB?
+    changeStatus(user, assignment, status);
   }
 
   // REMOVE INLINE STYLE ONCE CSS IS ADDED
