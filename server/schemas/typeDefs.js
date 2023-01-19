@@ -17,6 +17,7 @@ const typeDefs = gql`
   type Course {
     _id: ID
     courseTitle: String
+    courseDescription: String
     instructor: User
     teachingAssistant: User
     assignments: [Assignment]
@@ -33,7 +34,8 @@ const typeDefs = gql`
     studentProgressWorking: [User]
     studentProgressCompleted: [User]
     studentDefaultStatus: [User]
-    requestingHelp: [HelpTicket]
+    requestingHelp: [User]
+    helpTickets: [HelpTicket]
     offeringAssistance: [User]
     createdAt: String
   }
@@ -69,9 +71,9 @@ const typeDefs = gql`
     addUser(username: String!, role: String!, firstName: String!, lastName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
 
-    updateUserProfile(userId: ID!, role: String, firstName: String, lastName: String, email: String, avatar: String, password: String): User
+    updateUserProfile( role: String, username: String,firstName: String, lastName: String, email: String, avatar: String, password: String): User
 
-    createCourse(courseTitle:String!, courseDescription:String!, instructor:ID!, teachingAssistant: String): Course
+    createCourse(courseTitle:String!, courseDescription:String!, teachingAssistant: ID): Course
     updateCourse(courseId: ID!, courseTitle:String, courseDescription:String, teachingAssistant: ID): Course
     deleteCourse(courseId: ID!): Course
 
