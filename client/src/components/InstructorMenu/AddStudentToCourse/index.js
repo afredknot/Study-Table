@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
+import { useMutation, useQuery } from '@apollo/client';
+import { ADD_STUDENT_TO_COURSE } from '../utils/mutations';
+import { QUERY_USERS } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
-const Signup = () => {
+const AddStudentToCourse = () => {
+
   const [formState, setFormState] = useState({
-    username: '',
-    firstName: '',
-    lastName: '',
-    role: '',
-    email: '',
-    password: '',
+    courseID: '',
+    userID: '',
   });
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+
+  // const [users, { error, data }] = useQuery(QUERY_USERS);
+
+
+  const [addStudentToCourse, { error, data }] = useMutation(ADD_STUDENT_TO_COURSE);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -31,11 +33,10 @@ const Signup = () => {
     console.log(formState);
 
     try {
-      const { data } = await addUser({
+      const { data } = await addStudentToCourse({
         variables: { ...formState },
       });
 
-      Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
@@ -45,53 +46,37 @@ const Signup = () => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
+          <h4 className="card-header bg-dark text-light p-2">Create a Course</h4>
           <div className="card-body">
             {data ? (
               <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
+                Success! You have added a new course.
+                {/* <Link to="/">back to the homepage.</Link> */}
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
-                  placeholder="Your username"
-                  name="username"
+                  placeholder="Course Name"
+                  name="courseTitle"
                   type="text"
-                  value={formState.username}
+                  value={formState.courseTitle}
                   onChange={handleChange}
                 />
                 <input
                   className="form-input"
-                  placeholder="Your first name"
-                  name="firstName"
+                  placeholder="Course Description"
+                  name="courseDescription"
                   type="text"
-                  value={formState.firstName}
+                  value={formState.courseDescription}
                   onChange={handleChange}
                 />
                <input
                   className="form-input"
-                  placeholder="Your last name"
-                  name="lastName"
+                  placeholder="Teaching Assistant"
+                  name="teachingAssistant"
                   type="text"
-                  value={formState.lastName}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
+                  value={formState.teachingAssistant}
                   onChange={handleChange}
                 />
                 <button
@@ -116,4 +101,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default AddStudentToCourse;

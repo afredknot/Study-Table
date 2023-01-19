@@ -4,13 +4,14 @@ import TicketSelector from "../components/TicketSelector";
 import NewsCard from "../components/NewsCard"
 
 import { useProviderContext } from "../utils/providerContext";
+import { QUERY_ME } from '../utils/queries';
 
 
 const Dashboard = ({ course }) => {
 
   const { functions } = useProviderContext();
 
-  console.log(functions)
+ console.log(functions.useAQuery(QUERY_ME))
 
   return (
     <main className="dashboard">
