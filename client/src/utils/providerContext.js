@@ -57,7 +57,7 @@ export const ContextProvider = ({ children }) => {
 
     
         function ChangeAssistanceStatus( {currentAssistanceStatus, assignmentId} ) {
-            const [newAssitanceStatus, setNewAssistanceStatus] = useState('');
+            const [newAssistanceStatus, setNewAssistanceStatus] = useState('');
 
             const [changeAssistanceStatus, { error }] = useMutation(CHANGE_ASSISTANCE_STATUS);
 
