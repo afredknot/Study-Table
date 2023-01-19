@@ -42,7 +42,7 @@ export const ContextProvider = ({ children }) => {
             console.log(reply);
         },
 
-        ChangeProgressStatus: function( {currentProgressStatus, assignmentId} ) {
+        changeProgressStatus: function( {currentProgressStatus, assignmentId} ) {
             const [newProgressStatus, setNewProgressStatus] = useState('');
 
             const [changeProgressStatus, { error }] = useMutation(CHANGE_PROGRESS_STATUS);
@@ -66,7 +66,7 @@ export const ContextProvider = ({ children }) => {
         },
 
     
-        ChangeAssistanceStatus: function( {currentAssistanceStatus, assignmentId} ) {
+        changeAssistanceStatus: function( {currentAssistanceStatus, assignmentId} ) {
             const [newAssistanceStatus, setNewAssistanceStatus] = useState('');
 
             const [changeAssistanceStatus, { error }] = useMutation(CHANGE_ASSISTANCE_STATUS);
@@ -89,6 +89,29 @@ export const ContextProvider = ({ children }) => {
             };
         },
 
+        
+        updateHelpTicket: function( { helpTicketId } ) {
+            const [newAssistanceStatus, setNewAssistanceStatus] = useState('');
+
+            const [changeAssistanceStatus, { error }] = useMutation(CHANGE_ASSISTANCE_STATUS);
+
+            const handleFormSubmit = async (event) => {
+                event.preventDefault();
+            
+                try {
+                    const { data } = await changeAssistanceStatus({
+                    variables: {
+                        assignmentId,
+                        currentAssistanceStatus,
+                        newAssistanceStatus,
+                    },
+                    });
+            
+                } catch (err) {
+                    console.error(err);
+                }
+            };
+        },
 
         viewProfile: function() {
             console.log(user);

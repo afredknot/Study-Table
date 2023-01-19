@@ -198,20 +198,20 @@ export const UPDATE_COURSE = gql`
 // }
 // `;
    
-// export const UPDATE_HELP_TICKET = gql`
-//   mutation updateHelpTicket($helpTicketId: ID!, $topic: String, $githubRepo: String, $problemDescription: String, $ticketStatus: Boolean) {
-//   updateHelpTicket(helpTicketId: $helpTicketId, topic: $topic, githubRepo: $githubRepo, problemDescription: $problemDescription, ticketStatus: $ticketStatus) {
-//     _id
-//     student {
-//       _id
-//     }
-//     problemDescription
-//     githubRepo
-//     ticketStatus
-//     topic
-//   }
-// }
-// `;
+export const UPDATE_HELP_TICKET = gql`
+  mutation updateHelpTicket($helpTicketId: ID!, $topic: String, $githubRepo: String, $problemDescription: String, $ticketStatus: Boolean) {
+  updateHelpTicket(helpTicketId: $helpTicketId, topic: $topic, githubRepo: $githubRepo, problemDescription: $problemDescription, ticketStatus: $ticketStatus) {
+    _id
+    student {
+      _id
+    }
+    problemDescription
+    githubRepo
+    ticketStatus
+    topic
+  }
+}
+`;
 
 export const CHANGE_PROGRESS_STATUS= gql`
 mutation changeProgressStatus($assignmentId: ID!, $currentStatus: String!, $newStatus: String!) {

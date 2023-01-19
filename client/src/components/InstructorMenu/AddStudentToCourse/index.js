@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_STUDENT_TO_COURSE } from '../utils/mutations';
-import { QUERY_USERS } from '../utils/mutations';
+import { QUERY_USERS } from '../../../utils/mutations';
 
 
 const AddStudentToCourse = (courseId) => {
