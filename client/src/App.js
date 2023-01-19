@@ -7,14 +7,17 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Dashboard from './pages/Dashboard';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Header from './components/Header';
-import { contextProvider } from './utils/providerContext';
-
+import LeftNav from "./components/LeftNav";
+import TicketView from "./pages/TicketView"
+import AssignmentView from './pages/AssignmentView';
+// import ThemeProvider from 'react-bootstrap/ThemeProvider';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -43,33 +46,36 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <contextProvider>
-        <Router>
-          <div className="flex-column justify-flex-start min-100-vh">
-            <Header />
-            <div className="container">
-              <Routes>
-                <Route
-                  path="/"
-                  element={<Dashboard />}
-                />
-                <Route
-                  path="/login"
-                  element={<Login />}
-                />
-                <Route
-                  path="/signup"
-                  element={<Signup />}
-                />
-                <Route
-                  path="/me"
-                  element={<Profile />}
-                />
-              </Routes>
-            </div>
+      <Router>
+        <div className="flex-column justify-flex-start min-100-vh">
+          <Header /> 
+          <LeftNav />
+          <div className="view container mb-2">
+           
+            <Routes>
+              <Route 
+                path="/"
+                element={<Dashboard />}
+              />
+                <Route path="/tickets" element={<TicketView />}/>
+                <Route path="/assignments" element={<AssignmentView />}/>
+              
+              <Route 
+                path="/login" 
+                element={<Login />}
+              />
+              <Route 
+                path="/signup" 
+                element={<Signup />}
+              />
+              <Route 
+                path="/me" 
+                element={<Profile />}
+              />
+            </Routes>
           </div>
-        </Router>
-      </contextProvider>
+        </div>
+      </Router>
     </ApolloProvider>
   );
 }
