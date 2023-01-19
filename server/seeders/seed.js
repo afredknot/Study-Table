@@ -1,5 +1,5 @@
 const db = require('../config/connection');
-const { User, Course, Assignment } = require('../models');
+const { User, Course, Assignment, HelpTicket } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const courseSeeds = require('./courseSeeds.json');
 const assignmentSeeds = require('./assignmentSeeds.json');
@@ -10,6 +10,7 @@ db.once('open', async () => {
     await Assignment.deleteMany({});
     await Course.deleteMany({});
     await User.deleteMany({});
+    await HelpTicket.deleteMany({});
 
     await User.create(userSeeds);
 

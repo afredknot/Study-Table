@@ -7,18 +7,22 @@ const resolvers = {
   Query: {
     
     users: async () => {
-      return User.find().populate('courses').populate({
-        path: 'courses',
-        populate: 'assignments'
-      });
+      return User.find({})
+        .populate('courses')
+        .populate({
+          path: 'courses',
+          populate: 'assignments'
+        });
     },
 
 
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('courses').populate({
+      return User.findOne({ username })
+      .populate('courses')
+      .populate({
         path: 'courses',
-        populate: 'assignments'
-      });
+        populate: 'assignments'})
+      .populate('instructor');
     },
     
 
@@ -30,7 +34,7 @@ const resolvers = {
       .populate('teachingAssistant')
       .populate({
         path: 'assignments',
-        populate: 'requestingHelp'
+        populate: 'helpTickets'
       })
     },
     
@@ -40,14 +44,17 @@ const resolvers = {
     
     
     assignments: async () => {
-      return Assignment.find().populate('requestingHelp').populate('studentProgressNotStarted').populate('studentProgressWorking').populate('studentDefaultStatus').populate({
-        path: 'requestingHelp',
-        populate: 'student'
-      })
-      .populate({
-        path: 'requestingHelp',
-        populate: 'helpTicket'
-      });
+      return Assignment.find()
+      .populate('requestingHelp')
+      .populate('studentProgressNotStarted')
+      .populate('studentProgressWorking')
+      .populate('studentDefaultStatus')
+      .populate('helpTickets')
+      .populate('offeringAssistance')
+      // .populate({
+      //   path: 'requestingHelp',
+      //   populate: 'helpTicket'
+      // });
     },
     
 
@@ -76,17 +83,18 @@ const resolvers = {
     },
 
 
-    updateUserProfile: async (parent, { userId, role, firstName, lastName, email, avatar, password }, context) => {
+    updateUserProfile: async (parent, { role, firstName, lastName, email, avatar, password, username }, context) => {
       // if (context.user) {
        return await User.findOneAndUpdate(
-        { _id: userId},
+        { _id: context.user._id},
         {
           role,
+          username,
           firstName,
           lastName,
           email,
           avatar,
-          password
+          password, 
         },
         {new: true}
         );
@@ -114,14 +122,34 @@ const resolvers = {
     },
 
 
-    createCourse: async (parent, { courseTitle, courseDescription, instructor, teachingAssistant }, context) => {
+    createCourse: async (parent, { courseTitle, courseDescription, teachingAssistant }, context) => {
       // if (context.user) {
       const course = await Course.create({
         courseTitle, 
         courseDescription, 
-        instructor, 
+        instructor: context.user._id, 
         teachingAssistant,
       });
+
+      await User.findOneAndUpdate(
+        { _id: context.user._id, },
+        { $addToSet: { courses: course._id } },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+      await User.findOneAndUpdate(
+        { _id: teachingAssistant, },
+        { $addToSet: { courses: course._id } },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+
       return course;
     // }
       throw new AuthenticationError('You need to be logged in!');
@@ -227,7 +255,20 @@ const resolvers = {
 
     updateCourse: async (parent, { courseId, courseTitle, courseDescription, teachingAssistant }, context) => {
       // if (context.user) {
-       return await Course.findOneAndUpdate(
+       const courseStart = await Course.findOne(
+        { _id: courseId},
+       );
+       
+       await User.findOneAndUpdate(
+        { _id: courseStart.teachingAssistant, },
+        { $pull: { courses: courseStart._id } },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+       const courseUpdated = await Course.findOneAndUpdate(
         { _id: courseId},
         {
           courseTitle,
@@ -236,6 +277,17 @@ const resolvers = {
         },
         {new: true}
         );
+
+        await User.findOneAndUpdate(
+          { _id: teachingAssistant, },
+          { $addToSet: { courses: courseStart._id } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+
+          return courseUpdated;
       // }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -243,19 +295,32 @@ const resolvers = {
 
     deleteCourse: async (parent, { courseId }, context) => {
       // if (context.user) {
-        const course = Course.findOne(
-          {_id : courseId}
-          )
-          if(course.students<0){
+        const course = Course.findOne( {_id : courseId} )
+          
+        if(course.students>0){
           for(i=0; i<course.students; i++) {
-        await User.findOneUpdate(
-          { _id: course.students[i] },
-          { $pull: { courses: course._id } }
-        )};
+            await User.findOneUpdate(
+              { _id: course.students[i] },
+              { $pull: { courses: course._id } }
+            )
+          };
         }
+
+        await User.findOneAndUpdate(
+          { _id: course.teachingAssistant },
+          { $pull: { courses: course._id } },
+        );
+
+        await User.findOneAndUpdate(
+          { _id: course.instructor },
+          { $pull: { courses: course._id } },
+        );
+
         await Course.findOneAndDelete({
           _id: courseId
         });
+
+        return course;
       // }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -263,6 +328,8 @@ const resolvers = {
    
     addHelpTicket: async (parent, { assignmentId, topic, githubRepo, problemDescription }, context) => {
       if (context.user) {
+        
+        
         const helpTicket = await HelpTicket.create({
           student: context.user._id, 
           topic,
@@ -271,11 +338,11 @@ const resolvers = {
           ticketStatus: true
         });
 
-        // await Assignment.findOneAndUpdate(
-        //   { _id: assignmentId },
-        //   { $addToSet: { requestingHelp: helpTicket._id } },
-        //   { $pull: { studentDefaultStatus: context.user._id, offeringAssistance: context.user._id } },
-        // );
+        await Assignment.findOneAndUpdate(
+          { _id: assignmentId },
+          { $addToSet: { helpTickets: helpTicket._id, requestingHelp: context.user._id }, 
+            $pull: { studentDefaultStatus: context.user._id, offeringAssistance: context.user._id } },
+        );
 
         return helpTicket;
       }
