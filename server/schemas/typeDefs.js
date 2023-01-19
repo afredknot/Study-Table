@@ -57,7 +57,7 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
-    user(username: String!): User
+    user(_id: ID!): User
     courses: [Course]
     course(courseTitle: String!): Course
     assignments: [Assignment]

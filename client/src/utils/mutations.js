@@ -28,6 +28,7 @@ mutation addUser($username: String!, $role: String!, $firstName: String!, $lastN
 `;
 
 
+
 // export const ADD_COMMENT = gql`
 //   mutation addComment($thoughtId: ID!, $commentText: String!) {
 //     addComment(thoughtId: $thoughtId, commentText: $commentText) {
@@ -88,6 +89,7 @@ export const UPDATE_COURSE = gql`
       _id
       username
     }
+  }
   }
 `;
 
@@ -185,11 +187,13 @@ mutation changeProgressStatus($assignmentId: ID!, $currentStatus: String!, $newS
   changeAssistanceStatus(assignmentId: $assignmentId, currentStatus: $currentStatus, newStatus: $newStatus) {
     assignmentTitle
 }
+}
 `;
    
 export const CHANGE_ASSISTANCE_STATUS = gql` 
 mutation changeAssistanceStatus($assignmentId: ID!, $currentStatus: String!, $newStatus: String!) {
   changeProgressStatus(assignmentId: $assignmentId, currentStatus: $currentStatus, newStatus: $newStatus) {
     assignmentTitle
+}
 }
 `;
