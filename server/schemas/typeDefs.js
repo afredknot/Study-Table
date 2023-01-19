@@ -50,6 +50,14 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type Comment {
+    _id: ID
+    CommenttText: String
+    CommentAuthor: String
+    createdAt: String
+    Replies: [Replies]!
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -95,10 +103,12 @@ const typeDefs = gql`
 
 # -------------------------------------------------------------------------------
 
-    # addThought(thoughtText: String!): Thought
-    # addComment(thoughtId: ID!, commentText: String!): Thought
-    # removeThought(thoughtId: ID!): Thought
-    # removeComment(thoughtId: ID!, commentId: ID!): Thought
+    addComment(commentText: String!, assignmentId:ID helpTicketId: ID ): Comment
+    removeComment(commentId: ID!, assignmentId:ID helpTicketId: ID ): Comment
+
+    addReply(commentId: ID!, replyText: String!): Reply
+    removeReply(commentId: ID!, replyId: ID!): Reply
+
    # ------------------------------------------------------------------------------------------   
 
   }

@@ -27,6 +27,12 @@ const helpTicketSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment',
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
