@@ -64,25 +64,40 @@ export const QUERY_SINGLE_THOUGHT = gql`
 `;
 
 export const QUERY_ME = gql`
-  query me {
-    me {
-      username
-      role
-      firstName
-      lastName
-      email
-      password
-      avatar
-      _id
-      courses {
-        courseTitle
-        createdAt
-        _id
-        instructor {
+query me {
+  me {
+    username
+    role
+    lastName
+    firstName
+    email
+    avatar
+    courses {
+      courseTitle
+      courseDescription
+      assignments {
+        assignmentTitle
+        assignmentDueDate
+        assignmentDescription
+        studentProgressWorking {
           username
-          email
         }
+        studentProgressNotStarted {
+          username
+        }
+        studentProgressCompleted {
+          username
+        }
+      }
+      instructor {
+        username
+        email
+      }
+      teachingAssistant {
+        username
+        email
       }
     }
   }
+}
 `;
