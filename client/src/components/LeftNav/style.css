@@ -1,0 +1,21 @@
+.navbar {
+    position: absolute;
+    left: 0;
+    width: 20vw;
+    height: 100%;
+    /* other styles */
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translateX(-100%);
+        /* other styles */
+    }
+
+    .navbar.open {
+        transform: translateX(0);
+      }
+}

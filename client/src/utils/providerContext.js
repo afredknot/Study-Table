@@ -8,7 +8,7 @@ export const useProviderContext = () => useContext(providerContext);
 export const contextProvider = ({ children }) => {
 
     // global variable here
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     // FUNCTIONS GO HERE
     function handleAssignmentSelect() {
@@ -42,7 +42,7 @@ export const contextProvider = ({ children }) => {
     };
 
     return (
-        <providerContext.Provider value={{ navigate, handleAssignmentSelect, handleTicketSelect, createComment, createReply, changeStatus, viewProfile, handleChange }} >
+        <providerContext.Provider value={{handleAssignmentSelect, handleTicketSelect, createComment, createReply, changeStatus, viewProfile, handleChange }} >
             {children}
         </providerContext.Provider>
     )
