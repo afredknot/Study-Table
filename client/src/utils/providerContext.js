@@ -91,8 +91,8 @@ export const ContextProvider = ({ children }) => {
             console.log(event.target);
         },
 
-        useAQuery: function (query){
-            const result = useQuery(query);
+        useAQuery: function (query, options){
+            const result = useQuery(query, options);
             return result
         }
     }   

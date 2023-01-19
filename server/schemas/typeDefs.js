@@ -59,10 +59,12 @@ const typeDefs = gql`
     users: [User]
     user(_id: ID!): User
     courses: [Course]
-    course(courseTitle: String!): Course
+    course(courseId: ID!): Course
     assignments: [Assignment]
     assignment(assignmentId: ID!): Assignment
     me: User
+    helpTickets: [HelpTicket]
+    helpTicket(_id: ID!): HelpTicket
   }
 
   # ------------------------------------------------------------------------------------------
