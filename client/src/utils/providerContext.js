@@ -88,12 +88,12 @@ export const ContextProvider = ({ children }) => {
                 }
             };
         },
-        // QUERY assignment -> status buckets -> find user
-        // REMOVE User -> assignment -> status bucket
-        // ADD User -> assignment -> new status bucket
+
 
         viewProfile: function() {
             console.log(user);
+            // ??? QUERY_ME
+
         },
 
         handleChange: function(event) {
