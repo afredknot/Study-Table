@@ -49,12 +49,20 @@ const resolvers = {
       .populate('teachingAssistant')
       .populate({
         path: 'assignments',
-        populate: 'helpTickets'
+        populate: { path: 'helpTickets'}
       })
     },
     
     course: async (parent, { courseId }) => {
-      return Course.findOne({ _id: courseId });
+      return Course.findOne({ _id: courseId })
+      .populate('assignments')
+      .populate('instructor')
+      .populate('students')
+      .populate('teachingAssistant')
+      .populate({
+        path: 'assignments',
+        populate: {path: 'helpTickets'}
+      });
     },
     
     
@@ -66,15 +74,25 @@ const resolvers = {
       .populate('studentDefaultStatus')
       .populate('helpTickets')
       .populate('offeringAssistance')
-      // .populate({
-      //   path: 'requestingHelp',
-      //   populate: 'helpTicket'
-      // });
+      .populate({
+        path: 'requestingHelp',
+        populate: { path: 'helpTicket'}
+      });
     },
     
 
     assignment: async (parent, { assignmentId }) => {
-      return Course.findOne({ _id: assignmentId });
+      return Assignment.findOne({ _id: assignmentId })
+      .populate('requestingHelp')
+      .populate('studentProgressNotStarted')
+      .populate('studentProgressWorking')
+      .populate('studentDefaultStatus')
+      .populate('helpTickets')
+      .populate('offeringAssistance')
+      .populate({
+        path: 'requestingHelp',
+        populate: { path: 'helpTicket'}
+      });
     },
     
 
@@ -100,7 +118,16 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+ 
+    helpTickets: async () => {
+        return HelpTicket.find()
+    },
+
+    helpTicket: async (parent, { _id }) => {
+      return HelpTicket.findOne({ _id: _id })
+      },
   },
+
 
   Mutation: {
     
