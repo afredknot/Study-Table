@@ -41,14 +41,15 @@ export const ContextProvider = ({ children }) => {
 
         function handleChange(event) {
             console.log(event.target);
+        },
+   
+        function veiwCourses(){
+           const me = useQuery(QUERY_ME);
+           const courses = me?.courses || [];
+            console.log(courses);
         }
     ]}   
         
-    function veiwCourses(){
-       const me = useQuery(QUERY_ME);
-       const courses = me?.courses || [];
-        console.log(courses);
-    }
 
 
 return (
