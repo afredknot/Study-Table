@@ -9,9 +9,19 @@ const resolvers = {
     users: async () => {
       return User.find({})
       .populate('courses')
-      .populate({path: 'courses', populate: {path: "instructor"}}).populate({path: 'courses', populate: {path: "teachingAssistant"}});
+      .populate({
+        path: 'courses', 
+        populate: {
+          path: "instructor"
+        }
+      })
+      .populate({
+        path: 'courses', 
+        populate: {
+          path: "teachingAssistant"
+        }
+      });
     },
-
 
     user: async (parent, { _id }) => {
       return User.findOne({ _id: _id })
