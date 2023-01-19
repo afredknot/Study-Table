@@ -115,3 +115,106 @@ query me {
   }
 }
 `;
+
+export const QUERY_ASSIGNMENT = gql`
+query assignment($assignmentId: ID!) {
+  assignment(assignmentId: $assignmentId) {
+    assignmentTitle
+    helpTickets {
+      topic
+      problemDescription
+      student {
+        username
+      }
+      ticketStatus
+      githubRepo
+      createdAt
+      _id
+    }
+  }
+}
+`;
+
+export const QUERY_COURSES = gql`
+query courses {
+  courses {
+    courseTitle
+    _id
+    createdAt
+    assignments {
+      assignmentTitle
+    }
+    teachingAssistant {
+      username
+      firstName
+      lastName
+    }
+    instructor {
+      username
+      lastName
+      password
+    }
+    students {
+      username
+      password
+      lastName
+    }
+  }
+}
+`;
+export const QUERY_COURSE = gql`
+query course($courseId: ID!) {
+  course(courseId: $courseId) {
+    courseTitle
+    assignments {
+      assignmentTitle
+      assignmentDueDate
+      assignmentDescription
+      createdAt
+      _id
+      helpTickets {
+        topic
+        ticketStatus
+        student {
+          username
+        }
+        problemDescription
+        githubRepo
+        createdAt
+        _id
+      }
+    }
+  }
+}
+`;
+
+export const QUERY_TICKETS = gql`
+query tickets {
+  helpTickets {
+    topic
+    ticketStatus
+    student {
+      username
+    }
+    problemDescription
+    githubRepo
+    createdAt
+    _id
+  }
+}
+`;
+
+export const QUERY_TICKET = gql`
+query helpTicket($id: ID!) {
+  helpTicket(_id: $id) {
+    topic
+    ticketStatus
+    student {
+      username
+    }
+    problemDescription
+    githubRepo
+    createdAt
+  }
+}
+`;
