@@ -67,7 +67,7 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('courses').populate({
           path: 'courses',
-          populate: 'assignments'
+          populate: 'assignments',
         });
       }
       throw new AuthenticationError('You need to be logged in!');
