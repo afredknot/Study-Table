@@ -26,7 +26,7 @@ const AssignmentSelector = ({ assignments }) => {
   });
   // console.log(data)
   const assignmentList = data?.course.assignments || {}
-  console.log(assignmentList)
+  // console.log(assignmentList)
   // ADD STATUS INDICATIOR
   return (
 
