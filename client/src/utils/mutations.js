@@ -28,22 +28,6 @@ export const ADD_USER = gql`
 `;
 
 
-
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        username
-      }
-    }
-  }
-`;
-
 export const ADD_USER = gql`
   mutation addUser($username: String!, $role: String!, $firstName: String!, $lastName: String!, $email: String!, $password: String!) {
     addUser(username: $username, role: $role, firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
@@ -60,22 +44,6 @@ export const ADD_USER = gql`
 `;
 
 
-// export const ADD_COMMENT = gql`
-//   mutation addComment($thoughtId: ID!, $commentText: String!) {
-//     addComment(thoughtId: $thoughtId, commentText: $commentText) {
-//       _id
-//       thoughtText
-//       thoughtAuthor
-//       createdAt
-//       comments {
-//         _id
-//         commentText
-//         createdAt
-//       }
-//     }
-//   }
-// `;
-
 export const UPDATE_PROFILE = gql`
   mutation updateUserProfile($firstName: String, $lastName: String, $email: String, $avatar: String, $password: String, $role: String, $username: String) {
     updateUserProfile(firstName: $firstName, lastName: $lastName, email: $email, avatar: $avatar, password: $password, role: $role, username: $username) {
@@ -87,6 +55,7 @@ export const UPDATE_PROFILE = gql`
     }
   }
 `;
+
 
 export const CREATE_COURSE = gql`
   mutation createCourse($courseTitle: String!, $courseDescription: String!, $teachingAssistant: ID, ) {
@@ -106,6 +75,7 @@ export const CREATE_COURSE = gql`
   }
 `;
 
+
 export const UPDATE_COURSE = gql`
   mutation updateCourse($courseId: ID!, $courseTitle: String, $teachingAssistant: ID, $courseDescription: String) {
     updateCourse(courseId: $courseId, courseTitle: $courseTitle, teachingAssistant: $teachingAssistant, courseDescription: $courseDescription) {
@@ -124,6 +94,7 @@ export const UPDATE_COURSE = gql`
   }
 `;
 
+
 export const DELETE_COURSE = gql`
   mutation deleteCourse($courseId: ID!) {
     deleteCourse(courseId: $courseId) {
@@ -131,6 +102,7 @@ export const DELETE_COURSE = gql`
     }
   }
 `;
+
 
 export const ADD_STUDENT_TO_COURSE = gql`
   mutation addStudentToCourse($userId: ID!, $courseId: ID!) {
@@ -145,6 +117,7 @@ export const ADD_STUDENT_TO_COURSE = gql`
   }
 `;
 
+
 export const REMOVE_STUDENT_FROM_COURSE = gql`
   mutation removeStudentFromCourse($userId: ID!, $courseId: ID!) {
     removeStudentFromCourse(userId: $userId, courseId: $courseId) {
@@ -153,6 +126,7 @@ export const REMOVE_STUDENT_FROM_COURSE = gql`
   }
 `;
     
+
 export const CREATE_ASSIGNMENT = gql`
   mutation createAssignment($courseId: ID!, $assignmentTitle: String!, $assignmentDescription: String!, $assignmentDueDate: String!) {
     createAssignment(courseId: $courseId, assignmentTitle: $assignmentTitle, assignmentDescription: $assignmentDescription, assignmentDueDate: $assignmentDueDate) {
@@ -164,6 +138,7 @@ export const CREATE_ASSIGNMENT = gql`
   }
 `;
     
+
 export const UPDATE_ASSIGNMENT = gql`
   mutation updateAssignment($assignmentId: ID!, $assignmentTitle: String, $assignmentDescription: String, $assignmentDueDate: String) { 
     updateAssignment(assignmentId: $assignmentId, assignmentTitle: $assignmentTitle, assignmentDescription: $assignmentDescription, assignmentDueDate: $assignmentDueDate) {
@@ -174,6 +149,7 @@ export const UPDATE_ASSIGNMENT = gql`
   }
 `;
 
+
 export const REMOVE_ASSIGNMENT = gql`
   mutation removeAssignment($assignmentId: ID!, $courseId: ID!) {
     removeAssignment(assignmentId: $assignmentId, courseId: $courseId) {
@@ -181,6 +157,7 @@ export const REMOVE_ASSIGNMENT = gql`
     }
   }
 `;
+
 
 export const ADD_HELP_TICKET = gql`
   mutation addHelpTicket($assignmentId: ID!, $githubRepo: String!, $problemDescription: String!, $topic: String) {
@@ -198,6 +175,7 @@ export const ADD_HELP_TICKET = gql`
   }
 `;
    
+
 export const UPDATE_HELP_TICKET = gql`
   mutation updateHelpTicket($helpTicketId: ID!, $topic: String, $githubRepo: String, $problemDescription: String, $ticketStatus: Boolean) {
     updateHelpTicket(helpTicketId: $helpTicketId, topic: $topic, githubRepo: $githubRepo, problemDescription: $problemDescription, ticketStatus: $ticketStatus) {
@@ -213,6 +191,7 @@ export const UPDATE_HELP_TICKET = gql`
   }
 `;
 
+
 export const CHANGE_PROGRESS_STATUS= gql`
   mutation changeProgressStatus($assignmentId: ID!, $currentStatus: String!, $newStatus: String!) {
     changeAssistanceStatus(assignmentId: $assignmentId, currentStatus: $currentStatus, newStatus: $newStatus) {
@@ -221,10 +200,80 @@ export const CHANGE_PROGRESS_STATUS= gql`
   }
 `;
    
+
 export const CHANGE_ASSISTANCE_STATUS = gql` 
   mutation changeAssistanceStatus($assignmentId: ID!, $currentStatus: String!, $newStatus: String!) {
     changeProgressStatus(assignmentId: $assignmentId, currentStatus: $currentStatus, newStatus: $newStatus) {
       assignmentTitle
+    }
+  }
+`;
+
+
+export const ADD_COMMENT = gql` 
+  mutation addComment($commentText: String!, $assignmentId: ID) {
+    addComment(commentText: $commentText, assignmentId: $assignmentId) {
+      _id
+      commentAuthor
+      commentText
+      createdAt
+      replies {
+        _id
+        createdAt
+        replyAuthor
+        replyText
+      }
+    }
+  }
+`;
+
+export const REMOVE_COMMENT = gql` 
+  mutation removeComment($commentId: ID!, $assignmentId: ID, $helpTicketId: ID) {
+    removeComment(commentId: $commentId, assignmentId: $assignmentId, helpTicketId: $helpTicketId) {
+      _id
+      commentAuthor
+      commentText
+      createdAt
+      replies {
+        _id
+        createdAt
+        replyAuthor
+        replyText
+      }
+    }
+  }
+`;
+
+export const ADD_REPLY = gql` 
+  mutation addReply($commentId: ID!, $replyText: String!) {
+    addReply(commentId: $commentId, replyText: $replyText) {
+      _id
+      commentAuthor
+      commentText
+      createdAt
+      replies {
+        _id
+        createdAt
+        replyAuthor
+        replyText
+      }
+    }
+  }
+`;
+
+export const REMOVE_REPLY = gql` 
+  mutation removeReply($commentId: ID!, $replyId: ID!) {
+    removeReply(commentId: $commentId, replyId: $replyId) {
+      _id
+      commentAuthor
+      commentText
+      createdAt
+      replies {
+        _id
+        createdAt
+        replyAuthor
+        replyText
+      }
     }
   }
 `;

@@ -10,8 +10,13 @@ const AddStudentToCourse = (courseId) => {
 
   const [userSelected, setUserSelected] = useState();
 
-  const [users] = useQuery(QUERY_USERS);
+  const { userData } = useQuery(QUERY_USERS);
+  const allUsers = userData?.user || [];
 
+  
+  allUsers.map((user) => (
+    <option value="Student Name"></option>
+  ))
 
   // query all users and get back id and first and last name
      // const results = users()

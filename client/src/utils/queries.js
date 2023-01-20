@@ -82,14 +82,16 @@ query me {
   me {
     username
     role
-    lastName
     firstName
+    lastName
     email
     avatar
     courses {
+      _id
       courseTitle
       courseDescription
       assignments {
+        _id
         assignmentTitle
         assignmentDueDate
         assignmentDescription
@@ -138,10 +140,10 @@ query assignment($assignmentId: ID!) {
 export const QUERY_COURSES = gql`
 query courses {
   courses {
-    courseTitle
     _id
-    createdAt
+    courseTitle
     assignments {
+      _id
       assignmentTitle
     }
     teachingAssistant {
@@ -151,12 +153,13 @@ query courses {
     }
     instructor {
       username
+      firstName
       lastName
-      password
     }
     students {
+      _id
       username
-      password
+      firstName
       lastName
     }
   }

@@ -78,6 +78,9 @@ const resolvers = {
         path: 'requestingHelp',
         populate: { path: 'helpTicket'}
       });
+
+    // TODO: Populate Comments
+
     },
     
 
@@ -93,6 +96,9 @@ const resolvers = {
         path: 'requestingHelp',
         populate: { path: 'helpTicket'}
       });
+      
+    // TODO: Populate Comments
+
     },
     
 
@@ -121,10 +127,16 @@ const resolvers = {
  
     helpTickets: async () => {
         return HelpTicket.find()
+        
+    // TODO: Populate Comments
+
     },
 
     helpTicket: async (parent, { _id }) => {
       return HelpTicket.findOne({ _id: _id })
+      
+    // TODO: Populate Comments
+
       },
   },
 
