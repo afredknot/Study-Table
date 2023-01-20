@@ -38,8 +38,9 @@ const LeftNav = ({ user }) => {
 
     const { functions } = useProviderContext();
     const data = functions.useAQuery(QUERY_ME)
-    // console.log(data.data)
-    const myCourses = (data.data.me.courses)
+    console.log(data)
+    const myCourses = (data.data.me)
+    console.log(myCourses)
     //     const myCourseLinks = myCourses.map(course => {
     //         <li className='course'>{course.courseTitle}</li>
     // });
@@ -63,14 +64,14 @@ const LeftNav = ({ user }) => {
                     <ul className='courseList'>
                         <li className='course'>Menu item 1</li>
                         <li className='course'>Menu item 2</li>
-                <div>
+                {/* <div>
                     {myCourses.map((course) => (
                         <ul key={course._id} className="courseList">
                             <li className='course'>
                             <ClassSelector name={course.courseTitle}/>
                             </li>
                         </ul>))}
-                </div>
+                </div> */}
                         {/* {user.classes.map(({icon, name}) => (
                    <li className='course'>
                     <ClassSelector icon={icon} name={name}/>
