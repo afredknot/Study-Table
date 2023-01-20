@@ -7,41 +7,41 @@ export const useProviderContext = () => useContext(ProviderContext);
 
 export const ContextProvider = ({ children }) => {
 
-    const globalVar = { functions:[
+    const globalVar = { functions: {
         // global variable here
         // const navigate = useNavigate();
 
         // FUNCTIONS GO HERE
-        function handleAssignmentSelect() {
+        handleAssignmentSelect: function () {
             console.log("Clicked Assignment!");
         },
 
-        function handleTicketSelect() {
+        handleTicketSelect: function () {
             console.log("Clicked Ticket");
         },
 
-        function createComment(comment) {
+        createComment: function (comment) {
             console.log(comment);
         },
 
-        function createReply(reply) {
+        createReply: function (reply) {
             console.log(reply);
         },
 
-        function changeStatus() {
+        changeStatus: function () {
             // QUERY assignment -> status buckets -> find user
             // REMOVE User -> assignment -> status bucket
             // ADD User -> assignment -> new status bucket
         },
 
-        function viewProfile(user) {
+        viewProfile: function (user) {
             console.log(user);
         },
 
-        function handleChange(event) {
+        handleChange: function (event) {
             console.log(event.target);
         }
-    ]}
+    }}
 
 
 

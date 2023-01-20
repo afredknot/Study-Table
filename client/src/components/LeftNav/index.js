@@ -40,13 +40,14 @@ const LeftNav = ({ user }) => {
             onTouchMove={handleTouchMove}
         >
 
+            <button className="handle" onClick={handleMenuClick}>{isMenuOpen ? "Close" : "Menu"}</button>
+
             {isMenuOpen && (
                 <div className='navContent'>
                     <div className='navButtons'>
                         <ProfileIcon user={user} />
                         <NotificationHandler />
                         <SettingsMenu />
-                        <button onClick={handleMenuClick}> x </button>
                     </div>
                     <ul className='courseList'>
                         <li className='course'>Menu item 1</li>
@@ -57,7 +58,11 @@ const LeftNav = ({ user }) => {
                    </li> 
                 ))} */}
                     </ul>
-                    <button> DOWNLOAD??? </button>
+                    
+                    <div className="navOptions">
+                        <button> DOWNLOAD??? </button>
+                        <button> Log Out </button>
+                    </div>
                 </div>
             )}
 

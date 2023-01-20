@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import notification from "./notification.svg"
 
 const NotificationHandler = () => {
 
@@ -19,7 +20,7 @@ const NotificationHandler = () => {
   return (
     <div>
       <div onClick={handleNotificationClick}>
-        <img  alt="Notification Icon" style={{ width: "25px" }} />
+        <img src={notification} alt="Notification Icon" style={{ width: "25px" }} />
         {notifications.length > 0 && <div style={{ position: "absolute", top: "0", right: "0", width: "10px", height: "10px", backgroundColor: "red", borderRadius: "50%" }} />}
       </div>
 
