@@ -185,27 +185,29 @@ export const QUERY_TICKETS = gql`
 `;
 
 export const QUERY_TICKET = gql`
-query helpTicket(_id: $id) {
-    _id
-    createdAt
-    githubRepo
-    problemDescription
-    student {
+  query ($id: ID!) {
+    helpTicket(_id: $id) {
       _id
-      username
-    }
-    ticketStatus
-    topic
-    comments {
-      _id
-      commentAuthor
-      commentText
       createdAt
-      replies {
+      githubRepo
+      problemDescription
+      student {
         _id
+        username
+      }
+      ticketStatus
+      topic
+      comments {
+        _id
+        commentAuthor
+        commentText
         createdAt
-        replyAuthor
-        replyText
+        replies {
+          _id
+          createdAt
+          replyAuthor
+          replyText
+        }
       }
     }
   }

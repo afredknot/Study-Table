@@ -62,8 +62,8 @@ const TicketDetails = () => {
                         <li id={ticketDetails._id} className='assignment'>
                             <div  >
                             {/* <img src={icon} alt={name} Icon></img> */}
-                            <h3>{ticketDetails.topic}</h3>
-                            <p>{ticketDetails.student.username}</p>
+                            <h3> {ticketDetails.topic}</h3>
+                            <p> {ticketDetails.student.username}</p>
                             <p> {ticketDetails.githubRepo}</p>
                             <p> {ticketDetails.problemDescription}</p>
                             <p> {ticketDetails.createdAt}</p>
@@ -72,6 +72,31 @@ const TicketDetails = () => {
                     </ul>
                 </div>
             )}
+
+
+            <h3>Comments</h3>
+
+            {data && (
+
+            <ul>
+                {ticketDetails.comments.map((comment) => (
+                    <div>
+                        <h4 key = {comment._id} id= {comment._id} className="comment">{comment.commentText}</h4>
+                        <h5>{comment.commentAuthor}</h5>
+
+                       {comment.replies.map((reply) => (
+                            <li key= {reply._id}>
+                                <p className="tagAuth">{reply.replyText}</p>
+                                <p className="tagAssi">{reply.replyAuthor}</p>
+                                <p className="tagDur">{reply.createdAt}</p>
+                            </li>
+                        ))}
+                    </div>
+                ))}
+            </ul>
+
+            )}
+
 
             {error && (
             console.log(error)
