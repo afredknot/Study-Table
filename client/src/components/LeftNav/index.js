@@ -7,12 +7,12 @@ import "./style.css";
 import { QUERY_ME } from '../../utils/queries';
 import { useProviderContext } from "../../utils/providerContext";
 import { useQuery } from '@apollo/client';
-
+import { useNavigate } from 'react-router-dom';
 
 // iconUrl={iconUrl} onClick={onIconClick}
 // TODO CREATE LOGO ICON AND INSERT HERE
 const LeftNav = ({  }) => {
-
+    const navigate = useNavigate();
     const { course, updateCourse, user, updateUser } = useProviderContext();
 
     const [isMenuOpen, setIsMenuOpen] = useState(true);
@@ -36,19 +36,24 @@ const LeftNav = ({  }) => {
             // The user has swiped right, open the navbar
             setIsMenuOpen(true);
             console.log("opening menu");
+
         }
     };
 
 
-    const handleCourseSelect =  function(courseId) {
-
+    const handleCourseSelect =  function(e) {
+        // console.log(e.target.id);
+            updateCourse(e.target.id)
+            console.log(course)
+            setIsMenuOpen(!isMenuOpen);
+            navigate('/dashboard');
         };
 
 
 
     const { loading, data, error } = useQuery(QUERY_ME);
     const me = data?.me || {}
-    console.log(me)
+    // console.log(me)
 
     return (
         <nav
@@ -77,12 +82,12 @@ const LeftNav = ({  }) => {
 
                         {data && (                        
                         <div>
-                            {data.me.courses.map((course) => (
+                            {me.courses.map((course) => (
                         <ul key={course._id} className="courseList">
                             <li className='course'>
                             <div onClick={handleCourseSelect}>
                                 {/* <img src={icon} alt={name} Icon></img> */}
-                                <h2>{course.courseTitle}</h2>
+                                <h2 id={course._id}>{course.courseTitle}</h2>
                             </div>
                             {/* <ClassSelector name={course.courseTitle}/> */}
                             </li>
