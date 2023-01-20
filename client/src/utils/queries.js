@@ -96,8 +96,10 @@ export const QUERY_ME = gql`
 export const QUERY_ASSIGNMENT = gql`
   query assignment($assignmentId: ID!) {
     assignment(assignmentId: $assignmentId) {
+      _id
       assignmentTitle
-      assignmentId
+      assignmentDescription
+      assignmentDueDate
       helpTickets {
         topic
         problemDescription
