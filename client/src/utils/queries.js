@@ -28,6 +28,7 @@ export const QUERY_USERS = gql`
 export const QUERY_USER = gql`
   query user($id: ID!) {
     user(_id: $id) {
+      _id
       username
       role
       firstName
@@ -53,6 +54,7 @@ export const QUERY_USER = gql`
 export const QUERY_ME = gql`
   query me {
     me {
+      -id
       username
       role
       firstName
@@ -95,6 +97,7 @@ export const QUERY_ASSIGNMENT = gql`
   query assignment($assignmentId: ID!) {
     assignment(assignmentId: $assignmentId) {
       assignmentTitle
+      assignmentId
       helpTickets {
         topic
         problemDescription
@@ -143,6 +146,7 @@ export const QUERY_COURSE = gql`
   query course($courseId: ID!) {
     course(courseId: $courseId) {
       courseTitle
+      _id
       assignments {
         assignmentTitle
         assignmentDueDate
@@ -184,6 +188,7 @@ export const QUERY_TICKETS = gql`
 export const QUERY_TICKET = gql`
 query helpTicket($id: ID!) {
   helpTicket(_id: $id) {
+    _id
     topic
     ticketStatus
     student {
@@ -194,4 +199,4 @@ query helpTicket($id: ID!) {
     createdAt
   }
 }
-`;
+`;s
