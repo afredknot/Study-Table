@@ -7,7 +7,7 @@ import "./style.css";
 import { QUERY_ME } from '../../utils/queries';
 import { useProviderContext } from "../../utils/providerContext";
 import { useQuery } from '@apollo/client';
-
+import { useNavigate } from 'react-router-dom';
 
 // iconUrl={iconUrl} onClick={onIconClick}
 // TODO CREATE LOGO ICON AND INSERT HERE
