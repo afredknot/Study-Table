@@ -29,7 +29,17 @@
   background: linear-gradient(90deg, rgba(49,21,126,0.5074404761904762) 1%, rgba(61,68,93,1) 75%);
   color: var(--text);
   margin: 10px;
-  height: 50vh;
+  width: 300px;
+  height: 60vh;
+  border-radius: 3%;
+}
+
+.card2 {
+  background: linear-gradient(90deg, rgba(49,21,126,0.5074404761904762) 1%, rgba(61,68,93,1) 75%);
+  color: var(--text);
+  margin: 10px;
+  width: 600px;
+  height: 60vh;
   border-radius: 3%;
 }
 
