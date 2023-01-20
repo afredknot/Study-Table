@@ -56,11 +56,12 @@ function App() {
 
               <Routes>
                 <Route path="/" element={<LandingPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/tickets" element={<TicketView />} />
                 <Route path="/assignments" element={<AssignmentView />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
+                
                 {/* <Route 
                 path="/me" 
                 // element={<Profile />}
