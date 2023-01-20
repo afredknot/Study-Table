@@ -3,7 +3,8 @@ import { createContext, useContext } from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
 
-import { CHANGE_ASSISTANCE_STATUS, CHANGE_PROGRESS_STATUS } from './mutations';
+import { ADD_COMMENT, ADD_REPLY, CHANGE_ASSISTANCE_STATUS, CHANGE_PROGRESS_STATUS, UPDATE_HELP_TICKET } from './mutations';
+import { QUERY_ASSIGNMENT, QUERY_COURSE, QUERY_TICKET } from './queries';
 
 
 const ProviderContext = createContext();
@@ -13,38 +14,96 @@ export const useProviderContext = () => useContext(ProviderContext);
 export const ContextProvider = ({ children }) => {
 
     const globalVar = { functions: {
-        // global variable here
-        // const navigate = useNavigate();
 
-        // FUNCTIONS GO HERE
-        handleAssignmentSelect: function() {
+        // query individual assignment and assignment tickets
+        handleAssignmentSelect: function(assignmentId) {
+            
+            const { loading, data } = useQuery(QUERY_ASSIGNMENT, {
+                variables: { assignmentId: assignmentId },
+            });
+
+            const assignment = data?.assignment || {};
+            console.log(assignment)
             console.log("Clicked Assignment!");
+        },
+        
+        
+        // query individual course populate assignments and tickets
+        handleCourseSelect: function(courseId) {
+            const { loading, data } = useQuery(QUERY_COURSE, {
+                variables: { courseId: courseId },
+            });
 
-            // query individual assignment and assignment tickets
+            const course = data?.course || {};
+            console.log(course)
+            console.log("Clicked Course");
         },
 
-        handleCourseSelect: function() {
-            console.log("Clicked Assignment!");
 
-            // query individual course populate assignments and tickets
-        },
+        // query individual ticket and get details
+        handleTicketSelect: function(helpTicketId) {
+            const { loading, data } = useQuery(QUERY_TICKET, {
+                variables: { id: helpTicketId },
+            });
 
-        handleTicketSelect: function() {
+            const ticket = data?.helpTicket || {};
+            console.log(ticket)
             console.log("Clicked Ticket");
-            // query individual ticket and get details
         },
 
-        createComment: function(comment) {
-            console.log(comment);
+        createComment: function(assignmentId, helpTicketId) {
+            const [commentState, setCommentState] = useState('');
+            const [addComment, { error, data }] = useMutation(ADD_COMMENT);
+            
+            const handleChange = (event) => {
+                const { name, value } = event.target;
+                setCommentState({comment});
+            };
+            
+            const handleFormSubmit = async (event) => {
+                event.preventDefault();
+                try {
+                    const { data } = await addComment({
+                        variables: { 
+                            assignmentId,
+                            helpTicketId,
+                            commentText: commentState
+                        },
+                    });
+                } catch (e) {
+                    console.error(e);
+                }
+            };
         },
 
-        createReply: function(reply) {
-            console.log(reply);
+        createReply: function(commentId) {
+            const [replyState, setReplyState] = useState('');
+            const [addReply, { error, data }] = useMutation(ADD_REPLY);
+            
+            const handleChange = (event) => {
+                const { name, value } = event.target;
+                setCommentState({reply});
+                };
+            
+                const handleFormSubmit = async (event) => {
+                event.preventDefault();
+            
+                try {
+                    const { data } = await addReply({
+                    variables: { 
+                        commentId,
+                        replyText: replyState
+                        },
+                    });
+            
+                } catch (e) {
+                    console.error(e);
+                }
+            };
         },
 
         changeProgressStatus: function( {currentProgressStatus, assignmentId} ) {
             const [newProgressStatus, setNewProgressStatus] = useState('');
-
             const [changeProgressStatus, { error }] = useMutation(CHANGE_PROGRESS_STATUS);
 
             const handleFormSubmit = async (event) => {
@@ -68,7 +127,6 @@ export const ContextProvider = ({ children }) => {
     
         changeAssistanceStatus: function( {currentAssistanceStatus, assignmentId} ) {
             const [newAssistanceStatus, setNewAssistanceStatus] = useState('');
-
             const [changeAssistanceStatus, { error }] = useMutation(CHANGE_ASSISTANCE_STATUS);
 
             const handleFormSubmit = async (event) => {
@@ -91,25 +149,53 @@ export const ContextProvider = ({ children }) => {
 
         
         updateHelpTicket: function( { helpTicketId } ) {
-            const [newAssistanceStatus, setNewAssistanceStatus] = useState('');
+            const [topic, setSubject] = useState("");
+            const [repo, setRepo] = useState("");
+            const [body, setBody] = useState("");
+            const [ticketOpen, setTicketOpen] = useState(true);
 
-            const [changeAssistanceStatus, { error }] = useMutation(CHANGE_ASSISTANCE_STATUS);
-
-            const handleFormSubmit = async (event) => {
-                event.preventDefault();
-            
-                try {
-                    const { data } = await changeAssistanceStatus({
-                    variables: {
-                        assignmentId,
-                        currentAssistanceStatus,
-                        newAssistanceStatus,
-                    },
-                    });
-            
-                } catch (err) {
-                    console.error(err);
-                }
+            const [updateHelpTicket, { error, data }] = useMutation(UPDATE_HELP_TICKET);
+          
+            const handleChange = (e) => {
+              switch(e.target.id) {
+                case "1":
+                    setSubject(e.target.value);
+                    break;
+                case "2":
+                    setRepo(e.target.value);
+                    break;
+                case "3":
+                    setBody(e.target.value);
+                    break;
+                case "4":
+                    setTicketOpen(e.target.value);
+                    break;
+                };
+            };
+          
+            const handleSubmit = async(e) => {
+              e.preventDefault();
+              // SUBMITTED DATA
+              try {
+                const { data } = await updateHelpTicket({
+                  variables: {
+                    helpTicketId: helpTicketId,
+                    topic: topic,
+                    githubRpo: repo,
+                    problemDescription: body,
+                    ticketStatus: ticketOpen
+                  },
+                });
+          
+              } catch (e) {
+                console.error(e);
+              }
+          
+              // MUTATE HERE
+              setSubject("");
+              setRepo("");
+              setBody("");
+              // send success message and return to ???
             };
         },
 
@@ -130,8 +216,6 @@ export const ContextProvider = ({ children }) => {
     }   
   }     
   
-
-
 return (
     <ProviderContext.Provider value={globalVar} >
         {children}

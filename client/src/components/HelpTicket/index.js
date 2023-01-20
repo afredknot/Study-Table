@@ -32,8 +32,8 @@ const CreateHelpTicket = ({assignmentId, user}) => {
     try {
       const { data } = await addHelpTicket({
         variables: {
-          assignmentId: assignment,
-          topic: subject,
+          assignmentId: assignmentId,
+          topic: topic,
           githubRpo: repo,
           problemDescription: body
         },
