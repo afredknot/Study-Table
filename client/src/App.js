@@ -55,7 +55,7 @@ function App() {
             <div className="view">
 
               <Routes>
-                <Route path="/" element={<LandingPage />} />
+                {/* <Route path="/" element={<LandingPage />} /> */}
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/tickets" element={<TicketView />} />
                 <Route path="/assignments" element={<AssignmentView />} />

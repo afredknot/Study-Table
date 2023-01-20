@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ClassSelector from '../ClassSelector';
+// import ClassSelector from '../ClassSelector';
 import SettingsMenu from '../SettingsMenu';
 import NotificationHandler from '../NotificationHandler';
 import ProfileIcon from '../ProfileIcon';
@@ -11,7 +11,10 @@ import { useQuery } from '@apollo/client';
 
 // iconUrl={iconUrl} onClick={onIconClick}
 // TODO CREATE LOGO ICON AND INSERT HERE
-const LeftNav = ({ user }) => {
+const LeftNav = ({  }) => {
+
+    const { course, updateCourse, user, updateUser } = useProviderContext();
+
     const [isMenuOpen, setIsMenuOpen] = useState(true);
     const [initialPosition, setInitialPosition] = useState(0)
 
@@ -34,10 +37,18 @@ const LeftNav = ({ user }) => {
             setIsMenuOpen(true);
             console.log("opening menu");
         }
-
     };
 
+
+    const handleCourseSelect =  function(courseId) {
+
+        };
+
+
+
     const { loading, data, error } = useQuery(QUERY_ME);
+    const me = data?.me || {}
+    console.log(me)
 
     return (
         <nav
@@ -69,7 +80,11 @@ const LeftNav = ({ user }) => {
                             {data.me.courses.map((course) => (
                         <ul key={course._id} className="courseList">
                             <li className='course'>
-                            <ClassSelector name={course.courseTitle}/>
+                            <div onClick={handleCourseSelect}>
+                                {/* <img src={icon} alt={name} Icon></img> */}
+                                <h2>{course.courseTitle}</h2>
+                            </div>
+                            {/* <ClassSelector name={course.courseTitle}/> */}
                             </li>
                         </ul>))}
                         </div>

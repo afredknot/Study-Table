@@ -10,13 +10,13 @@ import { ADD_HELP_TICKET, CREATE_ASSIGNMENT, CREATE_COURSE } from '../utils/muta
 
 const Dashboard = ({ course }) => {
 
-  const { user, updateUser } = useProviderContext();
+  // const { user, updateUser } = useProviderContext();
 
-  console.log(user);
+  // console.log(user);
   
-  setTimeout(() => updateUser("Tom"), 2000);
+  // setTimeout(() => updateUser("Tom"), 2000);
 
-  console.log(user);
+  // console.log(user);
 
 //  console.log(functions.useAQuery(QUERY_ME))
 //  console.log(functions.useAQuery(QUERY_ASSIGNMENT, {
