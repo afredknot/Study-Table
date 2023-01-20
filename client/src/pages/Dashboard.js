@@ -12,10 +12,13 @@ const Dashboard = ({ course }) => {
 
   const { functions } = useProviderContext();
 
- console.log(functions.useAQuery(QUERY_ME))
- console.log(functions.useAQuery(QUERY_ASSIGNMENT, {
-          variables: { assignmentId: "63c8a1e1003d5a5cd2a758a4" },
-      }))
+//  console.log(functions.useAQuery(QUERY_ME))
+//  console.log(functions.useAQuery(QUERY_ASSIGNMENT, {
+//           variables: { assignmentId: "63c8a1e1003d5a5cd2a758a4" },
+//       }))
+      // console.log(functions.useAQuery(QUERY_COURSE, {
+      //     variables: { courseId: "63c886cff478fa1240f011bb" },
+      // }))
 
       // ! I can't get mutations to run with this setup 
   // console.log(functions.useAMutation(ADD_HELP_TICKET, {
@@ -43,9 +46,6 @@ const Dashboard = ({ course }) => {
     // !!This Works But repeatedly fires, so comment out after a quick run
     // console.log(functions.CreateComment())
 
-  console.log(functions.useAQuery(QUERY_COURSE, {
-      variables: { courseId: "63c886cff478fa1240f011bb" },
-  }))
 
   return (
     <main className="dashboard">

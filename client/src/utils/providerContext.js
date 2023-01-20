@@ -29,15 +29,19 @@ export const ContextProvider = ({ children }) => {
         
         
         // // query individual course populate assignments and tickets
-        // handleCourseSelect: function(courseId) {
-        //     const { loading, data } = useQuery(QUERY_COURSE, {
-        //         variables: { courseId: courseId },
-        //     });
+        HandleCourseSelect: function(courseId) {
+            const { loading, data } = useQuery(QUERY_COURSE, {
+                variables: { courseId: courseId },
+            });
 
-        //     const course = data?.course || {};
-        //     console.log(course)
-        //     console.log("Clicked Course");
-        // },
+            const course = data?.course || {};
+            console.log(course)
+            console.log("Clicked Course");
+
+            // return assignment, ticket, newsfeed components
+            // close nav bar
+
+        },
 
 
         // // query individual ticket and get details
