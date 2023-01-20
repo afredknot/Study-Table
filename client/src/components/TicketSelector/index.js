@@ -24,9 +24,10 @@ const TicketSelector = () => {
   const { loading, data, error } = useQuery(QUERY_COURSE, {
     variables: { courseId: course },
   });
-  console.log(data)
+  // console.log(data)
   const assignmentList = data?.course.assignments || {}
-  console.log(assignmentList)
+  // console.log(assignmentList)
+  // console.log(assignmentList[0].helpTickets[0]._id)
 
     return (
       
@@ -34,22 +35,19 @@ const TicketSelector = () => {
         <div className ="selectors">
 
 
-      {loading && (
-        <p>Loading...</p>
-      )}
-          
+        {loading && (
+          <p>Loading...</p>
+        )}
+
           <h3>Open Tickets</h3>
 
-
             {data && (
-
-
 
               <ul>
                 {assignmentList.map((assignment) => {
                   return assignment.helpTickets.map((helpTicket) => (
-                    <li key= {assignment._id}>
-                      <h4 className="associatedAssignment">{assignment.assignmentTitle}</h4>
+                    <li key= {helpTicket._id}  onClick={handleTicketSelect}>
+                      <h4 id= {helpTicket._id} className="associatedAssignment">{assignment.assignmentTitle}</h4>
                       <p className="tagAuth">{helpTicket.student.username}</p>
                       <p className="tagAssi">{helpTicket.topic}</p>
                       <p className="tagDur">{helpTicket.createdAt}</p>
@@ -58,12 +56,12 @@ const TicketSelector = () => {
                 )}
               </ul>
 
-      )}
+           )}
 
 
-      {error && (
-        console.log(error)
-      )}
+          {error && (
+            console.log(error)
+          )}
 
         </div>
         
