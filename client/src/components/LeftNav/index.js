@@ -6,6 +6,7 @@ import ProfileIcon from '../ProfileIcon';
 import "./style.css";
 import { QUERY_ME } from '../../utils/queries';
 import { useProviderContext } from "../../utils/providerContext";
+import { useQuery } from '@apollo/client';
 
 
 // iconUrl={iconUrl} onClick={onIconClick}
@@ -36,13 +37,7 @@ const LeftNav = ({ user }) => {
 
     };
 
-    const { functions } = useProviderContext();
-    const data = functions.useAQuery(QUERY_ME)
-    // console.log(data.data)
-    const myCourses = (data.data.me.courses)
-    //     const myCourseLinks = myCourses.map(course => {
-    //         <li className='course'>{course.courseTitle}</li>
-    // });
+    const { loading, data, error } = useQuery(QUERY_ME);
 
     return (
         <nav
@@ -51,33 +46,45 @@ const LeftNav = ({ user }) => {
             onTouchMove={handleTouchMove}
         >
 
+            <button className="handle" onClick={handleMenuClick}>{isMenuOpen ? "Close" : "Menu"}</button>
+
             {isMenuOpen && (
                 <div className='navContent'>
                     <div className='navButtons'>
                         <ProfileIcon user={user} />
                         <NotificationHandler />
                         <SettingsMenu />
-                        <button onClick={handleMenuClick}> x </button>
                     </div>
 
                     <ul className='courseList'>
                         <li className='course'>Menu item 1</li>
                         <li className='course'>Menu item 2</li>
-                <div>
-                    {myCourses.map((course) => (
+
+                        {loading && (
+                            <p>Loading...</p>
+                        )}
+
+                        {data && (                        
+                        <div>
+                            {data.me.courses.map((course) => (
                         <ul key={course._id} className="courseList">
                             <li className='course'>
                             <ClassSelector name={course.courseTitle}/>
                             </li>
                         </ul>))}
-                </div>
-                        {/* {user.classes.map(({icon, name}) => (
-                   <li className='course'>
-                    <ClassSelector icon={icon} name={name}/>
-                   </li> 
-                ))} */}
+                        </div>
+                        )}
+
+                        {error && (
+                            console.log(error)
+                        )}
+
                     </ul>
-                    <button> DOWNLOAD??? </button>
+
+                    <div className="navOptions">
+                        <button> DOWNLOAD??? </button>
+                        <button> Log Out </button>
+                    </div>
                 </div>
             )}
 
