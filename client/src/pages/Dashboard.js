@@ -40,7 +40,7 @@ const Dashboard = ({ course }) => {
     //      assignmentDueDate: "01-24-2023" 
     //    }
     //  }))
-    // !!This Works 
+    // !!This Works But repeatedly fires, so comment out after a quick run
     // console.log(functions.CreateComment())
 
   console.log(functions.useAQuery(QUERY_COURSE, {
