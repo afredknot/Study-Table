@@ -13,6 +13,7 @@ const Dashboard = ({ course }) => {
 
  console.log(functions.useAQuery(QUERY_ME))
 
+ 
   return (
     <main className="dashboard">
       <AssignmentSelector />

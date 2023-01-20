@@ -1,5 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Course, Assignment, HelpTicket } = require('../models');
+const { User, Course, Assignment, HelpTicket, Comment } = require('../models');
+const { populate } = require('../models/User');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -55,29 +56,43 @@ const resolvers = {
     
     course: async (parent, { courseId }) => {
       return Course.findOne({ _id: courseId })
-      .populate('assignments')
+      // .populate('assignments')
       .populate('instructor')
       .populate('students')
       .populate('teachingAssistant')
       .populate({
         path: 'assignments',
-        populate: {path: 'helpTickets'}
+        populate: {
+          path: 'comments', 
+          populate: 'replies'}
+        })
+      .populate({
+        path: 'assignments',
+        populate: {
+          path: 'helpTickets',
+          populate: {path: 'student'}}
       });
     },
     
     
     assignments: async () => {
       return Assignment.find()
+      .populate('studentDefaultStatus')
       .populate('requestingHelp')
+      .populate('offeringAssistance')
       .populate('studentProgressNotStarted')
       .populate('studentProgressWorking')
-      .populate('studentDefaultStatus')
-      .populate('helpTickets')
-      .populate('offeringAssistance')
+      .populate('studentProgressCompleted')
       .populate({
-        path: 'requestingHelp',
-        populate: { path: 'helpTicket'}
+        path: 'helpTickets',
+        populate: { path: 'student'}
+      })
+      .populate({
+        path: 'comments', 
+        populate: 'replies'
       });
+
+
     },
     
 
@@ -90,9 +105,14 @@ const resolvers = {
       .populate('helpTickets')
       .populate('offeringAssistance')
       .populate({
-        path: 'requestingHelp',
-        populate: { path: 'helpTicket'}
+        path: 'helpTickets',
+        populate: { path: 'student'}
+      })
+      .populate({
+        path: 'comments', 
+        populate: 'replies'
       });
+
     },
     
 
@@ -121,10 +141,16 @@ const resolvers = {
  
     helpTickets: async () => {
         return HelpTicket.find()
+        
+    // TODO: Populate Comments
+
     },
 
     helpTicket: async (parent, { _id }) => {
       return HelpTicket.findOne({ _id: _id })
+      
+    // TODO: Populate Comments
+
       },
   },
 
@@ -457,75 +483,86 @@ const resolvers = {
     },
 
 
-    // addThought: async (parent, { thoughtText }, context) => {
-    //   if (context.user) {
-    //     const thought = await Thought.create({
-    //       thoughtText,
-    //       thoughtAuthor: context.user.username,
-    //     });
+    addComment: async (parent, { assignmentId, helpTicketId, commentText }, context) => {
+      if (context.user) {
+        const comment = await Comment.create({
+          commentText,
+          commentAuthor: context.user.username,
+        });
 
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $addToSet: { thoughts: thought._id } }
-    //     );
+        await HelpTicket.findOneAndUpdate(
+          { _id: helpTicketId },
+          { $addToSet: { comments: comment._id } }
+        );
 
-    //     return thought;
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+        await Assignment.findOneAndUpdate(
+          { _id: assignmentId },
+          { $addToSet: { comments: comment._id } }
+        );
 
-    // addComment: async (parent, { thoughtId, commentText }, context) => {
-    //   if (context.user) {
-    //     return Thought.findOneAndUpdate(
-    //       { _id: thoughtId },
-    //       {
-    //         $addToSet: {
-    //           comments: { commentText, commentAuthor: context.user.username },
-    //         },
-    //       },
-    //       {
-    //         new: true,
-    //         runValidators: true,
-    //       }
-    //     );
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+        return comment;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
 
-    // removeThought: async (parent, { thoughtId }, context) => {
-    //   if (context.user) {
-    //     const thought = await Thought.findOneAndDelete({
-    //       _id: thoughtId,
-    //       thoughtAuthor: context.user.username,
-    //     });
+    removeComment: async (parent, { assignmentId, helpTicketId, commentId }, context) => {
+      if (context.user) {
+        const comment = await Comment.findOneAndDelete({
+          _id: commentId,
+          commentAuthor: context.user.username,
+        });
 
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $pull: { thoughts: thought._id } }
-    //     );
+        await HelpTicket.findOneAndUpdate(
+          { _id: helpTicketId },
+          { $pull: { Comments: comment._id } }
+        );
 
-    //     return thought;
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+        await Assignment.findOneAndUpdate(
+          { _id: assignmentId },
+          { $pull: { Comments: comment._id } }
+        );
+
+        return comment;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    addReply: async (parent, { commentId, replyText }, context) => {
+      if (context.user) {
+        return Comment.findOneAndUpdate(
+          { _id: commentId },
+          {
+            $addToSet: {
+              replies: { replyText, replyAuthor: context.user.username },
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
     
-    // removeComment: async (parent, { thoughtId, commentId }, context) => {
-    //   if (context.user) {
-    //     return Thought.findOneAndUpdate(
-    //       { _id: thoughtId },
-    //       {
-    //         $pull: {
-    //           comments: {
-    //             _id: commentId,
-    //             commentAuthor: context.user.username,
-    //           },
-    //         },
-    //       },
-    //       { new: true }
-    //     );
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    
+    removeReply: async (parent, { replyId, commentId }, context) => {
+      if (context.user) {
+        return Comment.findOneAndUpdate(
+          { _id: commentId },
+          {
+            $pull: {
+              replies: {
+                _id: replyId,
+                replyAuthor: context.user.username,
+              },
+            },
+          },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
 };
 
