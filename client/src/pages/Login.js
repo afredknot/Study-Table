@@ -45,6 +45,8 @@ const Login = (props) => {
     navigate('/dashboard');
 
   };
+  // const navigate = useNavigate('/dashboard');
+// navigate('/dashboard');
 
   return (
     <main className="flex-row justify-center mb-4">
