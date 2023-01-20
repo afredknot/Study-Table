@@ -9,7 +9,6 @@ const resolvers = {
     
     users: async () => {
       return User.find({})
-      .populate('courses')
       .populate({
         path: 'courses', 
         populate: {
@@ -26,7 +25,6 @@ const resolvers = {
 
     user: async (parent, { _id }) => {
       return User.findOne({ _id: _id })
-      .populate('courses')
       .populate({
         path: 'courses', 
         populate: {
@@ -44,7 +42,6 @@ const resolvers = {
 
     courses: async () => {
       return Course.find()
-      .populate('assignments')
       .populate('instructor')
       .populate('students')
       .populate('teachingAssistant')
@@ -56,7 +53,6 @@ const resolvers = {
     
     course: async (parent, { courseId }) => {
       return Course.findOne({ _id: courseId })
-      // .populate('assignments')
       .populate('instructor')
       .populate('students')
       .populate('teachingAssistant')
@@ -102,7 +98,6 @@ const resolvers = {
       .populate('studentProgressNotStarted')
       .populate('studentProgressWorking')
       .populate('studentDefaultStatus')
-      .populate('helpTickets')
       .populate('offeringAssistance')
       .populate({
         path: 'helpTickets',
@@ -110,7 +105,7 @@ const resolvers = {
       })
       .populate({
         path: 'comments', 
-        populate: 'replies'
+        populate: {path: 'replies'}
       });
 
     },
@@ -118,7 +113,7 @@ const resolvers = {
 
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('courses')
+        return User.findOne({ _id: context.user._id })
         .populate({
           path: 'courses', 
           populate: {
@@ -141,16 +136,18 @@ const resolvers = {
  
     helpTickets: async () => {
         return HelpTicket.find()
-        
-    // TODO: Populate Comments
-
+        .populate('students')
+        .populate({path: 'comments', 
+          populate: { 
+          path: 'replies'} })
     },
 
     helpTicket: async (parent, { _id }) => {
       return HelpTicket.findOne({ _id: _id })
-      
-    // TODO: Populate Comments
-
+      .populate('students')
+      .populate({path: 'comments', 
+        populate: { 
+        path: 'replies'} })
       },
   },
 
