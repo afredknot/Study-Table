@@ -37,6 +37,7 @@ const typeDefs = gql`
     requestingHelp: [User]
     helpTickets: [HelpTicket]
     offeringAssistance: [User]
+    comments: [Comment]
     createdAt: String
   }
 
@@ -47,6 +48,22 @@ const typeDefs = gql`
     githubRepo: String
     problemDescription: String
     ticketStatus: Boolean
+    comments: [Comment]
+    createdAt: String
+  }
+
+  type Comment {
+    _id: ID
+    commentText: String
+    commentAuthor: String
+    createdAt: String
+    replies: [Reply]
+  }
+
+  type Reply {
+    _id: ID
+    replyText: String
+    replyAuthor: String
     createdAt: String
   }
 
@@ -59,10 +76,12 @@ const typeDefs = gql`
     users: [User]
     user(_id: ID!): User
     courses: [Course]
-    course(courseTitle: String!): Course
+    course(courseId: ID!): Course
     assignments: [Assignment]
     assignment(assignmentId: ID!): Assignment
     me: User
+    helpTickets: [HelpTicket]
+    helpTicket(_id: ID!): HelpTicket
   }
 
   # ------------------------------------------------------------------------------------------
@@ -93,10 +112,12 @@ const typeDefs = gql`
 
 # -------------------------------------------------------------------------------
 
-    # addThought(thoughtText: String!): Thought
-    # addComment(thoughtId: ID!, commentText: String!): Thought
-    # removeThought(thoughtId: ID!): Thought
-    # removeComment(thoughtId: ID!, commentId: ID!): Thought
+    addComment(commentText: String!, assignmentId:ID helpTicketId: ID ): Comment
+    removeComment(commentId: ID!, assignmentId:ID helpTicketId: ID ): Comment
+
+    addReply(commentId: ID!, replyText: String!): Comment
+    removeReply(commentId: ID!, replyId: ID!): Comment
+
    # ------------------------------------------------------------------------------------------   
 
   }

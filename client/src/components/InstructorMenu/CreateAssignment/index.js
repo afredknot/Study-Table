@@ -2,20 +2,17 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
+import { CREATE_ASSIGNMENT } from '../../../utils/mutations';
 
 import Auth from '../utils/auth';
 
-const Signup = () => {
+const CreateAssignment = () => {
   const [formState, setFormState] = useState({
-    username: '',
-    firstName: '',
-    lastName: '',
-    role: '',
-    email: '',
-    password: '',
+    assignmentTitle: '',
+    assignmentDescription: '',
+    assignmentDueDate: '',
   });
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+  const [createAssignment, { error, data }] = useMutation(CREATE_ASSIGNMENT);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -31,11 +28,10 @@ const Signup = () => {
     console.log(formState);
 
     try {
-      const { data } = await addUser({
+      const { data } = await createAssignment({
         variables: { ...formState },
       });
 
-      Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
@@ -45,53 +41,40 @@ const Signup = () => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
+          <h4 className="card-header bg-dark text-light p-2">Add an Assignment</h4>
           <div className="card-body">
             {data ? (
               <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
+                Success! You have added a new assignment.
+                {/* <Link to="/">back to the homepage.</Link> */}
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
-                  placeholder="Your username"
-                  name="username"
+                  placeholder="Assignment Name"
+                  name="assignmentTitle"
                   type="text"
-                  value={formState.username}
+                  value={formState.assignmentTitle}
                   onChange={handleChange}
                 />
                 <input
                   className="form-input"
-                  placeholder="Your first name"
-                  name="firstName"
+                  placeholder="Assignment Description"
+                  name="assignmentDescription"
                   type="text"
-                  value={formState.firstName}
+                  value={formState.assignmentDescription}
                   onChange={handleChange}
                 />
                <input
                   className="form-input"
-                  placeholder="Your last name"
-                  name="lastName"
+                  placeholder="Due Date"
+                  name="assignmentDueDate"
+                  
+                  // ! Validate / date type? 
+
                   type="text"
-                  value={formState.lastName}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
+                  value={formState.assignmentDueDate}
                   onChange={handleChange}
                 />
                 <button
@@ -116,4 +99,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default CreateAssignment;

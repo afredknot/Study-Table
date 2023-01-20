@@ -4,6 +4,9 @@ import SettingsMenu from '../SettingsMenu';
 import NotificationHandler from '../NotificationHandler';
 import ProfileIcon from '../ProfileIcon';
 import "./style.css";
+import { QUERY_ME } from '../../utils/queries';
+import { useProviderContext } from "../../utils/providerContext";
+
 
 // iconUrl={iconUrl} onClick={onIconClick}
 // TODO CREATE LOGO ICON AND INSERT HERE
@@ -33,6 +36,14 @@ const LeftNav = ({ user }) => {
 
     };
 
+    const { functions } = useProviderContext();
+    const data = functions.useAQuery(QUERY_ME)
+    // console.log(data.data)
+    const myCourses = (data.data.me.courses)
+    //     const myCourseLinks = myCourses.map(course => {
+    //         <li className='course'>{course.courseTitle}</li>
+    // });
+
     return (
         <nav
             className={`navbar ${isMenuOpen ? 'open' : 'closed'}`}
@@ -49,9 +60,18 @@ const LeftNav = ({ user }) => {
                         <NotificationHandler />
                         <SettingsMenu />
                     </div>
+
                     <ul className='courseList'>
                         <li className='course'>Menu item 1</li>
                         <li className='course'>Menu item 2</li>
+                <div>
+                    {myCourses.map((course) => (
+                        <ul key={course._id} className="courseList">
+                            <li className='course'>
+                            <ClassSelector name={course.courseTitle}/>
+                            </li>
+                        </ul>))}
+                </div>
                         {/* {user.classes.map(({icon, name}) => (
                    <li className='course'>
                     <ClassSelector icon={icon} name={name}/>
