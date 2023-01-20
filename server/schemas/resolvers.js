@@ -1,5 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Course, Assignment, HelpTicket, Comment } = require('../models');
+const { populate } = require('../models/User');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -55,31 +56,42 @@ const resolvers = {
     
     course: async (parent, { courseId }) => {
       return Course.findOne({ _id: courseId })
-      .populate('assignments')
+      // .populate('assignments')
       .populate('instructor')
       .populate('students')
       .populate('teachingAssistant')
       .populate({
         path: 'assignments',
-        populate: {path: 'helpTickets'}
+        populate: {
+          path: 'comments', 
+          populate: 'replies'}
+        })
+      .populate({
+        path: 'assignments',
+        populate: {
+          path: 'helpTickets',
+          populate: {path: 'student'}}
       });
     },
     
     
     assignments: async () => {
       return Assignment.find()
+      .populate('studentDefaultStatus')
       .populate('requestingHelp')
+      .populate('offeringAssistance')
       .populate('studentProgressNotStarted')
       .populate('studentProgressWorking')
-      .populate('studentDefaultStatus')
-      .populate('helpTickets')
-      .populate('offeringAssistance')
+      .populate('studentProgressCompleted')
       .populate({
-        path: 'requestingHelp',
-        populate: { path: 'helpTicket'}
+        path: 'helpTickets',
+        populate: { path: 'student'}
+      })
+      .populate({
+        path: 'comments', 
+        populate: 'replies'
       });
 
-    // TODO: Populate Comments
 
     },
     
@@ -93,11 +105,13 @@ const resolvers = {
       .populate('helpTickets')
       .populate('offeringAssistance')
       .populate({
-        path: 'requestingHelp',
-        populate: { path: 'helpTicket'}
+        path: 'helpTickets',
+        populate: { path: 'student'}
+      })
+      .populate({
+        path: 'comments', 
+        populate: 'replies'
       });
-      
-    // TODO: Populate Comments
 
     },
     

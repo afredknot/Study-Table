@@ -57,7 +57,7 @@ const typeDefs = gql`
     commentText: String
     commentAuthor: String
     createdAt: String
-    replies: [Reply]!
+    replies: [Reply]
   }
 
   type Reply {

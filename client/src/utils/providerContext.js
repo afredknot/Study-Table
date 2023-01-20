@@ -103,6 +103,9 @@ export const ContextProvider = ({ children }) => {
         },
 
         changeProgressStatus: function( {currentProgressStatus, assignmentId} ) {
+            
+            //   progress statuses are: "studentProgressNotStarted", "studentProgressWorking", and "studentProgressCompleted"
+            
             const [newProgressStatus, setNewProgressStatus] = useState('');
             const [changeProgressStatus, { error }] = useMutation(CHANGE_PROGRESS_STATUS);
 
@@ -126,6 +129,8 @@ export const ContextProvider = ({ children }) => {
 
     
         changeAssistanceStatus: function( {currentAssistanceStatus, assignmentId} ) {
+            //   progress statuses are: "studentDefaultStatus", "requestingHelp", and "offeringAssistance"
+            
             const [newAssistanceStatus, setNewAssistanceStatus] = useState('');
             const [changeAssistanceStatus, { error }] = useMutation(CHANGE_ASSISTANCE_STATUS);
 
@@ -149,6 +154,8 @@ export const ContextProvider = ({ children }) => {
 
         
         updateHelpTicket: function( { helpTicketId } ) {
+            // ticketOpen/ticketStatus are Boolean where true=open ticket
+
             const [topic, setSubject] = useState("");
             const [repo, setRepo] = useState("");
             const [body, setBody] = useState("");
