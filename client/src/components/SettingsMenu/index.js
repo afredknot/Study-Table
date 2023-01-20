@@ -1,6 +1,5 @@
-// LIGHT AND DARK MODE
-
 import React, { useState } from 'react';
+import settings from "./settings.svg";
 
 function SettingsMenu() {
   const [theme, setTheme] = useState('light');
@@ -11,9 +10,12 @@ function SettingsMenu() {
       setTheme('light');
     }
   };
+
+{/* <button onClick={toggleTheme}>Toggle Theme</button> */}
+
   return (
     <div className={`App ${theme}`}>
-     <button onClick={toggleTheme}>Toggle Theme</button>
+     <img src={settings}></img>
     </div>
   );
 }

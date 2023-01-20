@@ -1,11 +1,12 @@
 import React from 'react';
+import icon from "./profileIcon.svg"
 
-// src={iconUrl} alt="Profile Icon"
+
 // FIGURE OUT WHAT WE'RE DOING FOR IMAGES
 const ProfileIcon = ({iconUrl, onClick}) => {
   return (
     <div onClick={onClick}>
-      <div >icon image here</div>
+      <img src={icon} alt="Profile Icon"></img>
     </div>
   );
 }

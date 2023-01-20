@@ -10,7 +10,7 @@ const AssignmentSelector = ({ assignments }) => {
   // ADD STATUS INDICATIOR
   return (
 
-    <div className="card1 align-content-center col-3">
+    <div className="card1">
       <h3>Assignments</h3>
       <ul>
         {/* <li onClick={functions.handleAssignmentSelect}>
