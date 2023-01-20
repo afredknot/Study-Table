@@ -61,6 +61,12 @@ const assignmentSchema = new Schema({
       ref: 'HelpTicket',
     },
   ],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment',
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,

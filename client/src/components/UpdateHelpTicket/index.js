@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { useMutation } from '@apollo/client';
+import { UPDATE_HELP_TICKET } from '../../utils/mutations';
 
-import { ADD_HELP_TICKET } from '../../utils/mutations';
-
-
-const CreateHelpTicket = ({assignmentId, user}) => {
+i
+const UpdateHelpTicket = ({assignmentId}) => {
   const [topic, setSubject] = useState("");
   const [repo, setRepo] = useState("");
   const [body, setBody] = useState("");
 
-  const [addHelpTicket, { error, data }] = useMutation(ADD_HELP_TICKET);
+  const [updatHelpTicket, { error, data }] = useMutation(UPDATE_HELP_TICKET);
 
   const handleChange = (e) => {
     switch(e.target.id) {
@@ -30,10 +31,10 @@ const CreateHelpTicket = ({assignmentId, user}) => {
     e.preventDefault();
     // SUBMITTED DATA
     try {
-      const { data } = await addHelpTicket({
+      const { data } = await updateHelpTicket({
         variables: {
-          assignmentId: assignmentId,
-          topic: topic,
+          assignmentId: assignment,
+          topic: subject,
           githubRpo: repo,
           problemDescription: body
         },
@@ -61,4 +62,4 @@ const CreateHelpTicket = ({assignmentId, user}) => {
   );
 }
 
-export default CreateHelpTicket;
+export default UpdateHelpTicket;

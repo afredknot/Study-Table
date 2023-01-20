@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
-import { CREATE_COURSE } from '../../../utils/mutations';
+import { UPDATE_COURSE } from '../../../utils/mutations';
 
 import Auth from '../utils/auth';
 
-const CreateCourse = () => {
+const UpdateCourse = ( {CourseId} ) => {
   const [formState, setFormState] = useState({
     courseTitle: '',
     courseDescription: '',
     teachingAssistant: '',
   });
-  const [createCourse, { error, data }] = useMutation(CREATE_COURSE);
+  const [updateCourse, { error, data }] = useMutation(UPDATE_COURSE);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -28,7 +28,7 @@ const CreateCourse = () => {
     console.log(formState);
 
     try {
-      const { data } = await createCourse({
+      const { data } = await updateCourse({
         variables: { ...formState },
       });
 
@@ -45,7 +45,7 @@ const CreateCourse = () => {
           <div className="card-body">
             {data ? (
               <p>
-                Success! You have added a new course.
+                Success! You have updated a course.
                 {/* <Link to="/">back to the homepage.</Link> */}
               </p>
             ) : (
@@ -96,4 +96,4 @@ const CreateCourse = () => {
   );
 };
 
-export default CreateCourse;
+export default UpdateCourse;

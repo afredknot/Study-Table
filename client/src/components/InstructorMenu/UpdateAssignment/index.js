@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
-import { CREATE_COURSE } from '../../../utils/mutations';
+import { UPDATE_ASSIGNMENT } from '../../../utils/mutations';
 
 import Auth from '../utils/auth';
 
-const CreateCourse = () => {
+const UpdateAssignment = ( {assignmentId} ) => {
   const [formState, setFormState] = useState({
-    courseTitle: '',
-    courseDescription: '',
-    teachingAssistant: '',
+    assignmentTitle: '',
+    assignmentDescription: '',
+    assignmentDueDate: '',
   });
-  const [createCourse, { error, data }] = useMutation(CREATE_COURSE);
+  const [updateAssignment, { error, data }] = useMutation(UPDATE_ASSIGNMENT);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -28,7 +28,7 @@ const CreateCourse = () => {
     console.log(formState);
 
     try {
-      const { data } = await createCourse({
+      const { data } = await updateAssignment({
         variables: { ...formState },
       });
 
@@ -41,37 +41,40 @@ const CreateCourse = () => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Create a Course</h4>
+          <h4 className="card-header bg-dark text-light p-2">Update an Assignment</h4>
           <div className="card-body">
             {data ? (
               <p>
-                Success! You have added a new course.
+                Success! You have updated an assignment.
                 {/* <Link to="/">back to the homepage.</Link> */}
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
-                  placeholder="Course Name"
-                  name="courseTitle"
+                  placeholder="Assignment Name"
+                  name="assignmentTitle"
                   type="text"
-                  value={formState.courseTitle}
+                  value={formState.assignmentTitle}
                   onChange={handleChange}
                 />
                 <input
                   className="form-input"
-                  placeholder="Course Description"
-                  name="courseDescription"
+                  placeholder="Assignment Description"
+                  name="assignmentDescription"
                   type="text"
-                  value={formState.courseDescription}
+                  value={formState.assignmentDescription}
                   onChange={handleChange}
                 />
                <input
                   className="form-input"
-                  placeholder="Teaching Assistant"
-                  name="teachingAssistant"
+                  placeholder="Due Date"
+                  name="assignmentDueDate"
+                  
+                  // ! Validate / date type? 
+
                   type="text"
-                  value={formState.teachingAssistant}
+                  value={formState.assignmentDueDate}
                   onChange={handleChange}
                 />
                 <button
@@ -96,4 +99,4 @@ const CreateCourse = () => {
   );
 };
 
-export default CreateCourse;
+export default UpdateAssignment;
