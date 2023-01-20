@@ -54,7 +54,7 @@ export const QUERY_USER = gql`
 export const QUERY_ME = gql`
   query me {
     me {
-      -id
+      _id
       username
       role
       firstName
