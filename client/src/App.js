@@ -8,7 +8,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-
+import LandingPage from './components/LandingPage';
 import Dashboard from './pages/Dashboard';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -48,36 +48,27 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <ContextProvider>
-      <Router>
-        <div className="appContainer flex-column justify-flex-start min-100-vh">
-          <Header /> 
-          <LeftNav />
-          <div className="view">
-           
-            <Routes>
-              <Route 
-                path="/"
-                element={<Dashboard />}
-              />
-                <Route path="/tickets" element={<TicketView />}/>
-                <Route path="/assignments" element={<AssignmentView />}/>
-              
-              <Route 
-                path="/login" 
-                element={<Login />}
-              />
-              <Route 
-                path="/signup" 
-                element={<Signup />}
-              />
-              {/* <Route 
+        <Router>
+          <div className="appContainer flex-column justify-flex-start min-100-vh">
+            <Header />
+            <LeftNav />
+            <div className="view">
+
+              <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/tickets" element={<TicketView />} />
+                <Route path="/assignments" element={<AssignmentView />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                {/* <Route 
                 path="/me" 
                 // element={<Profile />}
               /> */}
-            </Routes>
+              </Routes>
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
       </ContextProvider>
     </ApolloProvider>
   );

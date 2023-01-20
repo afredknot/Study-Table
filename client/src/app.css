@@ -23,15 +23,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
 }
 
 .card1 {
-  background-color: var(--secondary);
+  background: linear-gradient(90deg, rgba(49,21,126,0.5074404761904762) 1%, rgba(61,68,93,1) 75%);
   color: var(--text);
   margin: 10px;
-  height: 50%;
+  height: 50vh;
+  border-radius: 3%;
 }
 
 h3 {
@@ -44,14 +43,7 @@ h3 {
 
 .appContainer {
   background-color: var(--tertiary);
-  height: 100%;
-  width: 100%;
 }
-
-.view {
-  min-height: 100vh;
-  min-width: 100vw;
-};
 
 /* DEFINING BLUR FOR CONTENT IN DASHBOARD WHILE MENU IS OPEN */
 .view::before {
