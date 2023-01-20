@@ -4,7 +4,7 @@ const TicketSelector = ({tickets, handleTicketSelect}) => {
 
     return (
       
-        <div className ="card1 align-content-center col-3">
+        <div className ="card1">
           <h3>Open Tickets</h3>
             <ul>
               <li>

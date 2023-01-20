@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import { useNavigate } from 'react-router-dom';
+
 import Auth from '../utils/auth';
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  const navigate = useNavigate();
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -38,6 +40,10 @@ const Login = (props) => {
       email: '',
       password: '',
     });
+
+    // send the user to their dashboard
+    navigate('/dashboard');
+
   };
   // const navigate = useNavigate('/dashboard');
 // navigate('/dashboard');

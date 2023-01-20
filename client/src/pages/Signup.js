@@ -16,10 +16,11 @@ const Signup = () => {
     password: '',
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
+  const {role, setRole} = useState("")
+  
+   const handleChange = (event) => {
+    const { name, value, setRole} = event.target; 
+    
     setFormState({
       ...formState,
       [name]: value,
@@ -33,11 +34,13 @@ const Signup = () => {
     try {
       const { data } = await addUser({
         variables: { ...formState },
+        
       });
-
+      // const token = data.data.addUser.token;
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
+      
     }
   };
 
@@ -78,6 +81,19 @@ const Signup = () => {
                   value={formState.lastName}
                   onChange={handleChange}
                 />
+                <select
+                className="form-input"
+                placeholder="Whats your Role"
+                name="role"
+                type="text"
+                value={ role }
+                onChange={handleChange}
+                >
+                  <option value="empty">Select a Role</option>
+                <option value="student">Student</option>
+                <option value="instructor">Instructor</option>
+                </select>
+
                 <input
                   className="form-input"
                   placeholder="Your email"
