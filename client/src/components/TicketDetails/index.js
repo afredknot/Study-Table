@@ -80,8 +80,8 @@ const TicketDetails = () => {
 
             <ul>
                 {ticketDetails.comments.map((comment) => (
-                    <div>
-                        <h4 key = {comment._id} id= {comment._id} className="comment">{comment.commentText}</h4>
+                    <div key = {comment._id} >
+                        <h4 id= {comment._id} className="comment">{comment.commentText}</h4>
                         <h5>{comment.commentAuthor}</h5>
                         <h5>{comment.createdAt}</h5>
                        {comment.replies.map((reply) => (
