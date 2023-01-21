@@ -19,6 +19,7 @@ export const ContextProvider = ({ children }) => {
     const [ticket, updateTicket] = useState("");
     const [comment, updateComment] = useState("");
     const [reply, updateReply] = useState("");
+    const [myRole, updateMyRole] = useState("");
         
 //         functions: {
 
@@ -221,7 +222,7 @@ export const ContextProvider = ({ children }) => {
 //   }     
   
 return (
-    <ProviderContext.Provider value={{user, course, assignment, ticket, comment, reply, updateUser, updateCourse, updateAssignment, updateTicket, updateComment, updateReply}} >
+    <ProviderContext.Provider value={{user, course, assignment, ticket, comment, reply, myRole, updateUser, updateCourse, updateAssignment, updateTicket, updateComment, updateReply, updateMyRole}} >
         {children}
     </ProviderContext.Provider>
 )

@@ -4,19 +4,14 @@ import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_COURSE } from '../../../utils/mutations';
 import { QUERY_INSTRUCTORS } from '../../../utils/queries';
-// import { useProviderContext } from "../../../utils/providerContext";
-
-// import Auth from '../utils/auth';
 
 const CreateCourse = () => {
 
   const [asssistantSelected, setAssistantSelected] = useState();
 
   const { data} = useQuery(QUERY_INSTRUCTORS);
-  console.log(data)
 
   const allInstructors = data?.instructors || [];
-  console.log(allInstructors)
 
   const [formState, setFormState] = useState({
     courseTitle: '',
@@ -38,7 +33,6 @@ const CreateCourse = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
 
     try {
       const { data } = await createCourse({
@@ -74,6 +68,7 @@ const CreateCourse = () => {
                   value={formState.courseDescription}
                   onChange={handleChange}
                 />
+
                 {data && (
                   <select name="instructors" id="instructor-datalist" onChange={(e) => setAssistantSelected(e.target.value)}>
                   
@@ -99,6 +94,7 @@ const CreateCourse = () => {
                 {error.message}
               </div>
             )}
+
           </div>
         </div>
       </div>

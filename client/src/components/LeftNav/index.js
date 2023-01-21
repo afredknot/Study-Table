@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 // TODO CREATE LOGO ICON AND INSERT HERE
 const LeftNav = ({  }) => {
     const navigate = useNavigate();
-    const { course, updateCourse, user, updateUser } = useProviderContext();
+    const { course, updateCourse, user, updateUser, myRole, updateMyRole } = useProviderContext();
 
     const [isMenuOpen, setIsMenuOpen] = useState(true);
     const [initialPosition, setInitialPosition] = useState(0)
@@ -42,18 +42,15 @@ const LeftNav = ({  }) => {
 
 
     const handleCourseSelect =  function(e) {
-        // console.log(e.target.id);
             updateCourse(e.target.id)
-            console.log(course)
             setIsMenuOpen(!isMenuOpen);
+            updateMyRole(role)
             navigate('/dashboard');
         };
 
-
-
     const { loading, data, error } = useQuery(QUERY_ME);
     const me = data?.me || {}
-    console.log(me)
+    const role = me.role
 
     return (
         <nav
@@ -69,8 +66,16 @@ const LeftNav = ({  }) => {
                     <div className='navButtons'>
                         <ProfileIcon user={user} />
                         <NotificationHandler />
-                        <SettingsMenu />
+                        <SettingsMenu/>
                     </div>
+
+                {/*----------------------- MAKE THIS A BUTTON TO OPEN MODAL TO CREATE COURSE --------------------*/}
+
+                {myRole==='instructor' && (
+                    <ul className='courseList'>
+                    <li className='course'>Add a Course</li>
+                    </ul>
+                )}
 
                     <ul className='courseList'>
                         <li className='course'>Menu item 1</li>
@@ -102,7 +107,7 @@ const LeftNav = ({  }) => {
                     </ul>
 
                     <div className="navOptions">
-                        <button> DOWNLOAD??? </button>
+                        {/* <button> DOWNLOAD??? </button> */}
                         <button> Log Out </button>
                     </div>
                 </div>

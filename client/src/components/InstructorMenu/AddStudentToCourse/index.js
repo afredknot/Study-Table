@@ -13,23 +13,8 @@ const AddStudentToCourse = (courseId) => {
   const [userSelected, setUserSelected] = useState();
 
   const { data} = useQuery(QUERY_STUDENTS);
-  console.log(data)
 
   const allStudents = data?.students || [];
-  console.log(allStudents)
-
-  // allUsers.map((user) => (
-  //   <option value="Student Name"></option>
-  // ))
-
-  // query all users and get back id and first and last name
-     // const results = users()
-
-  //take results and make objects with     <option value="Student Name">
-  // get studentid from name selected
-  // setUserSelected(studentId)
-  
-  console.log(userSelected)
 
 // !! NEED A SUCCESS MESSAGE
 
@@ -49,9 +34,7 @@ const AddStudentToCourse = (courseId) => {
           courseId: course, 
           userId: userSelected },
       });
-    
-
-
+   
     } catch (e) {
       console.error(e);
     }
