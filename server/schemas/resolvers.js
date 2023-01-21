@@ -24,6 +24,23 @@ const resolvers = {
       });
     },
 
+    instructors: async () => {
+      return User.find({})
+      .find({role :"instructor"})
+      .populate({
+        path: 'courses', 
+        populate: {
+          path: "instructor"
+        }
+      })
+      .populate({
+        path: 'courses', 
+        populate: {
+          path: "teachingAssistant"
+        }
+      });
+    },
+
     users: async () => {
       return User.find({})
       .populate({
@@ -131,6 +148,7 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id })
+        .populate('courses')
         .populate({
           path: 'courses', 
           populate: {

@@ -3,14 +3,19 @@ import { Link } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
 import { CREATE_ASSIGNMENT } from '../../../utils/mutations';
+import { useProviderContext } from "../../../utils/providerContext";
 
-import Auth from '../utils/auth';
+
 
 const CreateAssignment = () => {
+
+  const { course } = useProviderContext();
+
   const [formState, setFormState] = useState({
     assignmentTitle: '',
     assignmentDescription: '',
     assignmentDueDate: '',
+    courseId: course
   });
   const [createAssignment, { error, data }] = useMutation(CREATE_ASSIGNMENT);
 
@@ -26,10 +31,11 @@ const CreateAssignment = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
+    console.log(course)
 
     try {
       const { data } = await createAssignment({
-        variables: { ...formState },
+        variables: { ...formState}
       });
 
     } catch (e) {

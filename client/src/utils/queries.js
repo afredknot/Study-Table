@@ -13,6 +13,18 @@ export const QUERY_STUDENTS = gql`
 `;
 
 
+export const QUERY_INSTRUCTORS = gql`
+  query instructors {
+  instructors {
+    _id
+    username
+    firstName
+    lastName
+  }
+}
+`;
+
+
 export const QUERY_USERS = gql`
   query users {
   users {
@@ -65,6 +77,7 @@ export const QUERY_ME = gql`
       firstName
       lastName
       email
+      role
       avatar
       courses {
         _id
