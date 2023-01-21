@@ -3,56 +3,26 @@ import AssignmentSelector from '../components/AssignmentSelector'
 import TicketSelector from "../components/TicketSelector";
 import NewsCard from "../components/NewsCard"
 import AddStudentToCourse from '../components/InstructorMenu/AddStudentToCourse';
+import CreateAssignment from '../components/InstructorMenu/CreateAssignment';
+import CreateCourse from '../components/InstructorMenu/CreateCourse';
+import InstructorDashboard from '../components/InstructorDashboard';
 
 import { useProviderContext } from "../utils/providerContext";
-import { QUERY_ME, QUERY_ASSIGNMENT, QUERY_COURSE } from '../utils/queries';
-import { ADD_HELP_TICKET, CREATE_ASSIGNMENT, CREATE_COURSE } from '../utils/mutations';
-
 
 const Dashboard = ({ course }) => {
 
-
-//  console.log(functions.useAQuery(QUERY_ME))
-//  console.log(functions.useAQuery(QUERY_ASSIGNMENT, {
-//           variables: { assignmentId: "63c8a1e1003d5a5cd2a758a4" },
-//       }))
-      // console.log(functions.useAQuery(QUERY_COURSE, {
-      //     variables: { courseId: "63c886cff478fa1240f011bb" },
-      // }))
-
-      // ! I can't get mutations to run with this setup 
-  // console.log(functions.useAMutation(ADD_HELP_TICKET, {
-  //       variables: { 
-  //         assignmentId: "63c8a1e1003d5a5cd2a758a4", 
-  //         githubRepo: "github.com/mfrabott", 
-  //         topic: "this is hard",
-  //         problemDescription: "like, really hard"
-  //      }
-  //   }))
-  // console.log(functions.useAMutation(CREATE_COURSE, {
-  //    variables: { 
-  //       courseTitle: "Title", 
-  //       courseDescription: "Description", 
-  //     }
-  //   }))
-    // console.log(functions.useAMutation(CREATE_ASSIGNMENT, {
-    //   variables: { 
-    //      courseId: "63c886cff478fa1240f011bb", 
-    //      assignmentTitle: "Title",
-    //      assignmentDescription: "Description",
-    //      assignmentDueDate: "01-24-2023" 
-    //    }
-    //  }))
-    // !!This Works But repeatedly fires, so comment out after a quick run
-    // console.log(functions.CreateComment())
-
+  const { myRole } = useProviderContext();
+  console.log(myRole)
 
   return (
     <main className="dashboard">
-      <AddStudentToCourse />
       <AssignmentSelector />
       <TicketSelector />
       <NewsCard />
+      {myRole === 'instructor' ?( 
+        <InstructorDashboard />
+      ) : <></>
+      }
     </main>
   );
 };
