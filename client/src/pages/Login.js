@@ -42,7 +42,7 @@ const Login = (props) => {
     });
 
     // send the user to their dashboard
-    navigate('/dashboard');
+    // navigate('/');
 
   };
   // const navigate = useNavigate('/dashboard');
@@ -56,8 +56,8 @@ const Login = (props) => {
           <div className="card-body">
             {data ? (
               <p>
-                Success! You may now head{' '}
-                <Link to="/dashboard">back to the homepage.</Link>
+                Success! You may now head back to the homepage.{' '}
+                <Link to="/dashboard"></Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>

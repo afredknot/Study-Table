@@ -80,11 +80,14 @@ const LeftNav = ({  }) => {
 
                 {/*----------------------- MAKE THIS A BUTTON TO OPEN MODAL TO CREATE COURSE --------------------*/}
 
-                {myRole==='instructor' && (
+                {role==='instructor' && (
                     <ul className='courseList'>
+                    
                     <li className='course'>Add a Course</li>
                     </ul>
                 )}
+
+            {/* ----------------------------------- */}
 
                     <ul className='courseList'>
                         <li className='course'>Menu item 1</li>
@@ -116,18 +119,19 @@ const LeftNav = ({  }) => {
                     </ul>
 
                     <div className="navOptions">
-                        <button> DOWNLOAD??? </button>
+
                        <div> {Auth.loggedIn() ? (
                         <>
                         <button className="btn btn-md m-2" onClick={logout}> Log Out </button>
                         </>
                         ) : (
                             <>
-                            <Link className="btn btn-md m-2" to="/login">
+                            <Link className="btn btn-md m-2" onClick={handleMenuClick} to="/login">
                               Login
                             </Link> 
                             </>
                         )}
+
                         </div>
                     </div>
                 </div>
