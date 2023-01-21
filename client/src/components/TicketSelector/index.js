@@ -50,6 +50,7 @@ const TicketSelector = () => {
                       <h4 id= {helpTicket._id} className="associatedAssignment">{assignment.assignmentTitle}</h4>
                       <p className="tagAuth">{helpTicket.student.username}</p>
                       <p className="tagAssi">{helpTicket.topic}</p>
+                      <p className="tagAssi">{helpTicket.problemDescription}</p>
                       <p className="tagDur">{helpTicket.createdAt}</p>
                     </li>
                 ))}
