@@ -3,11 +3,13 @@ import AssignmentSelector from '../components/AssignmentSelector'
 import TicketSelector from "../components/TicketSelector";
 import NewsCard from "../components/NewsCard"
 import AddStudentToCourse from '../components/InstructorMenu/AddStudentToCourse';
+import CreateAssignment from '../components/InstructorMenu/CreateAssignment';
+
 
 import { useProviderContext } from "../utils/providerContext";
 import { QUERY_ME, QUERY_ASSIGNMENT, QUERY_COURSE } from '../utils/queries';
 import { ADD_HELP_TICKET, CREATE_ASSIGNMENT, CREATE_COURSE } from '../utils/mutations';
-
+import CreateCourse from '../components/InstructorMenu/CreateCourse';
 
 const Dashboard = ({ course }) => {
 
@@ -49,6 +51,8 @@ const Dashboard = ({ course }) => {
 
   return (
     <main className="dashboard">
+      <CreateCourse />
+      <CreateAssignment />
       <AddStudentToCourse />
       <AssignmentSelector />
       <TicketSelector />

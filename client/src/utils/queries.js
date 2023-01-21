@@ -12,6 +12,17 @@ export const QUERY_STUDENTS = gql`
 }
 `;
 
+export const QUERY_INSTRUCTORS = gql`
+  query instructors {
+  instructors {
+    _id
+    username
+    firstName
+    lastName
+  }
+}
+`;
+
 
 export const QUERY_USERS = gql`
   query users {

@@ -53,7 +53,7 @@ const LeftNav = ({  }) => {
 
     const { loading, data, error } = useQuery(QUERY_ME);
     const me = data?.me || {}
-    // console.log(me)
+    console.log(me)
 
     return (
         <nav
