@@ -2,6 +2,7 @@ import React from 'react';
 import AssignmentSelector from '../components/AssignmentSelector'
 import TicketSelector from "../components/TicketSelector";
 import NewsCard from "../components/NewsCard"
+import AddStudentToCourse from '../components/InstructorMenu/AddStudentToCourse';
 
 import { useProviderContext } from "../utils/providerContext";
 import { QUERY_ME, QUERY_ASSIGNMENT, QUERY_COURSE } from '../utils/queries';
@@ -48,6 +49,7 @@ const Dashboard = ({ course }) => {
 
   return (
     <main className="dashboard">
+      <AddStudentToCourse />
       <AssignmentSelector />
       <TicketSelector />
       <NewsCard />

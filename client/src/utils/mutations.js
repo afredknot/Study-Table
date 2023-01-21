@@ -195,8 +195,8 @@ export const CHANGE_ASSISTANCE_STATUS = gql`
 
 
 export const ADD_COMMENT = gql` 
-  mutation addComment($commentText: String!, $assignmentId: ID) {
-    addComment(commentText: $commentText, assignmentId: $assignmentId) {
+  mutation addComment($commentText: String!, $assignmentId: ID, $helpTicketId: ID) {
+    addComment(commentText: $commentText, assignmentId: $assignmentId, helpTicketId: $helpTicketId) {
       _id
       commentAuthor
       commentText
