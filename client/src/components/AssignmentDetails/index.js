@@ -1,5 +1,5 @@
 import React from "react";
-// import StatusDropdown from "./StatusDropdown"
+import StatusDropdown from "../StatusDropdown"
 
 import { useProviderContext } from "../../utils/providerContext";
 import { useQuery } from '@apollo/client';
@@ -31,6 +31,9 @@ const AssignmentDetails = () => {
     return (
         
         <div className="card col-4">
+            
+            <StatusDropdown />
+
             <p>this is the card for the assignment details</p>
 
             {loading && (

@@ -10,7 +10,7 @@ const UpdateHelpTicket = ({assignmentId}) => {
   const [repo, setRepo] = useState("");
   const [body, setBody] = useState("");
 
-  const [updatHelpTicket, { error, data }] = useMutation(UPDATE_HELP_TICKET);
+  const [updateHelpTicket, { error, data }] = useMutation(UPDATE_HELP_TICKET);
 
   const handleChange = (e) => {
     switch(e.target.id) {

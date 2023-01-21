@@ -7,6 +7,23 @@ const resolvers = {
  
   Query: {
     
+    students: async () => {
+      return User.find({})
+      .find({role :"student"})
+      .populate({
+        path: 'courses', 
+        populate: {
+          path: "instructor"
+        }
+      })
+      .populate({
+        path: 'courses', 
+        populate: {
+          path: "teachingAssistant"
+        }
+      });
+    },
+
     users: async () => {
       return User.find({})
       .populate({
