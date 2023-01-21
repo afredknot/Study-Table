@@ -1,21 +1,54 @@
 import React, { useState } from 'react';
+import { useProviderContext } from "../../utils/providerContext";
+import { useMutation } from '@apollo/client';
+import { CHANGE_PROGRESS_STATUS } from '../../utils/mutations';
 
 const StatusDropdown = () => {
-  const [status, setStatus] = useState("Not Started");
 
-  const handleChange = (e) => {
-    setStatus(e.target.value);
-    // POTENTIAL MUTATION TO ASSIGNMENT STATUS ON DB?
-    changeStatus(user, assignment, status);
-  }
+    const [changeProgressStatus, { error, data }] = useMutation(CHANGE_PROGRESS_STATUS);
+    const { ticket, updateTicket, assignment, updateAssignment, comment, updateComment } = useProviderContext();
+
+    const [status, setStatus] = useState("studentProgressNotStarted");
+  
+    const currentTestStatus = status
+
+    console.log(currentTestStatus)
+
+
+    const handleChange = (e) => {
+      setStatus(e.target.value);
+      // POTENTIAL MUTATION TO ASSIGNMENT STATUS ON DB?
+      // changeStatus(user, assignment, status);
+    }
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        console.log(currentTestStatus)
+        try {
+            const { data } = await changeProgressStatus({
+            variables: {
+                assignmentId: assignment,
+
+                // !! Need to query current status??
+
+                currentProgressStatus: currentTestStatus,
+                newProgressStatus: status,
+            },
+            });
+
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
 
   // REMOVE INLINE STYLE ONCE CSS IS ADDED
   return (
     <div>
       <select value={status} onChange={handleChange}>
-        <option value="Not Started" style={{ color: "red" }}>Not Started</option>
-        <option value="In Progress" style={{ color: "orange" }}>In Progress</option>
-        <option value="Completed" style={{ color: "green" }}>Completed</option>
+        <option value="studentProgressNotStarted" style={{ color: "red" }}>Not Started</option>
+        <option value="studentProgressWorking" style={{ color: "orange" }}>In Progress</option>
+        <option value="studentProgressCompleted" style={{ color: "green" }}>Completed</option>
       </select>
     </div>
   );
