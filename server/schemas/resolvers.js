@@ -7,6 +7,23 @@ const resolvers = {
  
   Query: {
     
+    students: async () => {
+      return User.find({})
+      .find({role :"student"})
+      .populate({
+        path: 'courses', 
+        populate: {
+          path: "instructor"
+        }
+      })
+      .populate({
+        path: 'courses', 
+        populate: {
+          path: "teachingAssistant"
+        }
+      });
+    },
+
     users: async () => {
       return User.find({})
       .populate({
@@ -136,7 +153,7 @@ const resolvers = {
  
     helpTickets: async () => {
         return HelpTicket.find()
-        .populate('students')
+        .populate('student')
         .populate({path: 'comments', 
           populate: { 
           path: 'replies'} })
@@ -144,7 +161,7 @@ const resolvers = {
 
     helpTicket: async (parent, { _id }) => {
       return HelpTicket.findOne({ _id: _id })
-      .populate('students')
+      .populate('student')
       .populate({path: 'comments', 
         populate: { 
         path: 'replies'} })
