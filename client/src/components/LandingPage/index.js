@@ -4,7 +4,7 @@ import './style.css';
 
 function LandingPage() {
   return (
-    <div className='landingPage'>
+    <div className='landing-page'>
       <h1>Welcome to Study-Table</h1>
       <Link to="/login">
         <button>Login</button>

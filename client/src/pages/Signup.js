@@ -45,10 +45,10 @@ const Signup = () => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
+    <main className="flex-row justify-center mt-4" >
+      <div className="col-12 col-lg-6 rounded">
+        <div className="card rounded-bottom">
+          <h4 className="card-header bg-dark text-center text-light p-2 rounded">Sign Up</h4>
           <div className="card-body">
             {data ? (
               <p>
@@ -58,7 +58,7 @@ const Signup = () => {
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
-                  className="form-input"
+                  className="form-input text-center"
                   placeholder="Your username"
                   name="username"
                   type="text"
@@ -66,7 +66,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="form-input text-center"
                   placeholder="Your first name"
                   name="firstName"
                   type="text"
@@ -74,7 +74,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                <input
-                  className="form-input"
+                  className="form-input text-center"
                   placeholder="Your last name"
                   name="lastName"
                   type="text"
@@ -82,7 +82,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <select
-                className="form-input"
+                className="form-input text-center"
                 placeholder="Whats your Role"
                 name="role"
                 type="text"
@@ -95,7 +95,7 @@ const Signup = () => {
                 </select>
 
                 <input
-                  className="form-input"
+                  className="form-input text-center"
                   placeholder="Your email"
                   name="email"
                   type="email"
@@ -103,7 +103,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="form-input text-center"
                   placeholder="******"
                   name="password"
                   type="password"

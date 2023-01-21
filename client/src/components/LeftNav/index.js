@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 // import ClassSelector from '../ClassSelector';
 import SettingsMenu from '../SettingsMenu';
 import NotificationHandler from '../NotificationHandler';
@@ -8,6 +8,8 @@ import { QUERY_ME } from '../../utils/queries';
 import { useProviderContext } from "../../utils/providerContext";
 import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import Auth from "../../utils/auth"
+import { Link } from 'react-router-dom';
 
 // iconUrl={iconUrl} onClick={onIconClick}
 // TODO CREATE LOGO ICON AND INSERT HERE
@@ -51,6 +53,13 @@ const LeftNav = ({  }) => {
     const { loading, data, error } = useQuery(QUERY_ME);
     const me = data?.me || {}
     const role = me.role
+
+    const logout = (event)=>{
+        event.preventDefault();
+        Auth.logout();
+        setIsMenuOpen(!isMenuOpen);
+    
+    };
 
     return (
         <nav
@@ -107,8 +116,19 @@ const LeftNav = ({  }) => {
                     </ul>
 
                     <div className="navOptions">
-                        {/* <button> DOWNLOAD??? </button> */}
-                        <button> Log Out </button>
+                        <button> DOWNLOAD??? </button>
+                       <div> {Auth.loggedIn() ? (
+                        <>
+                        <button className="btn btn-md m-2" onClick={logout}> Log Out </button>
+                        </>
+                        ) : (
+                            <>
+                            <Link className="btn btn-md m-2" to="/login">
+                              Login
+                            </Link> 
+                            </>
+                        )}
+                        </div>
                     </div>
                 </div>
             )}
