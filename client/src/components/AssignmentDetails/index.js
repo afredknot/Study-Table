@@ -23,7 +23,7 @@ const AssignmentDetails = () => {
     });
 
     const assignmentDetails = data?.assignment || {}
-
+    console.log(assignmentDetails)
   // ADD STATUS INDICATIOR
 
     // Potentially insert chat button in this return
@@ -52,11 +52,35 @@ const AssignmentDetails = () => {
                         </li>
                     </ul>
                 </div>
-      )}
+            )}
   
-                {error && (
-                    console.log(error)
+            <h3>Comments</h3>
+
+                {data && (
+
+                <ul>
+                    {assignmentDetails.comments.map((comment) => (
+                        <div>
+                            <h4 key = {comment._id} id= {comment._id} className="comment">{comment.commentText}</h4>
+                            <h5>{comment.commentAuthor}</h5>
+                            <h5>{comment.createdAt}</h5>
+                        {comment.replies.map((reply) => (
+                                <li key= {reply._id}>
+                                    <p className="tagAuth">{reply.replyText}</p>
+                                    <p className="tagAssi">{reply.replyAuthor}</p>
+                                    <p className="tagDur">{reply.createdAt}</p>
+                                </li>
+                            ))}
+                        </div>
+                    ))}
+                </ul>
+
                 )}
+
+
+            {error && (
+                console.log(error)
+            )}
 
                 {/* <h3>{assignmentName}</h3>
 

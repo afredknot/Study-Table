@@ -55,7 +55,7 @@ const TicketDetails = () => {
 
   
             {data && (                        
-                <div className="card1">
+                <div className="card1 selector">
                     <h3>Ticket Details</h3>
 
                     <ul  className="ticketDetails">
@@ -83,7 +83,7 @@ const TicketDetails = () => {
                     <div>
                         <h4 key = {comment._id} id= {comment._id} className="comment">{comment.commentText}</h4>
                         <h5>{comment.commentAuthor}</h5>
-
+                        <h5>{comment.createdAt}</h5>
                        {comment.replies.map((reply) => (
                             <li key= {reply._id}>
                                 <p className="tagAuth">{reply.replyText}</p>

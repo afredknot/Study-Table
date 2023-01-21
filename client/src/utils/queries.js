@@ -93,24 +93,60 @@ export const QUERY_ME = gql`
 
 export const QUERY_ASSIGNMENT = gql`
   query assignment($assignmentId: ID!) {
-    assignment(assignmentId: $assignmentId) {
+  assignment(assignmentId: $assignmentId) {
+    _id
+    assignmentTitle
+    assignmentDescription
+    assignmentDueDate
+    studentDefaultStatus {
       _id
-      assignmentTitle
-      assignmentDescription
-      assignmentDueDate
-      helpTickets {
-        topic
-        problemDescription
-        student {
-          username
-        }
-        ticketStatus
-        githubRepo
-        createdAt
+      username
+    }
+    requestingHelp {
+      _id
+      username
+    }
+    offeringAssistance {
+      _id
+      username
+    }
+    studentProgressNotStarted {
+      _id
+      username
+    }
+    studentProgressWorking {
+      _id
+      username
+    }
+    studentProgressCompleted {
+      _id
+      username
+    }
+    helpTickets {
+      _id
+      topic
+      problemDescription
+      createdAt
+      ticketStatus
+      student {
         _id
+        username
+      }
+    }
+    comments {
+      _id
+      commentText
+      commentAuthor
+      createdAt
+      replies {
+        _id
+        replyText
+        replyAuthor
+        createdAt
       }
     }
   }
+}
 `;
 
 export const QUERY_COURSES = gql`
