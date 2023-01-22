@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 // import ClassSelector from '../ClassSelector';
 import SettingsMenu from '../SettingsMenu';
 import NotificationHandler from '../NotificationHandler';
@@ -13,11 +13,11 @@ import { Link } from 'react-router-dom';
 
 // iconUrl={iconUrl} onClick={onIconClick}
 // TODO CREATE LOGO ICON AND INSERT HERE
-const LeftNav = ({  }) => {
+const LeftNav = ({ }) => {
     const navigate = useNavigate();
     const { course, updateCourse, user, updateUser, myRole, updateMyRole } = useProviderContext();
 
-    const [isMenuOpen, setIsMenuOpen] = useState(true);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [initialPosition, setInitialPosition] = useState(0)
 
     const handleMenuClick = () => {
@@ -43,23 +43,30 @@ const LeftNav = ({  }) => {
     };
 
 
-    const handleCourseSelect =  function(e) {
-            updateCourse(e.target.id)
-            setIsMenuOpen(!isMenuOpen);
-            updateMyRole(role)
-            navigate('/dashboard');
-        };
+    const handleCourseSelect = function (e) {
+        updateCourse(e.target.id)
+        setIsMenuOpen(!isMenuOpen);
+        updateMyRole(role)
+        navigate('/dashboard');
+    };
 
     const { loading, data, error } = useQuery(QUERY_ME);
     const me = data?.me || {}
+    // console.log(me)
     const role = me.role
+
+    setTimeout(() => {
+        updateUser(me._id);
+      }, 1000);
 
     const logout = (event)=>{
         event.preventDefault();
         Auth.logout();
         setIsMenuOpen(!isMenuOpen);
-    
+
     };
+
+    // console.log(me)
 
     return (
         <nav
@@ -75,41 +82,35 @@ const LeftNav = ({  }) => {
                     <div className='navButtons'>
                         <ProfileIcon user={user} />
                         <NotificationHandler />
-                        <SettingsMenu/>
+                        <SettingsMenu />
                     </div>
 
-                {/*----------------------- MAKE THIS A BUTTON TO OPEN MODAL TO CREATE COURSE --------------------*/}
+                    {/*----------------------- MAKE THIS A BUTTON TO OPEN MODAL TO CREATE COURSE --------------------*/}
 
-                {role==='instructor' && (
+                    {role === 'instructor' && (
+                        <ul className='courseList'>
+
+                            <li className='course'>Add a Course</li>
+                        </ul>
+                    )}
+
+                    {/* ----------------------------------- */}
+
                     <ul className='courseList'>
-                    
-                    <li className='course'>Add a Course</li>
-                    </ul>
-                )}
-
-            {/* ----------------------------------- */}
-
-                    <ul className='courseList'>
-                        <li className='course'>Menu item 1</li>
-                        <li className='course'>Menu item 2</li>
 
                         {loading && (
                             <p>Loading...</p>
                         )}
 
-                        {data && (                        
-                        <div>
-                            {me.courses.map((course) => (
-                        <ul key={course._id} className="courseList">
-                            <li className='course'>
-                            <div onClick={handleCourseSelect}>
-                                {/* <img src={icon} alt={name} Icon></img> */}
-                                <h2 id={course._id}>{course.courseTitle}</h2>
+                        {data && (
+                            <div>
+                                {me.courses.map((course) => (
+                                    <ul key={course._id} className="courseList">
+                                        <li id={course._id} className='course' onClick={handleCourseSelect}>
+                                            <h3 className="courseName" id={course._id}>{course.courseTitle}</h3>
+                                        </li>
+                                    </ul>))}
                             </div>
-                            {/* <ClassSelector name={course.courseTitle}/> */}
-                            </li>
-                        </ul>))}
-                        </div>
                         )}
 
                         {error && (
@@ -120,15 +121,15 @@ const LeftNav = ({  }) => {
 
                     <div className="navOptions">
 
-                       <div> {Auth.loggedIn() ? (
-                        <>
-                        <button className="btn btn-md m-2" onClick={logout}> Log Out </button>
-                        </>
+                        <div> {Auth.loggedIn() ? (
+                            <>
+                                <button className="logButton" onClick={logout}> Log Out </button>
+                            </>
                         ) : (
                             <>
-                            <Link className="btn btn-md m-2" onClick={handleMenuClick} to="/login">
-                              Login
-                            </Link> 
+                                <Link className="logButton" onClick={handleMenuClick} to="/login">
+                                    Login
+                                </Link>
                             </>
                         )}
 

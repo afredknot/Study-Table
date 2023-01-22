@@ -4,28 +4,23 @@ const CommentDisplay = ({ comment }) => {
 
     // add delete buttons?
     return (
-        <div>
-            {/* <button onClick={createComment}>Create Comment</button>
-            {comment.map((comment) => (
-                <div>
-                    <div>
-                        <p>{comment.author}</p>
-                        <p>{comment.time}</p>
-                        <p>{comment.body}</p>
-                        <button onClick={createReply}>reply</button>
-                    </div>
+        <li key={comment._id}>
+            <h4 id={comment._id} className="comment">{comment.commentText}</h4>
+            <h5>{comment.commentAuthor}</h5>
+            <h5>{comment.createdAt}</h5>
 
+            <ul>
+            {comment.replies.map((reply) => {
+                <li key={reply._id}>
+                    <p className="tagAuth">{reply.replyText}</p>
+                    <p className="tagAssi">{reply.replyAuthor}</p>
+                    <p className="tagDur">{reply.createdAt}</p>
+                </li>
+            })}
+            </ul>
 
-                    {(comment.replies > 0) ? comment.replies.map((reply) => {
-                        <div>
-                            <p>{reply.author}</p>
-                            <p>{reply.time}</p>
-                            <p>{reply.body}</p>
-                        </div>
-                    }) : false}
-                </div>
-            ))} */}
-        </div>
+            <button>Reply</button>
+        </li>
     );
 };
 

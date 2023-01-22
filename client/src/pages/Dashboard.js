@@ -12,7 +12,6 @@ import { useProviderContext } from "../utils/providerContext";
 const Dashboard = ({ course }) => {
 
   const { myRole } = useProviderContext();
-  console.log(myRole)
 
   return (
     <main className="dashboard">

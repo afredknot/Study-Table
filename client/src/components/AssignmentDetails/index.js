@@ -1,6 +1,9 @@
-import React from "react";
-import StatusDropdown from "../StatusDropdown"
-
+import React, { useState, useEffect} from "react";
+import StatusDropdown from "../StatusDropdown";
+import CommentDisplay from "../CommentDisplay";
+import CommentForm from "../CommentForm";
+import "./style.css"
+import AssistanceDropdown from "../AssistanceDropdown";
 import { useProviderContext } from "../../utils/providerContext";
 import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
@@ -10,11 +13,11 @@ import { QUERY_ASSIGNMENT } from '../../utils/queries';
 const AssignmentDetails = () => {
 
     const navigate = useNavigate();
-    const { ticket, updateTicket, assignment, updateAssignment } = useProviderContext();
+    const { user, ticket, updateTicket, assignment, updateAssignment } = useProviderContext();
 
-    const handleTicketSelect =  function(e) {
+    const handleTicketSelect = function (e) {
         updateAssignment(e.target.id)
-        console.log(assignment)
+        // console.log(assignment)
         navigate('/assignments');
     };
 
@@ -23,116 +26,91 @@ const AssignmentDetails = () => {
     });
 
     const assignmentDetails = data?.assignment || {}
-    console.log(assignmentDetails)
-  // ADD STATUS INDICATIOR
+    // console.log(assignmentDetails)
+    // ADD STATUS INDICATIOR
 
     // Potentially insert chat button in this return
-    
-    return (
-        
-        <div className= "col-8">
-            
-            <StatusDropdown />
 
+    return (
+        <div className="assignmentDetails">
 
             {loading && (
                 <p>Loading...</p>
             )}
-  
-            {data && (                        
-                <div className="card col-4 selectors">
-                    <h3>Assignment Details</h3>
 
-                    <ul  className="assignmentDetails">
-                        <li id={assignmentDetails._id} onClick={handleTicketSelect} className='assignment'>
-                            <div  >
-                            {/* <img src={icon} alt={name} Icon></img> */}
+            {data && (
+                <div className="detailsContent">
+
+                    {/* Header */}
+                    <div className="cardHeader">
+                        <h2>Assignment Details</h2>
+                        <StatusDropdown />
+                        <AssistanceDropdown deets={assignmentDetails}/>
+                    </div>
+
+                    {/* Content */}
+                    <div id={assignmentDetails._id} className='assignmentContent'>
+                        <div className="titleField">
                             <h3>{assignmentDetails.assignmentTitle}</h3>
-                            <p> {assignmentDetails.assignmentDescription}</p>
-                            
+                            <p>due date here</p>
                             {/* NEED TO DO DATE FORMATTING */}
                             {/* <p> {assignmentDetails.assignmentDueDate}</p> */}
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            )}
-  
+                        </div>
+                        <p className="description"> {assignmentDetails.assignmentDescription}</p>
+                    </div>
 
-                {data && (
-                    <div className="card selectors">
-                    <h3>Comments</h3>
-                <ul>
-                    {assignmentDetails.comments.map((comment) => (
-                        <div key = {comment._id}>
-                            <li>
-                                <h4  id= {comment._id} className="comment">{comment.commentText}</h4>
-                                <h5>{comment.commentAuthor}</h5>
-                                <h5>{comment.createdAt}</h5>
-                            </li>
-                        {comment.replies.map((reply) => (
-                                <li key= {reply._id}>
-                                    <p className="tagAuth">{reply.replyText}</p>
-                                    <p className="tagAssi">{reply.replyAuthor}</p>
-                                    <p className="tagDur">{reply.createdAt}</p>
+                    {/* Comments */}
+                    <div className="commentContainer">
+                        <h3>Comments</h3>
+
+                        <CommentForm></CommentForm>
+
+                        <ul>
+                            {assignmentDetails.comments.map((comment) => (
+                                <CommentDisplay comment={comment}>
+                                </CommentDisplay>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Help Tickets */}
+                    <div className="ticketContainer">
+                        <h3>Tickets</h3>
+
+                        <h3>Students Without Assistance Status</h3>
+                        <ul className="">
+                            {assignmentDetails.studentDefaultStatus.map((student) => (
+                                <li key={student._id}>
+                                    <p className="tagAuth">{student.username}</p>
                                 </li>
                             ))}
-                        </div>
-                    ))}
-                </ul>
-            </div>
-                )}
-          {data && (
-              <div className="card selectors">
-                <h2>Student Assistance Requests</h2>
-                <h3>Students Without Assistance Status</h3>
-                    <ul  className="assignmentDetails">
-                        {assignmentDetails.studentDefaultStatus.map((student) => (
-                            <li key= {student._id}>
-                                <p className="tagAuth">{student.username}</p>
-                            </li>
-                        ))}
-                    </ul>
+                        </ul>
 
-                <h3>Students Requesting Help With This Assignment</h3>
-                    <ul  className="assignmentDetails">
-                        {assignmentDetails.requestingHelp.map((student) => (
-                            <li key= {student._id}>
-                                <p className="tagAuth">{student.username}</p>
-                            </li>
-                        ))}
-                    </ul>
-                
-                <h3>Students Offering Assistance on This Assignment</h3>
-                    <ul  className="assignmentDetails">
-                        {assignmentDetails.offeringAssistance.map((student) => (
-                            <li key= {student._id}>
-                                <p className="tagAuth">{student.username}</p>
-                            </li>
-                        ))}
-                    </ul>
+                        <h3>Students Requesting Help With This Assignment</h3>
+                        <ul className="">
+                            {assignmentDetails.requestingHelp.map((student) => (
+                                <li key={student._id}>
+                                    <p className="tagAuth">{student.username}</p>
+                                </li>
+                            ))}
+                        </ul>
 
-
+                        <h3>Students Offering Assistance on This Assignment</h3>
+                        <ul className="">
+                            {assignmentDetails.offeringAssistance.map((student) => (
+                                <li key={student._id}>
+                                    <p className="tagAuth">{student.username}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
-
-
             )}
-
 
             {error && (
                 console.log(error)
             )}
-
-                {/* <h3>{assignmentName}</h3>
-
-                <StatusDropdown />
-
-                <p>{assignmentDueDate}</p>
-
-                <p>{assignmentDescription}</p> */}
-
-            </div>
-       
+        </div>
     )
 }
 

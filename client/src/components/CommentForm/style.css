@@ -1,0 +1,41 @@
+.commentForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 20px;
+}
+
+.commentInput {
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid black;
+    border-radius: 3px;
+    width: 90%;
+    padding: 7px 15px;
+}
+
+.commentInput:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.commentButtons {
+    margin-top: 7px;
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    transition: visibility .4s ease-in-out, opacity .2s ease-in-out;
+}
+
+.commentButtons button:hover {
+    outline: 2px solid var(--accentGreen);
+}
+
+.commentButtons button {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    outline: 2px solid;
+    border-radius: 20px;
+}

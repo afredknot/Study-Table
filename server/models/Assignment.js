@@ -46,7 +46,7 @@ const assignmentSchema = new Schema({
   requestingHelp: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'HelpTicket',
+      ref: 'User',
     },
   ],
   offeringAssistance: [

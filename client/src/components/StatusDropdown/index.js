@@ -12,10 +12,11 @@ const StatusDropdown = () => {
   
     const currentTestStatus = status
 
-    console.log(currentTestStatus)
+    // console.log(currentTestStatus)
 
 
     const handleChange = (e) => {
+      console.log(e.target.value);
       setStatus(e.target.value);
       // POTENTIAL MUTATION TO ASSIGNMENT STATUS ON DB?
       // changeStatus(user, assignment, status);

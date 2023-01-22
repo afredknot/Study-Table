@@ -14,7 +14,7 @@ function SettingsMenu() {
 {/* <button onClick={toggleTheme}>Toggle Theme</button> */}
 
   return (
-    <div className={`App ${theme}`}>
+    <div className="navButton">
      <img src={settings}></img>
     </div>
   );
