@@ -18,7 +18,7 @@ const TicketSelector = () => {
     updateTicket(e.target.id)
     console.log(ticket)
     // setIsMenuOpen(!isMenuOpen);
-    navigate('/tickets');
+    // navigate('/tickets');
   };
 
   const { loading, data, error } = useQuery(QUERY_COURSE, {
