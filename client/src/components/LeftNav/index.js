@@ -17,7 +17,7 @@ const LeftNav = ({ }) => {
     const navigate = useNavigate();
     const { course, updateCourse, user, updateUser, myRole, updateMyRole } = useProviderContext();
 
-    const [isMenuOpen, setIsMenuOpen] = useState(true);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [initialPosition, setInitialPosition] = useState(0)
 
     const handleMenuClick = () => {
