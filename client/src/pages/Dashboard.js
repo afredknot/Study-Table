@@ -19,7 +19,7 @@ const Dashboard = ({ course }) => {
       <AssignmentSelector />
       <TicketSelector />
       <NewsCard />
-      {myRole === 'instructor' ?( 
+      {myRole === 'instructor' ? ( 
         <InstructorDashboard />
       ) : <></>
       }

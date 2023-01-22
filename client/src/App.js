@@ -14,8 +14,8 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Header from './components/Header';
-import LeftNav from "./components/LeftNav";
-import TicketView from "./pages/TicketView"
+import LeftNav from './components/LeftNav';
+import TicketView from './pages/TicketView';
 import AssignmentView from './pages/AssignmentView';
 import { ContextProvider } from './utils/providerContext';
 // import ThemeProvider from 'react-bootstrap/ThemeProvider';
@@ -47,29 +47,26 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <ContextProvider>
-        <Router>
-          <div className="appContainer flex-column justify-flex-start min-100-vh">
+      <Router>
+        <div className="appContainer flex-column justify-flex-start min-100-vh">
+          <ContextProvider>
             <Header />
-            <LeftNav />
-            <div className="view">
-
+             <LeftNav />
               <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/tickets" element={<TicketView />} />
                 <Route path="/assignments" element={<AssignmentView />} />
-                <Route path="/login" element= {<Login />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 {/* <Route 
                 path="/me" 
                 // element={<Profile />}
-              /> */}
+                /> */}
               </Routes>
-            </div>
-          </div>
-        </Router>
-      </ContextProvider>
+          </ContextProvider>
+        </div>
+      </Router>
     </ApolloProvider>
   );
 }
