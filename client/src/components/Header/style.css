@@ -1,7 +1,7 @@
 header {
     height: 100px;
     width: 100%;
-    background-color: var(--primary);
+    background-color: var(--tertiary);
     color: var(--text);
     display: flex;
     justify-content: center;

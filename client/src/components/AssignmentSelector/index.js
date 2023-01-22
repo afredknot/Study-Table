@@ -44,12 +44,10 @@ const AssignmentSelector = ({ assignments }) => {
           <ul  className="assignmentList">
             
             {assignmentList.map((assignment) => (
-              <li key={assignment._id}  className='assignment'>
-                <div onClick={handleAssignmentSelect}>
+              <li key={assignment._id}  className='assignment' onClick={handleAssignmentSelect}>
                     {/* <img src={icon} alt={name} Icon></img> */}
                     <h4 id={assignment._id} className="assignmentTitle" >{assignment.assignmentTitle}</h4>
                     {/* <p className="due">{assignment.assignmentDueDate}</p> */}
-                </div>
               </li>
             ))}
 

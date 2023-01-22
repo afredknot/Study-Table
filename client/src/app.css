@@ -17,6 +17,13 @@
 
   /* Accent Color - This is a bright green color that can be used as a secondary accent color. */
   --accentGreen: #4CAF50;
+
+  /* Accent Color - This is a bright blue color that can be used as a tertiary accent color. */
+  --accentBlue: #9ad1ec;
+
+  /* Backround Color */
+  --background: #192031;
+
 }
 
 .dashboard {
@@ -29,7 +36,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(90deg, rgba(49,21,126,0.5074404761904762) 1%, rgba(61,68,93,1) 75%);
+  background: linear-gradient(90deg, rgba(49, 21, 126, 0.5074404761904762) 1%, rgba(61, 68, 93, 1) 75%);
   color: var(--text);
   margin: 10px;
   width: 300px;
@@ -51,6 +58,7 @@ ul {
   border-bottom: 3px solid rgba(255, 255, 255, 0.6);
   margin-top: 5px;
   border-radius: 5%;
+  cursor: pointer;
 }
 
 .selectors li:hover {
@@ -63,7 +71,7 @@ ul {
 }
 
 .card2 {
-  background: linear-gradient(90deg, rgba(49,21,126,0.5074404761904762) 1%, rgba(61,68,93,1) 75%);
+  background: linear-gradient(90deg, rgba(49, 21, 126, 0.5074404761904762) 1%, rgba(61, 68, 93, 1) 75%);
   color: var(--text);
   margin: 10px;
   width: 600px;
@@ -86,28 +94,7 @@ h4 {
 }
 
 .appContainer {
-  background-color: var(--tertiary);
-}
-
-/* DEFINING BLUR FOR CONTENT IN DASHBOARD WHILE MENU IS OPEN */
-.view::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(104, 104, 104, 0.8);
-  z-index: 1;
-  filter: blur(5px);
-}
-
-.navbar.open~.view::before {
-  display: block;
-}
-
-.navbar.closed~.view::before {
-  display: none;
+  background-color: var(--background);
 }
 
 @media screen and (max-height: 450px) {
