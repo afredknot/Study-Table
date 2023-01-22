@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import StatusDropdown from "../StatusDropdown"
-
+import AssistanceDropdown from "../AssistanceDropdown";
 import { useProviderContext } from "../../utils/providerContext";
 import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
@@ -10,11 +10,11 @@ import { QUERY_ASSIGNMENT } from '../../utils/queries';
 const AssignmentDetails = () => {
 
     const navigate = useNavigate();
-    const { ticket, updateTicket, assignment, updateAssignment } = useProviderContext();
+    const { user, ticket, updateTicket, assignment, updateAssignment } = useProviderContext();
 
     const handleTicketSelect =  function(e) {
         updateAssignment(e.target.id)
-        console.log(assignment)
+        // console.log(assignment)
         navigate('/assignments');
     };
 
@@ -23,7 +23,10 @@ const AssignmentDetails = () => {
     });
 
     const assignmentDetails = data?.assignment || {}
-    console.log(assignmentDetails)
+    // console.log(user)
+    // console.log(assignmentDetails)
+
+
   // ADD STATUS INDICATIOR
 
     // Potentially insert chat button in this return
@@ -31,18 +34,18 @@ const AssignmentDetails = () => {
     return (
         
         <div className= "col-8">
-            
-            <StatusDropdown />
-
 
             {loading && (
                 <p>Loading...</p>
             )}
+            
+            <StatusDropdown deets={assignmentDetails}/>
+            <AssistanceDropdown deets={assignmentDetails}/>
   
             {data && (                        
                 <div className="card col-4 selectors">
                     <h3>Assignment Details</h3>
-
+                    {/* <h4>My status on this assignment: {myHelpStatus}</h4> */}
                     <ul  className="assignmentDetails">
                         <li id={assignmentDetails._id} onClick={handleTicketSelect} className='assignment'>
                             <div  >

@@ -16,7 +16,7 @@ const AssignmentSelector = ({ assignments }) => {
   const handleAssignmentSelect = function (e) {
     // console.log(e.target.id);
     updateAssignment(e.target.id)
-    console.log(assignment)
+    // console.log(assignment)
     // setIsMenuOpen(!isMenuOpen);
     navigate('/assignments');
   };

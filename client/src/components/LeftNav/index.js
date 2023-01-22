@@ -52,7 +52,12 @@ const LeftNav = ({  }) => {
 
     const { loading, data, error } = useQuery(QUERY_ME);
     const me = data?.me || {}
+    // console.log(me)
     const role = me.role
+
+    setTimeout(() => {
+        updateUser(me._id);
+      }, 1000);
 
     const logout = (event)=>{
         event.preventDefault();
