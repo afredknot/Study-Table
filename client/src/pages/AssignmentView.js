@@ -11,7 +11,7 @@ const AssignmentView = ({course}) => {
     <main className="flex-row justify-center mb-4">
       <AssignmentSelector />
        <AssignmentDetails />
-       {/* <HelpTicket /> */}
+       <HelpTicket />
        
         
 

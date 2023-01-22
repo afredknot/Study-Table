@@ -52,14 +52,21 @@ const LeftNav = ({ }) => {
 
     const { loading, data, error } = useQuery(QUERY_ME);
     const me = data?.me || {}
+    // console.log(me)
     const role = me.role
 
-    const logout = (event) => {
+    setTimeout(() => {
+        updateUser(me._id);
+      }, 1000);
+
+    const logout = (event)=>{
         event.preventDefault();
         Auth.logout();
         setIsMenuOpen(!isMenuOpen);
 
     };
+
+    // console.log(me)
 
     return (
         <nav
