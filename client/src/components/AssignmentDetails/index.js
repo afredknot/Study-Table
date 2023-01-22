@@ -42,7 +42,7 @@ const AssignmentDetails = () => {
                 <div className="detailsContent">
 
                     {/* Header */}
-                    <div className="detailsHeader">
+                    <div className="cardHeader">
                         <h2>Assignment Details</h2>
                         <StatusDropdown />
                     </div>
@@ -70,7 +70,6 @@ const AssignmentDetails = () => {
                                 </CommentDisplay>
                             ))}
                         </ul>
-
                     </div>
 
                     {/* Help Tickets */}
@@ -78,7 +77,7 @@ const AssignmentDetails = () => {
                         <h3>Tickets</h3>
 
                         <h3>Students Without Assistance Status</h3>
-                        <ul className="assignmentDetails">
+                        <ul className="">
                             {assignmentDetails.studentDefaultStatus.map((student) => (
                                 <li key={student._id}>
                                     <p className="tagAuth">{student.username}</p>
@@ -87,7 +86,7 @@ const AssignmentDetails = () => {
                         </ul>
 
                         <h3>Students Requesting Help With This Assignment</h3>
-                        <ul className="assignmentDetails">
+                        <ul className="">
                             {assignmentDetails.requestingHelp.map((student) => (
                                 <li key={student._id}>
                                     <p className="tagAuth">{student.username}</p>
@@ -96,7 +95,7 @@ const AssignmentDetails = () => {
                         </ul>
 
                         <h3>Students Offering Assistance on This Assignment</h3>
-                        <ul className="assignmentDetails">
+                        <ul className="">
                             {assignmentDetails.offeringAssistance.map((student) => (
                                 <li key={student._id}>
                                     <p className="tagAuth">{student.username}</p>

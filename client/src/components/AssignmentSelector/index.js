@@ -39,15 +39,17 @@ const AssignmentSelector = ({ assignments }) => {
 
       {data && (
         <div className="selectors">
-          <h3>Assignments</h3>
+          <div className="cardHeader">
+            <h3>Assignments</h3>
+          </div>
 
-          <ul  className="assignmentList">
-            
+          <ul className="assignmentList">
+
             {assignmentList.map((assignment) => (
-              <li key={assignment._id}  className='assignment' onClick={handleAssignmentSelect}>
-                    {/* <img src={icon} alt={name} Icon></img> */}
-                    <h4 id={assignment._id} className="assignmentTitle" >{assignment.assignmentTitle}</h4>
-                    {/* <p className="due">{assignment.assignmentDueDate}</p> */}
+              <li key={assignment._id} className='assignment' onClick={handleAssignmentSelect}>
+
+                <h4 id={assignment._id} className="assignmentTitle" >{assignment.assignmentTitle}</h4>
+
               </li>
             ))}
 
