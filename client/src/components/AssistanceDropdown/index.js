@@ -47,6 +47,8 @@ const AssistanceDropdown = (deets) => {
     
     const [status, setStatus] = useState('');
     
+
+    // ! this useEffect needs attention
     useEffect(() => {
     checkMyStatus(assignmentDetails);
     }, [assignmentDetails, status]);
@@ -58,6 +60,9 @@ const AssistanceDropdown = (deets) => {
     //   console.log(assignment)
 
     // e.preventDefault();
+
+// !------------------- This is working, but triggering too quick - need to have setstatus as separate function i think
+
 
     try {
         const { data } = await changeProgressStatus({

@@ -66,6 +66,8 @@ const LeftNav = ({  }) => {
     
     };
 
+    console.log(me)
+
     return (
         <nav
             className={`navbar ${isMenuOpen ? 'open' : 'closed'}`}
@@ -108,10 +110,10 @@ const LeftNav = ({  }) => {
                         <ul key={course._id} className="courseList">
                             <li className='course'>
                             <div onClick={handleCourseSelect}>
-                                {/* <img src={icon} alt={name} Icon></img> */}
+
                                 <h2 id={course._id}>{course.courseTitle}</h2>
                             </div>
-                            {/* <ClassSelector name={course.courseTitle}/> */}
+
                             </li>
                         </ul>))}
                         </div>
