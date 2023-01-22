@@ -22,7 +22,7 @@ const Header = ({title}) => {
 
   return (
     <header>
-      <h1 className ="pageTitle">PASS IN HERE</h1>
+      <h1 className ="pageTitle">Study Table</h1>
     </header>
   );
 }
