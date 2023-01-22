@@ -62,12 +62,14 @@ const CreateHelpTicket = ({assignmentId, user}) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input id="1" value={topic} onChange={handleChange} placeholder="Subject"></input>
-      <input id="2" value={githubRepo} onChange={handleChange} placeholder="Link to your Repo"></input>
-      <textarea id="3" value={body} onChange={handleChange} placeholder="Type your question/request here."></textarea>
-      <button type="submit">Submit</button>
-    </form>
+    <div className='selectors'>
+      <form onSubmit={handleSubmit}>
+        <input id="1" value={topic} onChange={handleChange} placeholder="Subject"></input>
+        <input id="2" value={githubRepo} onChange={handleChange} placeholder="Link to your Repo"></input>
+        <textarea id="3" value={body} onChange={handleChange} placeholder="Type your question/request here."></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   );
 }
 
