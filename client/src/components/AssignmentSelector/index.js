@@ -48,7 +48,7 @@ const AssignmentSelector = ({ assignments }) => {
                 <div onClick={handleAssignmentSelect}>
                     {/* <img src={icon} alt={name} Icon></img> */}
                     <h4 id={assignment._id} className="assignmentTitle" >{assignment.assignmentTitle}</h4>
-                    <p className="due">{assignment.assignmentDueDate}</p>
+                    {/* <p className="due">{assignment.assignmentDueDate}</p> */}
                 </div>
               </li>
             ))}

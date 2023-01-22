@@ -30,18 +30,17 @@ const AssignmentDetails = () => {
     
     return (
         
-        <div className="card col-4">
+        <div className= "col-8">
             
             <StatusDropdown />
 
-            <p>this is the card for the assignment details</p>
 
             {loading && (
                 <p>Loading...</p>
             )}
   
             {data && (                        
-                <div className="card1">
+                <div className="card col-4 selectors">
                     <h3>Assignment Details</h3>
 
                     <ul  className="assignmentDetails">
@@ -50,23 +49,27 @@ const AssignmentDetails = () => {
                             {/* <img src={icon} alt={name} Icon></img> */}
                             <h3>{assignmentDetails.assignmentTitle}</h3>
                             <p> {assignmentDetails.assignmentDescription}</p>
-                            <p> {assignmentDetails.assignmentDueDate}</p>
+                            
+                            {/* NEED TO DO DATE FORMATTING */}
+                            {/* <p> {assignmentDetails.assignmentDueDate}</p> */}
                             </div>
                         </li>
                     </ul>
                 </div>
             )}
   
-            <h3>Comments</h3>
 
                 {data && (
-
+                    <div className="card selectors">
+                    <h3>Comments</h3>
                 <ul>
                     {assignmentDetails.comments.map((comment) => (
                         <div key = {comment._id}>
-                            <h4  id= {comment._id} className="comment">{comment.commentText}</h4>
-                            <h5>{comment.commentAuthor}</h5>
-                            <h5>{comment.createdAt}</h5>
+                            <li>
+                                <h4  id= {comment._id} className="comment">{comment.commentText}</h4>
+                                <h5>{comment.commentAuthor}</h5>
+                                <h5>{comment.createdAt}</h5>
+                            </li>
                         {comment.replies.map((reply) => (
                                 <li key= {reply._id}>
                                     <p className="tagAuth">{reply.replyText}</p>
@@ -77,8 +80,43 @@ const AssignmentDetails = () => {
                         </div>
                     ))}
                 </ul>
-
+            </div>
                 )}
+          {data && (
+              <div className="card selectors">
+                <h2>Student Assistance Requests</h2>
+                <h3>Students Without Assistance Status</h3>
+                    <ul  className="assignmentDetails">
+                        {assignmentDetails.studentDefaultStatus.map((student) => (
+                            <li key= {student._id}>
+                                <p className="tagAuth">{student.username}</p>
+                            </li>
+                        ))}
+                    </ul>
+
+                <h3>Students Requesting Help With This Assignment</h3>
+                    <ul  className="assignmentDetails">
+                        {assignmentDetails.requestingHelp.map((student) => (
+                            <li key= {student._id}>
+                                <p className="tagAuth">{student.username}</p>
+                            </li>
+                        ))}
+                    </ul>
+                
+                <h3>Students Offering Assistance on This Assignment</h3>
+                    <ul  className="assignmentDetails">
+                        {assignmentDetails.offeringAssistance.map((student) => (
+                            <li key= {student._id}>
+                                <p className="tagAuth">{student.username}</p>
+                            </li>
+                        ))}
+                    </ul>
+
+
+                </div>
+
+
+            )}
 
 
             {error && (

@@ -29,7 +29,7 @@ const TicketDetails = () => {
       // ADD STATUS INDICATIOR
     return (
         <div className ="container">
-        <div className ="card col-6">
+        <div className ="col-6">
             {/* <p> this is the container for the ticket details</p> */}
             {/* <h2>{ticket.subject}</h2>
 
@@ -55,7 +55,7 @@ const TicketDetails = () => {
 
   
             {data && (                        
-                <div className="card1 selector">
+                <div className="card1 selectors">
                     <h3>Ticket Details</h3>
 
                     <ul  className="ticketDetails">
@@ -74,17 +74,20 @@ const TicketDetails = () => {
             )}
 
 
-            <h3>Comments</h3>
 
             {data && (
-
+                <div className="selectors">
+                <h3>Comments</h3>
             <ul>
                 {ticketDetails.comments.map((comment) => (
                     <div key = {comment._id} >
+                       <li> 
                         <h4 id= {comment._id} className="comment">{comment.commentText}</h4>
                         <h5>{comment.commentAuthor}</h5>
                         <h5>{comment.createdAt}</h5>
-                       {comment.replies.map((reply) => (
+                        </li>
+                       {
+                       comment.replies.map((reply) => (
                             <li key= {reply._id}>
                                 <p className="tagAuth">{reply.replyText}</p>
                                 <p className="tagAssi">{reply.replyAuthor}</p>
@@ -94,7 +97,7 @@ const TicketDetails = () => {
                     </div>
                 ))}
             </ul>
-
+            </div>
             )}
 
 
