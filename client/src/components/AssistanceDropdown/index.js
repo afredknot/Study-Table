@@ -54,30 +54,34 @@ const AssistanceDropdown = (deets) => {
     }, [assignmentDetails, status]);
 
     const handleChange = async (e) => {
-      await setStatus(e.target.value);
-      await console.log(status) 
-      console.log(myHelpStatus)
-    //   console.log(assignment)
-
-    // e.preventDefault();
+      
+        await setStatus(e.target.value);
+        console.log(status) 
+        // console.log(myHelpStatus)
+        await sendUpdate()
 
 // !------------------- This is working, but triggering too quick - need to have setstatus as separate function i think
 
 
-    try {
-        const { data } = await changeProgressStatus({
-        variables: {
-            assignmentId: assignment,
-            currentStatus: myHelpStatus,
-            newStatus: status,
-        },
-        });
-
-    } catch (err) {
-        console.error(err);
-    }
-
     };
+
+    const sendUpdate = async() => {
+        
+        try {
+            const { data } = await changeProgressStatus({
+            variables: {
+                assignmentId: assignment,
+                currentStatus: myHelpStatus,
+                newStatus: status,
+            },
+            });
+        
+        } catch (err) {
+            console.error(err);
+        }
+
+        }
+
 
 
   // REMOVE INLINE STYLE ONCE CSS IS ADDED
@@ -86,11 +90,29 @@ const AssistanceDropdown = (deets) => {
 
         <h4>My status: {display}</h4>
 
-      <select value={status} onChange={handleChange}>
+      <select type="radio" value={status} onChange={handleChange} >
         <option value="studentDefaultStatus" style={{ color: "red" }}>I'm currently working on this independently</option>
         <option value="requestingHelp" style={{ color: "orange" }}>I'd like some assistance</option>
         <option value="offeringAssistance" style={{ color: "green" }}>Happy to help others</option>
-      </select>
+      </select> 
+
+    {/* <div>
+        <input onChange={handleChange} type="radio" id="studentDefaultStatus" name="drone" value="studentDefaultStatus" checked />
+        <label for="studentDefaultStatus">I'm currently working on this independently</label>
+    </div>
+
+    <div>
+      <input onChange={handleChange} type="radio" id="requestingHelp" name="drone" value="requestingHelp"/>
+      <label for="requestingHelp">I'd like some assistance</label>
+    </div>
+
+    <div>
+      <input onChange={handleChange} type="radio" id="offeringAssistance" name="drone" value="offeringAssistance"/>
+      <label for="offeringAssistance">Happy to help others</label>
+    </div> */}
+
+
+
     </div>
   );
 }
