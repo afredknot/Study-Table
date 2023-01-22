@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-
+import { useProviderContext } from "../../utils/providerContext";
 import { ADD_HELP_TICKET } from '../../utils/mutations';
 
 
 const CreateHelpTicket = ({assignmentId, user}) => {
+
+  const { course, updateCourse, assignment } = useProviderContext();
+
   const [topic, setSubject] = useState("");
-  const [repo, setRepo] = useState("");
+  const [githubRepo, setRepo] = useState("");
   const [body, setBody] = useState("");
 
   const [addHelpTicket, { error, data }] = useMutation(ADD_HELP_TICKET);
@@ -29,18 +32,25 @@ const CreateHelpTicket = ({assignmentId, user}) => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     // SUBMITTED DATA
+    console.log(assignment)
+    console.log(topic)
+    console.log(githubRepo)
+    console.log(body)
+
     try {
       const { data } = await addHelpTicket({
         variables: {
-          assignmentId: assignmentId,
+          assignmentId: assignment,
           topic: topic,
-          githubRpo: repo,
+          githubRepo: githubRepo,
           problemDescription: body
         },
       });
+      // window.location.reload();
 
     } catch (e) {
       console.error(e);
+
     }
 
 
@@ -54,7 +64,7 @@ const CreateHelpTicket = ({assignmentId, user}) => {
   return (
     <form onSubmit={handleSubmit}>
       <input id="1" value={topic} onChange={handleChange} placeholder="Subject"></input>
-      <input id="2" value={gitHubRepo} onChange={handleChange} placeholder="Link to your Repo"></input>
+      <input id="2" value={githubRepo} onChange={handleChange} placeholder="Link to your Repo"></input>
       <textarea id="3" value={body} onChange={handleChange} placeholder="Type your question/request here."></textarea>
       <button type="submit">Submit</button>
     </form>
