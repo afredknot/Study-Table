@@ -32,9 +32,11 @@ export const ContextProvider = ({ children }) => {
         useEffect(() => window.sessionStorage.setItem(`myRole`, myRole), [myRole]);
 
     const [modalVisibility, setVisibility] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
     return (
-        <ProviderContext.Provider value={{ user, course, courseTitle, assignment, ticket, comment, reply, myRole, modalVisibility, updateUser, updateCourse, updateCourseTitle, updateAssignment, updateTicket, updateComment, updateReply, updateMyRole, setVisibility }} >
+        <ProviderContext.Provider value={{ user, course, courseTitle, assignment, ticket, comment, reply, myRole, modalVisibility, isMenuOpen, updateUser, updateCourse, updateCourseTitle, updateAssignment, updateTicket, updateComment, updateReply, updateMyRole, setVisibility, setIsMenuOpen }} >
             {children}
         </ProviderContext.Provider>
     )
