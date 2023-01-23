@@ -26,6 +26,12 @@
 
 }
 
+.pageTitle, 
+.pageTitle:hover{
+  text-decoration: none;
+  color: var(--text)
+}
+
 .dashboard {
   display: flex;
   align-items: center;

@@ -204,6 +204,11 @@ export const QUERY_COURSE = gql`
     course(courseId: $courseId) {
       courseTitle
       _id
+      students{
+        _id
+        firstName
+        lastName
+      }
       assignments {
         assignmentTitle
         assignmentDueDate

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.css";
 
 import { useProviderContext } from "../../utils/providerContext";
@@ -10,7 +10,7 @@ import { QUERY_COURSE } from '../../utils/queries';
 const AssignmentSelector = ({ assignments }) => {
 
   const navigate = useNavigate();
-  const { course, updateCourse, assignment, updateAssignment } = useProviderContext();
+  const { course, updateCourse, assignment, updateAssignment, courseTitle, updateCourseTitle } = useProviderContext();
   // const { functions } = useProviderContext();
 
   const handleAssignmentSelect = function (e) {
@@ -21,6 +21,7 @@ const AssignmentSelector = ({ assignments }) => {
     navigate('/assignments');
   };
 
+  
   const { loading, data, error } = useQuery(QUERY_COURSE, {
     variables: { courseId: course },
   });
@@ -28,6 +29,15 @@ const AssignmentSelector = ({ assignments }) => {
   const assignmentList = data?.course.assignments || {}
   // console.log(assignmentList)
   // ADD STATUS INDICATIOR
+  const courseName = data?.course.courseTitle || {}
+
+  useEffect(() => {
+    updateCourseTitle(courseName)
+  }, [course]
+  )
+
+
+
   return (
 
 
