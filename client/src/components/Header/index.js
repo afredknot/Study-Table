@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useProviderContext } from '../../utils/providerContext';
+import CreateCourse from '../InstructorMenu/CreateCourse';
 import "./style.css";
 
 const Header = ({ title }) => {
@@ -15,6 +16,13 @@ const Header = ({ title }) => {
         <div className='modal'>
           <p>Feature coming soon! For now this is just a placeholder!</p>
           <button onClick={closeModal}>Okay!</button>
+        </div>
+      )}
+
+      {modalVisibility == "instructor" && (
+        <div className='instructorModal'>
+          <CreateCourse />
+          <button onClick={closeModal}>Cancel</button>
         </div>
       )}
     </header>

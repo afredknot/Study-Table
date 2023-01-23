@@ -3,19 +3,13 @@ import AssignmentSelector from '../components/AssignmentSelector'
 import TicketSelector from "../components/TicketSelector";
 import TicketDetails from "../components/TicketDetails"
 
-
-
-function TicketView () {
+function TicketView() {
 
   return (
     <main className="flex-row justify-center mb-4">
       <AssignmentSelector />
-       <TicketSelector/>
-       
-       <TicketDetails />
-        
-
-       
+      <TicketSelector />
+      <TicketDetails />
     </main>
   );
 };
