@@ -38,7 +38,7 @@ const AssignmentSelector = ({ assignments }) => {
       )}
 
       {data && (
-        <div className="selectors">
+        <div className="selectors no-scroll">
           <div className="cardHeader">
             <h3>Assignments</h3>
           </div>

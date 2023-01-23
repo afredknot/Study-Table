@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
@@ -15,7 +15,6 @@ const CreateAssignment = () => {
     assignmentTitle: '',
     assignmentDescription: '',
     assignmentDueDate: '',
-    courseId: course
   });
   const [createAssignment, { error, data }] = useMutation(CREATE_ASSIGNMENT);
 
@@ -28,20 +27,30 @@ const CreateAssignment = () => {
     });
   };
 
+
+  // useEffect(() => {
+  //   sendAssignment()
+  // }, [formState])
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
     console.log(course)
+    sendAssignment()
 
+  };
+
+  const sendAssignment = async() => {
     try {
       const { data } = await createAssignment({
-        variables: { ...formState}
+        variables: { ...formState, courseId: course}
       });
 
     } catch (e) {
       console.error(e);
     }
-  };
+    window.location.reload()
+  }
 
   return (
     <main className="flex-row justify-center mb-4">

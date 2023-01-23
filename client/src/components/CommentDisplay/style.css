@@ -1,0 +1,33 @@
+.commentLine {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(211, 211, 211, 0.05);
+    width: 100%;
+    margin: 10px;
+    border-bottom: 4px black solid;
+    border-radius: 5px;
+}
+
+.commentBlock {
+    display: flex;
+    align-items: center;
+}
+
+.commentAuth {
+    font-size: 14px;
+    margin: 0;
+    color: rgb(145, 178, 189)
+}
+
+.commentDate {
+    font-size: 12px;
+    color: rgb(145, 178, 189);
+}
+
+.commentBody {
+    font-size: 16px;
+    margin: 0;
+    color: white;
+}

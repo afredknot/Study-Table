@@ -42,7 +42,11 @@
   width: 300px;
   height: 60vh;
   border-radius: 25px;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.no-scroll{
+  overflow-y:hidden
 }
 
 ul {
