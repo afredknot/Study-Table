@@ -1,0 +1,153 @@
+:root {
+
+  /* Primary Color - This is a dark shade of blue that is used as the primary color */
+  --primary: #263238;
+
+  /* Secondary Color - This is a darker shade of blue that can be used for accents and UI elements. */
+  --secondary: #37474F;
+
+  /* Tertiary Color - This is a lighter shade of blue that can be used for backgrounds and hover effects. */
+  --tertiary: #607D8B;
+
+  /* Text Color - White is the choice for text color in dark themes. */
+  --text: #FFFFFF;
+
+  /* Accent Color - This is a bright red color that can be used for accents and call-to-action buttons. */
+  --accentRed: #F44336;
+
+  /* Accent Color - This is a bright green color that can be used as a secondary accent color. */
+  --accentGreen: #4CAF50;
+
+  /* Accent Color - This is a bright blue color that can be used as a tertiary accent color. */
+  --accentBlue: #9ad1ec;
+
+  /* Backround Color */
+  --background: #192031;
+
+}
+
+.pageTitle, 
+.pageTitle:hover{
+  text-decoration: none;
+  color: var(--text)
+}
+
+.dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selectors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--secondary);
+  color: var(--text);
+  margin: 10px;
+  width: 300px;
+  height: 60vh;
+  border-radius: 25px;
+  overflow-y: auto;
+}
+
+.no-scroll{
+  overflow-y:hidden
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 97%;
+}
+
+.selectors li {
+  background-color: rgba(41, 41, 41, 0.6);
+  width: 100%;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.6);
+  margin-top: 5px;
+  border-radius: 5%;
+  cursor: pointer;
+}
+
+.selectors li:hover {
+  background-color: rgba(41, 41, 41, 0.7);
+  border-bottom: 3px solid rgba(255, 255, 255);
+}
+
+.selectors li p {
+  margin-left: 5px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 50px;
+  padding: 15px;
+  background-color: var(--primary);
+  color: var(--text);
+}
+
+h3 {
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+h4 {
+  font-size: 14px;
+  margin: 4px 0 0 4px;
+}
+
+.app {
+  text-align: center;
+}
+
+.appContainer {
+  background-color: var(--background);
+}
+
+@media screen and (max-height: 450px) {
+  nav {
+    padding-top: 15px;
+  }
+}
+
+footer {
+  background-color: cadetblue;
+  width: auto;
+  height: auto
+}
+
+
+.student-list {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background: lightgreen;
+  padding: 10px;
+}
+
+th,
+td {
+  border: 1px solid grey;
+}
+
+.add-student {
+  margin: 20px 0;
+}
+
+.add-student button,
+.add-student input,
+.add-student select {
+  height: 40px;
+}

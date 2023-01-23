@@ -1,0 +1,35 @@
+.card2 {
+  background-color: var(--secondary);
+  color: var(--text);
+  margin: 10px;
+  width: 600px;
+  height: 60vh;
+  border-radius: 5%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.article {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 7px;
+    margin: 10px;
+}
+
+.article p {
+    font-size: 12px;
+    margin: 5px;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.links a {
+    margin: 3px;
+    font-size: 14px;
+}

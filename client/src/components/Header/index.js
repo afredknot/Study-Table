@@ -1,46 +1,36 @@
 import React from 'react';
+import { useProviderContext } from '../../utils/providerContext';
 import { Link } from 'react-router-dom';
 
-import Auth from '../../utils/auth';
+import CreateCourse from '../InstructorMenu/CreateCourse';
+import "./style.css";
 
-const Header = () => {
-  const logout = (event) => {
-    event.preventDefault();
-    Auth.logout();
-  };
+const Header = ({ title }) => {
+
+  const { modalVisibility, setVisibility } = useProviderContext();
+
+  const closeModal = () => setVisibility(!modalVisibility);
+
   return (
-    <header className="bg-primary text-light mb-4 py-3 flex-row align-center">
-      <div className="container flex-row justify-space-between-lg justify-center align-center">
-        <div>
-          <Link className="text-light" to="/">
-            <h1 className="m-0">Tech Thoughts</h1>
-          </Link>
-          <p className="m-0">Get into the mind of a programmer.</p>
+    <header>
+      <Link to="/">
+        <h1 className="pageTitle">Study Table</h1>
+        </Link>
+      {modalVisibility && (
+        <div className='modal'>
+          <p>Feature coming soon! For now this is just a placeholder!</p>
+          <button onClick={closeModal}>Okay!</button>
         </div>
-        <div>
-          {Auth.loggedIn() ? (
-            <>
-              <Link className="btn btn-lg btn-info m-2" to="/me">
-                {Auth.getProfile().data.username}'s profile
-              </Link>
-              <button className="btn btn-lg btn-light m-2" onClick={logout}>
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link className="btn btn-lg btn-info m-2" to="/login">
-                Login
-              </Link>
-              <Link className="btn btn-lg btn-light m-2" to="/signup">
-                Signup
-              </Link>
-            </>
-          )}
+      )}
+
+      {modalVisibility == "instructor" && (
+        <div className='instructorModal'>
+          <CreateCourse />
+          <button onClick={closeModal}>Cancel</button>
         </div>
-      </div>
+      )}
     </header>
   );
-};
+}
 
 export default Header;

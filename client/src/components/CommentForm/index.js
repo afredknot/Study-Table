@@ -1,88 +1,65 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useProviderContext } from "../../utils/providerContext";
 import { useMutation } from '@apollo/client';
-
+import { useNavigate } from 'react-router-dom';
 import { ADD_COMMENT } from '../../utils/mutations';
+import "./style.css";
 
-import Auth from '../../utils/auth';
+const CommentForm = () => {
 
-const CommentForm = ({ thoughtId }) => {
-  const [commentText, setCommentText] = useState('');
-  const [characterCount, setCharacterCount] = useState(0);
+  const { ticket, updateTicket, assignment, updateAssignment, comment, updateComment } = useProviderContext();
+  const [addComment, { error, data }] = useMutation(ADD_COMMENT);
 
-  const [addComment, { error }] = useMutation(ADD_COMMENT);
+  const [newComment, setComment] = useState("");
+  const [buttonDisplay, setButtonDisplay] = useState(false);
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  const handleChange = (e) => {
+    setComment(e.target.value);
 
+    if (e.target.value.length > 0) {
+      setButtonDisplay(true);
+    } else {
+      setButtonDisplay(false);
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
     try {
       const { data } = await addComment({
         variables: {
-          thoughtId,
-          commentText,
-          commentAuthor: Auth.getProfile().data.username,
+          commentText: newComment,
+
+          // !! This should only be one or the other?
+
+          assignmentId: assignment,
+          // helpTicketId: ticket
         },
       });
-
-      setCommentText('');
-    } catch (err) {
-      console.error(err);
+      
+    } catch (e) {
+      console.error(e);
     }
-  };
+    setComment("");
+    setButtonDisplay(false)
+    window.location.reload();
+  }
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    if (name === 'commentText' && value.length <= 280) {
-      setCommentText(value);
-      setCharacterCount(value.length);
-    }
-  };
+  const toggleButtons = () => {
+    setButtonDisplay(!buttonDisplay);
+    setComment("");
+  }
 
   return (
-    <div>
-      <h4>What are your thoughts on this thought?</h4>
-
-      {Auth.loggedIn() ? (
-        <>
-          <p
-            className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
-            }`}
-          >
-            Character Count: {characterCount}/280
-            {error && <span className="ml-2">{error.message}</span>}
-          </p>
-          <form
-            className="flex-row justify-center justify-space-between-md align-center"
-            onSubmit={handleFormSubmit}
-          >
-            <div className="col-12 col-lg-9">
-              <textarea
-                name="commentText"
-                placeholder="Add your comment..."
-                value={commentText}
-                className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
-                onChange={handleChange}
-              ></textarea>
-            </div>
-
-            <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Comment
-              </button>
-            </div>
-          </form>
-        </>
-      ) : (
-        <p>
-          You need to be logged in to share your thoughts. Please{' '}
-          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-        </p>
-      )}
-    </div>
+    <form className="commentForm" onSubmit={handleSubmit}>
+      <input className="commentInput" value={newComment} onChange={handleChange} placeholder="Add a comment..."></input>
+      <div className="commentButtons" style={{ visibility: `${buttonDisplay ? "visible" : "hidden"}`, opacity: `${buttonDisplay ? "100%" : "0%"}`}}>
+        <button type="submit">Submit</button>
+        <button onClick={toggleButtons} type="reset">Cancel</button>
+      </div>
+    </form>
   );
-};
+}
 
 export default CommentForm;

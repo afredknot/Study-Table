@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
+import { useNavigate } from 'react-router-dom';
 
 import Auth from '../utils/auth';
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  const navigate = useNavigate();
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -38,23 +40,29 @@ const Login = (props) => {
       email: '',
       password: '',
     });
+
+    // send the user to their dashboard
+    // navigate('/');
+
   };
+  // const navigate = useNavigate('/dashboard');
+// navigate('/dashboard');
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
+    <main className="flex-row justify-center mt-5">
+      <div className="col-12 col-md-5">
+        <div className="card text-center">
+          <h4 className="card-header bg-dark text-light">Login</h4>
           <div className="card-body">
             {data ? (
               <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
+                Success! You may now head back to the homepage.{' '}
+                <Link to="/dashboard"></Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
-                  className="form-input"
+                  className="form-input text-center"
                   placeholder="Your email"
                   name="email"
                   type="email"
@@ -62,7 +70,7 @@ const Login = (props) => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="form-input text-center"
                   placeholder="******"
                   name="password"
                   type="password"
