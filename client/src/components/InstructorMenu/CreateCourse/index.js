@@ -79,9 +79,7 @@ const CreateCourse = () => {
                     {allInstructors.map((instructor) => (
                       <option 
                       key={instructor._id}  
-                      value={instructor._id}>
-                        {instructor.firstName} 
-                        {instructor.lastName} 
+                      value={instructor._id}>{instructor.firstName} {instructor.lastName} 
                         </option>
                       ))}
                   

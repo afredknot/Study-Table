@@ -22,7 +22,7 @@ const CreateHelpTicket = ({assignmentId, user}) => {
         case "2":
             setRepo(e.target.value);
             break;
-        case "3":
+        case "problemDescription":
             setBody(e.target.value);
             break;
     };
@@ -32,10 +32,10 @@ const CreateHelpTicket = ({assignmentId, user}) => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     // SUBMITTED DATA
-    console.log(assignment)
-    console.log(topic)
-    console.log(githubRepo)
-    console.log(body)
+    // console.log(assignment)
+    // console.log(topic)
+    // console.log(githubRepo)
+    // console.log(body)
 
     try {
       const { data } = await addHelpTicket({
@@ -46,13 +46,14 @@ const CreateHelpTicket = ({assignmentId, user}) => {
           problemDescription: body
         },
       });
-      // window.location.reload();
+      window.location.reload();
 
     } catch (e) {
       console.error(e);
 
     }
 
+    
 
     // MUTATE HERE
     setSubject("");
@@ -62,7 +63,7 @@ const CreateHelpTicket = ({assignmentId, user}) => {
   };
 
   return (
-    <div className='selectors'>
+    <div className='selectors no-scroll'>
       <div className="cardHeader">
         <h3>Ask for Assistance</h3>
       </div>

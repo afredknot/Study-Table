@@ -47,9 +47,10 @@ const TicketSelector = () => {
             return assignment.helpTickets.map((helpTicket) => (
               <li key={helpTicket._id} onClick={handleTicketSelect}>
                 <h4 id={helpTicket._id} className="associatedAssignment">{assignment.assignmentTitle}</h4>
-                <p className="tagAuth">{helpTicket.student.username}</p>
                 <p className="tagAssi">{helpTicket.topic}</p>
                 <p className="tagAssi">{helpTicket.problemDescription}</p>
+                <a href={helpTicket.githubRepo} ><p className="tagAssi">{helpTicket.githubRepo}</p> </a>
+                <p className="tagAuth">{helpTicket.student.username}</p>
                 <p className="tagDur">{helpTicket.createdAt}</p>
               </li>
             ))
