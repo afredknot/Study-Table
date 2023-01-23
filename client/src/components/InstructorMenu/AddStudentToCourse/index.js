@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { useProviderContext } from "../../../utils/providerContext";
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_STUDENT_TO_COURSE } from '../../../utils/mutations';
@@ -50,7 +50,10 @@ const AddStudentToCourse = (courseId) => {
               <form onSubmit={handleFormSubmit}>
            
               {data && (
-                <select name="students" id="students-datalist" onChange={(e) => setUserSelected(e.target.value)}>
+                <select 
+                className="form-input"
+                name="students" 
+                id="students-datalist" onChange={(e) => setUserSelected(e.target.value)}>
                 
                   {allStudents.map((student) => (
                     <option key={student._id}  value={student._id}>{student.firstName} {student.lastName} </option>
