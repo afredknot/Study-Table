@@ -10,10 +10,6 @@
     border-radius: 5px;
 }
 
-.commentBlock {
-    display: flex;
-    align-items: center;
-}
 
 .commentAuth {
     font-size: 14px;
@@ -28,6 +24,12 @@
 
 .commentBody {
     font-size: 16px;
-    margin: 0;
+    margin: 2px;
     color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow-x: hidden;
 }
