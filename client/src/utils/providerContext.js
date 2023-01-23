@@ -34,8 +34,10 @@ export const ContextProvider = ({ children }) => {
     const [myRole, updateMyRole] = useState(sessionStorage.getItem('myRole') || '');
         useEffect(() => window.sessionStorage.setItem(`myRole`, myRole), [myRole]);
 
+    const [modalVisibility, setVisibility] = useState(false);
+
     return (
-        <ProviderContext.Provider value={{ user, course, assignment, ticket, comment, reply, myRole, updateUser, updateCourse, updateAssignment, updateTicket, updateComment, updateReply, updateMyRole }} >
+        <ProviderContext.Provider value={{ user, course, assignment, ticket, comment, reply, myRole, modalVisibility, updateUser, updateCourse, updateAssignment, updateTicket, updateComment, updateReply, updateMyRole, setVisibility }} >
             {children}
         </ProviderContext.Provider>
     )

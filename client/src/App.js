@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useContext, useState } from 'react';
 import {
   ApolloClient,
   InMemoryCache,
@@ -17,7 +17,7 @@ import Header from './components/Header';
 import LeftNav from './components/LeftNav';
 import TicketView from './pages/TicketView';
 import AssignmentView from './pages/AssignmentView';
-import { ContextProvider } from './utils/providerContext';
+import { ContextProvider, useProviderContext } from './utils/providerContext';
 // import ThemeProvider from 'react-bootstrap/ThemeProvider';
 
 // Construct our main GraphQL API endpoint
@@ -46,33 +46,22 @@ const client = new ApolloClient({
 
 
 function App() {
-  const [modalVisibility, setVisibility] = useState(false)
-  
-  function showResponseModal(){
-    setVisibility(!modalVisibility)
-    console.log('blah')
-  }
+
   return (
     <ApolloProvider client={client}>
       <Router>
         <div className="appContainer flex-column justify-flex-start min-100-vh">
           <ContextProvider>
             <Header />
-            <div className={`${(modalVisibility)? 'visible': 'hidden'} `}>I am text, fear me</div>
-            <button onClick={showResponseModal}>Click me</button>
-             <LeftNav />
-              <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/tickets" element={<TicketView />} />
-                <Route path="/assignments" element={<AssignmentView />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                {/* <Route 
-                path="/me" 
-                // element={<Profile />}
-                /> */}
-              </Routes>
+            <LeftNav />
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/tickets" element={<TicketView />} />
+              <Route path="/assignments" element={<AssignmentView />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </Routes>
           </ContextProvider>
         </div>
       </Router>

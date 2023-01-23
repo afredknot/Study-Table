@@ -61,7 +61,7 @@ const LeftNav = ({ }) => {
     const role = me.role
 
 
-    const logout = (event)=>{
+    const logout = (event) => {
         event.preventDefault();
         Auth.logout();
         setIsMenuOpen(!isMenuOpen);
@@ -106,14 +106,14 @@ const LeftNav = ({ }) => {
 
                         {data && (
                             <div>
-
-                            <h2>Welcome, {me.firstName}</h2>
-                                {me.courses.map((course) => (
-                                    <ul key={course._id} className="courseList">
+                                <h2>Welcome, {me.firstName}</h2>
+                                <ul key={course._id} className="courseList">
+                                    {me.courses.map((course) => (
                                         <li id={course._id} className='course' onClick={handleCourseSelect}>
                                             <h3 className="courseName" id={course._id}>{course.courseTitle}</h3>
                                         </li>
-                                    </ul>))}
+                                    ))}
+                                </ul>
                             </div>
                         )}
 

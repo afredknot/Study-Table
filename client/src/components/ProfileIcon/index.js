@@ -1,11 +1,17 @@
 import React from 'react';
 import icon from "./profileIcon.svg"
+import { useProviderContext } from '../../utils/providerContext';
 
+const ProfileIcon = () => {
 
-// FIGURE OUT WHAT WE'RE DOING FOR IMAGES
-const ProfileIcon = ({iconUrl, onClick}) => {
+  const { setVisibility, modalVisibility } = useProviderContext();
+
+  const handleProfileClick = () => {
+    setVisibility(!modalVisibility);
+  }
+  
   return (
-    <div className='navButton' onClick={onClick}>
+    <div className='navButton' onClick={handleProfileClick}>
       <img src={icon} alt="Profile Icon"></img>
     </div>
   );
