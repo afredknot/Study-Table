@@ -49,21 +49,13 @@ const AssistanceDropdown = (deets) => {
     const [status, setStatus] = useState('');
     
 
-    // ! this useEffect needs attention
     useEffect(() => {
-        console.log(`status: ${status}`)
         sendUpdate()
-           
-        checkMyStatus(assignmentDetails);
+        checkMyStatus();
     }, [assignmentDetails, status]);
 
     const handleChange = async (e) => {
-        
         await setStatus(e.target.value);
-
-
-// !------------------- This is working, but triggering too quick - need to have setstatus as separate function i think
-
 
     };
 

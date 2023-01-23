@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import ClassSelector from '../ClassSelector';
 import SettingsMenu from '../SettingsMenu';
 import NotificationHandler from '../NotificationHandler';
@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 
 // iconUrl={iconUrl} onClick={onIconClick}
 // TODO CREATE LOGO ICON AND INSERT HERE
+
 const LeftNav = ({ }) => {
     const navigate = useNavigate();
     const { course, updateCourse, user, updateUser, myRole, updateMyRole } = useProviderContext();
@@ -38,16 +39,18 @@ const LeftNav = ({ }) => {
             // The user has swiped right, open the navbar
             setIsMenuOpen(true);
             console.log("opening menu");
-
         }
     };
 
-
-    const handleCourseSelect = function (e) {
-        updateCourse(e.target.id)
+    useEffect(() => {
         setIsMenuOpen(!isMenuOpen);
         updateMyRole(role)
         navigate('/dashboard');
+    }, [course]);
+
+    const handleCourseSelect = function (e) {
+        updateCourse(e.target.id)
+
     };
 
     const { loading, data, error } = useQuery(QUERY_ME);
