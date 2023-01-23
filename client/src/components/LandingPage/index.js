@@ -7,26 +7,17 @@ import Auth from '../../utils/auth';
 function LandingPage() {
   return (
     <div className='landing-page'>
-      <h1>Welcome to Study Table</h1>
+      <h1>Welcome!</h1>
       <div className='landingPageDisplay'>
-      <div className='icon-container'>
-           <img className="icon" src='studyIcon.ico' alt='book icon'/>
-        </div>
-      <NewsCard />
-      {Auth.loggedIn() ? (
-        <></>
-        ) : (
-          <div className='buttons landing-buttons'>
+        <NewsCard />
+        <div className='buttons'>
           <Link to="/login">
             <button>Login</button>
           </Link>
           <Link to="/signup">
-            <button>Sign up</button>
+            <button>Signup</button>
           </Link>
-        </div>
-      )}
-        <div className='icon-container'>
-           <img className="icon" src='studyIcon.ico' alt='book icon'/>
+          <img className="icon" src='studyIcon.ico' alt='book icon' />
         </div>
       </div>
     </div>

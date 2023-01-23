@@ -41,23 +41,23 @@ const TicketSelector = () => {
       </div>
 
       {data && (
-
-        <ul>
-          {assignmentList.map((assignment) => {
-            return assignment.helpTickets.map((helpTicket) => (
-              <li key={helpTicket._id} onClick={handleTicketSelect}>
-                <h4 id={helpTicket._id} className="associatedAssignment">{assignment.assignmentTitle}</h4>
-                <p className="tagAssi">{helpTicket.topic}</p>
-                <p className="tagAssi">{helpTicket.problemDescription}</p>
-                <a href={helpTicket.githubRepo} ><p className="tagAssi">{helpTicket.githubRepo}</p> </a>
-                <p className="tagAuth">{helpTicket.student.username}</p>
-                <p className="tagDur">{helpTicket.createdAt}</p>
-              </li>
-            ))
-          }
-          )}
-        </ul>
-
+          <div className="ticketContainer">
+            <ul>
+              {assignmentList.map((assignment) => {
+                return assignment.helpTickets.map((helpTicket) => (
+                  <li className = "ticketLine" key={helpTicket._id} onClick={handleTicketSelect}>
+                    <h4 id={helpTicket._id} className="associatedAssignment">{assignment.assignmentTitle}</h4>
+                    <p className="ticketTopic">{helpTicket.topic}</p>
+                    <p className="ticketDescription">{helpTicket.problemDescription}</p>
+                    <a href={helpTicket.githubRepo} ><p className="tagAssi">{helpTicket.githubRepo}</p> </a>
+                    <p className="ticketAuth">{helpTicket.student.username}</p>
+                    <p className="ticketDate">{helpTicket.createdAt}</p>
+                  </li>
+                ))
+              }
+              )}
+            </ul>
+        </div>
       )}
 
       {error && (
