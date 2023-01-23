@@ -62,10 +62,10 @@ const TicketDetails = () => {
                         <li id={ticketDetails._id} className='assignment'>
                             <div  >
                             {/* <img src={icon} alt={name} Icon></img> */}
-                            <h3> {ticketDetails.topic}</h3>
-                            <p> {ticketDetails.student.username}</p>
-                            <p> {ticketDetails.githubRepo}</p>
-                            <p> {ticketDetails.problemDescription}</p>
+                            <h3 className="ticketTopic"> {ticketDetails.topic}</h3>
+                            <p className="ticketAuth"> {ticketDetails.student.username}</p>
+                            <p className="ticketGitHub"> {ticketDetails.githubRepo}</p>
+                            <p className="ticketDescription"> {ticketDetails.problemDescription}</p>
                             <p> {ticketDetails.createdAt}</p>
                             </div>
                         </li>

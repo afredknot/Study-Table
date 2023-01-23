@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
-  "engines" :{
+  "engines": {
     "node": "18.13",
     "npm": "8.19"
   },
@@ -13,7 +13,6 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build"
-    
   },
   "keywords": [],
   "author": "",
@@ -23,6 +22,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
+    "dayjs": "^1.11.7",
     "react-bootstrap": "^2.7.0"
   }
 }

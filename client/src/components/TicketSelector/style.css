@@ -1,15 +1,55 @@
-.tagAuth {
-    text-decoration: underline;
+
+.ticketContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.ticketLine {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(143, 24, 24, 0.171);
+    width: 95%;
+    margin: 10px;
+    
+    /* border-bottom: 4px black solid; */
+    border-radius: 5px;
+    /* padding: 6px, 5px; */
+}
+
+.ticketBody {
+    display: flex;
+    align-items: center;
+}
+
+.ticketGithub {
+    font-size: 14px;
+    margin: 0;
+    color: rgb(145, 178, 189)
+}
+
+.ticketTopic {
+    font-size: 20px;
+    margin: 0;
+    color: rgb(145, 178, 189)
+}
+
+.ticketAuth {
+    font-size: 14px;
+    margin: 0;
+    color: rgb(145, 178, 189)
+}
+
+.ticketDate {
     font-size: 12px;
-    margin-top: 0px;
+    color: rgb(145, 178, 189);
 }
 
-.tagDur {
-    font-size: 10px;
-    color: lightblue;
-    margin-bottom: 0px;
-}
-
-.tagAssi {
+.ticketDescription {
     font-size: 16px;
+    margin: 0;
+    color: white;
 }

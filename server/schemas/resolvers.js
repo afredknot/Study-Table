@@ -26,7 +26,7 @@ const resolvers = {
 
     instructors: async () => {
       return User.find({})
-      .find({role :"instructor"})
+      .find({role :"instructor" })
       .populate({
         path: 'courses', 
         populate: {

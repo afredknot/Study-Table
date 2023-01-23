@@ -9,7 +9,6 @@ const InstructorDashboard = ({  }) => {
     <main className="instructorDashBoard">
       <CreateAssignment />
       <AddStudentToCourse />
-      <CreateCourse />
     </main>
   );
 };

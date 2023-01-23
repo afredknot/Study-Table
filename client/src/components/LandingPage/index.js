@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import NewsCard from '../NewsCard';
 import './style.css';
+import Auth from '../../utils/auth';
 
 function LandingPage() {
   return (
@@ -20,6 +21,7 @@ function LandingPage() {
         </div>
       </div>
     </div>
+    
   );
 }
 
