@@ -10,7 +10,8 @@ function LandingPage() {
       <h1>Welcome!</h1>
       <div className='landingPageDisplay'>
         <NewsCard />
-        <div className='buttons'>
+        {!Auth.loggedIn() ? 
+        (<div className='buttons'>
           <Link to="/login">
             <button>Login</button>
           </Link>
@@ -18,10 +19,11 @@ function LandingPage() {
             <button>Signup</button>
           </Link>
           <img className="icon" src='studyIcon.ico' alt='book icon' />
-        </div>
+        </div>)
+        : (null)}
       </div>
     </div>
-    
+
   );
 }
 

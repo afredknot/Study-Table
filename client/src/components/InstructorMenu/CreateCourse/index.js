@@ -13,7 +13,7 @@ const CreateCourse = () => {
 
   const [asssistantSelected, setAssistantSelected] = useState();
 
-  const { data} = useQuery(QUERY_INSTRUCTORS);
+  const { data } = useQuery(QUERY_INSTRUCTORS);
 
   const allInstructors = data?.instructors || [];
 
@@ -56,53 +56,54 @@ const CreateCourse = () => {
           <h4 className="card-header bg-dark text-light p-2">Create a Course</h4>
           <div className="card-body">
 
-              <form onSubmit={handleFormSubmit}>
-                <input
+            <form onSubmit={handleFormSubmit}>
+              <input
+                className="form-input"
+                placeholder="Course Name"
+                name="courseTitle"
+                type="text"
+                value={formState.courseTitle}
+                onChange={handleChange}
+              />
+              <input
+                className="form-input"
+                placeholder="Course Description"
+                name="courseDescription"
+                type="text"
+                value={formState.courseDescription}
+                onChange={handleChange}
+              />
+              {/* <h4 className="card-header bg-dark text-light p-2">Choose a TA</h4> */}
+              {data && (
+                <select
                   className="form-input"
-                  placeholder="Course Name"
-                  name="courseTitle"
-                  type="text"
-                  value={formState.courseTitle}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Course Description"
-                  name="courseDescription"
-                  type="text"
-                  value={formState.courseDescription}
-                  onChange={handleChange}
-                />
-                {/* <h4 className="card-header bg-dark text-light p-2">Choose a TA</h4> */}
-                {data && (
-                  <select 
-                  className="form-input"
-                  name="instructors" 
-                  id="instructor-datalist" 
+                  name="instructors"
+                  id="instructor-datalist"
                   onChange={(e) => setAssistantSelected(e.target.value)}>
                   <option value="">Add a TA</option>
-                    {allInstructors.map((instructor) => {
-                      console.log(user)
-                      console.log(instructor._id)
-                      if (instructor._id !=user){
-                        return <option 
-                          key={instructor._id}  
-                          value={instructor._id}>{instructor.firstName} {instructor.lastName} 
-                        </option>
-                      }}
-                    )}
-                  
-                  </select>
+                  {allInstructors.map((instructor) => {
+                    console.log(user)
+                    console.log(instructor._id)
+                    if (instructor._id !== user) {
+                      return <option
+                        key={instructor._id}
+                        value={instructor._id}>{instructor.firstName} {instructor.lastName}
+                      </option>
+                    }
+                  }
+                  )}
 
-                )}
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
+                </select>
+
+              )}
+              <button
+                className="btn btn-block btn-primary"
+                style={{ cursor: 'pointer' }}
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
 
 
             {error && (
