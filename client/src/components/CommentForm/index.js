@@ -25,6 +25,7 @@ const CommentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try {
       const { data } = await addComment({
         variables: {
@@ -33,7 +34,7 @@ const CommentForm = () => {
           // !! This should only be one or the other?
 
           assignmentId: assignment,
-          helpTicketId: ticket
+          // helpTicketId: ticket
         },
       });
 
@@ -43,7 +44,6 @@ const CommentForm = () => {
 
     setComment("");
     setButtonDisplay(false)
-    // MUTATE HERE WITH VALUE OF comment AS BODY
   }
 
   const toggleButtons = () => {
