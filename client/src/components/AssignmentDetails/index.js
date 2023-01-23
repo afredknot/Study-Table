@@ -8,7 +8,7 @@ import { useProviderContext } from "../../utils/providerContext";
 import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { QUERY_ASSIGNMENT } from '../../utils/queries';
-
+import dayjs from 'dayjs';
 
 const AssignmentDetails = () => {
 
@@ -52,9 +52,9 @@ const AssignmentDetails = () => {
                     <div id={assignmentDetails._id} className='assignmentContent'>
                         <div className="titleField">
                             <h3>{assignmentDetails.assignmentTitle}</h3>
-                            <p>due date here</p>
+                            {/* <p>due date here</p> */}
                             {/* NEED TO DO DATE FORMATTING */}
-                            {/* <p> {assignmentDetails.assignmentDueDate}</p> */}
+                            <p>Due: {dayjs(assignmentDetails.assignmentDueDate).format("MMMM DD, 2023")}</p>
                         </div>
                         <p className="description"> {assignmentDetails.assignmentDescription}</p>
                     </div>

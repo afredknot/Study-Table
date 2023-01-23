@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_COURSE } from '../../../utils/mutations';
 import { QUERY_INSTRUCTORS } from '../../../utils/queries';
-
+import dayjs from 'dayjs';
 import { useProviderContext } from "../../../utils/providerContext";
 
 const CreateCourse = () => {
