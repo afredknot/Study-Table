@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import StatusDropdown from "../StatusDropdown";
 import CommentDisplay from "../CommentDisplay";
 import CommentForm from "../CommentForm";
@@ -46,7 +46,7 @@ const AssignmentDetails = () => {
                         <h3>Assignment Details</h3>
                         {/* <StatusDropdown /> */}
                     </div>
-                        {/* <AssistanceDropdown deets={assignmentDetails}/> */}
+                    {/* <AssistanceDropdown deets={assignmentDetails}/> */}
 
                     {/* Content */}
                     <div id={assignmentDetails._id} className='assignmentContent'>
@@ -75,25 +75,23 @@ const AssignmentDetails = () => {
 
                     {/* Help Tickets */}
                     <div >
-
-                    
-                {data && (
-                    <div className="ticketContainer">
-                        <h3>Tickets</h3>
-                        <ul>
-                            {assignmentDetails.helpTickets.map((helpTicket) => (
-                            <li className= "ticketLine" key={helpTicket._id} onClick={handleTicketSelect}>
-                                <h4 id={helpTicket._id} className="associatedAssignment">{assignment.assignmentTitle}</h4>
-                                <p className="ticketTopic">{helpTicket.topic}</p>
-                                <p className="ticketDescription">{helpTicket.problemDescription}</p>
-                                <a href={helpTicket.githubRepo} ><p className="tagAssi">{helpTicket.githubRepo}</p> </a>
-                                <p className="ticketAuth">{helpTicket.student.username}</p>
-                                <p className="ticketDate">{helpTicket.createdAt}</p>
-                            </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
+                        {data && (
+                            <div className="assTicketContainer">
+                                <h3>Tickets</h3>
+                                <ul className="assignmentTickets">
+                                    {assignmentDetails.helpTickets.map((helpTicket) => (
+                                        <li className="ticketLine" key={helpTicket._id}>
+                                            <h4 id={helpTicket._id} className="associatedAssignment">{assignment.assignmentTitle}</h4>
+                                            <p className="ticketTopic">{helpTicket.topic}</p>
+                                            <p className="ticketDescription">{helpTicket.problemDescription}</p>
+                                            <a target="_blank" href={helpTicket.githubRepo} ><p className="tagAssi">{helpTicket.githubRepo}</p> </a>
+                                            <p className="ticketAuth">{helpTicket.student.username}</p>
+                                            <p className="ticketDate">{helpTicket.createdAt}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
 
 
 
