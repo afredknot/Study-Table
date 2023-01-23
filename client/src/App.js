@@ -12,7 +12,6 @@ import LandingPage from './components/LandingPage';
 import Dashboard from './pages/Dashboard';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Profile from './pages/Profile';
 import Header from './components/Header';
 import LeftNav from './components/LeftNav';
 import TicketView from './pages/TicketView';
