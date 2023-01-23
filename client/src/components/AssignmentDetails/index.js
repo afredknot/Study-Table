@@ -43,10 +43,10 @@ const AssignmentDetails = () => {
 
                     {/* Header */}
                     <div className="cardHeader">
-                        <h2>Assignment Details</h2>
-                        <StatusDropdown />
-                        <AssistanceDropdown deets={assignmentDetails}/>
+                        <h3>Assignment Details</h3>
+                        {/* <StatusDropdown /> */}
                     </div>
+                        <AssistanceDropdown deets={assignmentDetails}/>
 
                     {/* Content */}
                     <div id={assignmentDetails._id} className='assignmentContent'>
@@ -76,6 +76,27 @@ const AssignmentDetails = () => {
                     {/* Help Tickets */}
                     <div className="ticketContainer">
                         <h3>Tickets</h3>
+
+                    
+                {data && (
+
+                    <ul>
+
+                            {assignmentDetails.helpTickets.map((helpTicket) => (
+                            <li key={helpTicket._id} onClick={handleTicketSelect}>
+                                <h4 id={helpTicket._id} className="associatedAssignment">{assignment.assignmentTitle}</h4>
+                                <p className="tagAuth">{helpTicket.student.username}</p>
+                                <p className="tagAssi">{helpTicket.topic}</p>
+                                <p className="tagAssi">{helpTicket.problemDescription}</p>
+                                <p className="tagDur">{helpTicket.createdAt}</p>
+                            </li>
+                            ))}
+
+                    </ul>
+
+                )}
+
+
 
                         <h3>Students Without Assistance Status</h3>
                         <ul className="">

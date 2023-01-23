@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useProviderContext } from "../../utils/providerContext";
 import { useMutation } from '@apollo/client';
-import { CHANGE_PROGRESS_STATUS } from '../../utils/mutations';
+import { CHANGE_ASSISTANCE_STATUS, CHANGE_PROGRESS_STATUS } from '../../utils/mutations';
 
 const AssistanceDropdown = (deets) => {
 
-    const [changeProgressStatus, { error, data }] = useMutation(CHANGE_PROGRESS_STATUS);
+    const [changeAssistanceStatus, { error, data }] = useMutation(CHANGE_ASSISTANCE_STATUS);
     const { user, ticket, updateTicket, assignment, updateAssignment, comment, updateComment } = useProviderContext();
     
     const assignmentDetails = deets.deets
@@ -50,15 +50,16 @@ const AssistanceDropdown = (deets) => {
 
     // ! this useEffect needs attention
     useEffect(() => {
-    checkMyStatus(assignmentDetails);
+        console.log(`status: ${status}`)
+        sendUpdate()
+           
+        checkMyStatus(assignmentDetails);
     }, [assignmentDetails, status]);
 
     const handleChange = async (e) => {
-      
+        
         await setStatus(e.target.value);
-        console.log(status) 
-        // console.log(myHelpStatus)
-        await sendUpdate()
+
 
 // !------------------- This is working, but triggering too quick - need to have setstatus as separate function i think
 
@@ -68,7 +69,7 @@ const AssistanceDropdown = (deets) => {
     const sendUpdate = async() => {
         
         try {
-            const { data } = await changeProgressStatus({
+            const { data } = await changeAssistanceStatus({
             variables: {
                 assignmentId: assignment,
                 currentStatus: myHelpStatus,
@@ -90,7 +91,7 @@ const AssistanceDropdown = (deets) => {
 
         <h4>My status: {display}</h4>
 
-      <select  value={status} onChange={handleChange} >
+      <select  value={myHelpStatus} id ="statusSelector" onChange={handleChange} >
         <option value="studentDefaultStatus" style={{ color: "red" }}>I'm currently working on this independently</option>
         <option value="requestingHelp" style={{ color: "orange" }}>I'd like some assistance</option>
         <option value="offeringAssistance" style={{ color: "green" }}>Happy to help others</option>

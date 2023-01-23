@@ -87,12 +87,12 @@ const LeftNav = ({ }) => {
 
                     {/*----------------------- MAKE THIS A BUTTON TO OPEN MODAL TO CREATE COURSE --------------------*/}
 
-                    {role === 'instructor' && (
+                    {/* {role === 'instructor' && (
                         <ul className='courseList'>
 
                             <li className='course'>Add a Course</li>
                         </ul>
-                    )}
+                    )} */}
 
                     {/* ----------------------------------- */}
 
@@ -104,6 +104,8 @@ const LeftNav = ({ }) => {
 
                         {data && (
                             <div>
+
+                            <h2>Welcome, {me.firstName}</h2>
                                 {me.courses.map((course) => (
                                     <ul key={course._id} className="courseList">
                                         <li id={course._id} className='course' onClick={handleCourseSelect}>
