@@ -17,7 +17,6 @@ const AssignmentDetails = () => {
 
     const handleTicketSelect = function (e) {
         updateAssignment(e.target.id)
-        // console.log(assignment)
         navigate('/assignments');
     };
 
