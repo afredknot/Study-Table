@@ -60,7 +60,6 @@ const TicketSelector = () => {
 
       )}
 
-
       {error && (
         console.log(error)
       )}

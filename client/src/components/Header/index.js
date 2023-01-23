@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import "./style.css";
 
 const Header = ({title}) => {
@@ -22,7 +24,9 @@ const Header = ({title}) => {
 
   return (
     <header>
-      <h1 className ="pageTitle">Study Table</h1>
+      <Link to="/landing">
+        <h1 className ="pageTitle">Study Table</h1>
+      </Link>
     </header>
   );
 }
