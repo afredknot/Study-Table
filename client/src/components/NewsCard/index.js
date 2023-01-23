@@ -4,7 +4,7 @@ import "./style.css";
 const NewsCard = ({ announcements }) => {
 
     return (
-        <div className="card2">
+        <div className="card2 no-scroll">
 
             <div className="cardHeader">
                 <h3>News and Updates</h3>

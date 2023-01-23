@@ -145,6 +145,7 @@ export const QUERY_ASSIGNMENT = gql`
     helpTickets {
       _id
       topic
+      githubRepo
       problemDescription
       createdAt
       ticketStatus

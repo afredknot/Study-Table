@@ -3,6 +3,7 @@ import { useProviderContext } from "../../utils/providerContext";
 import { useMutation } from '@apollo/client';
 import { CHANGE_ASSISTANCE_STATUS, CHANGE_PROGRESS_STATUS } from '../../utils/mutations';
 
+
 const AssistanceDropdown = (deets) => {
 
     const [changeAssistanceStatus, { error, data }] = useMutation(CHANGE_ASSISTANCE_STATUS);
@@ -81,6 +82,7 @@ const AssistanceDropdown = (deets) => {
             console.error(err);
         }
 
+        // window.location.reload()
         }
 
 
