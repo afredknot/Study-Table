@@ -45,11 +45,13 @@ const LeftNav = ({ }) => {
     useEffect(() => {
         setIsMenuOpen(!isMenuOpen);
         updateMyRole(role)
-        navigate('/dashboard');
     }, [course]);
-
+    
     const handleCourseSelect = function (e) {
         updateCourse(e.target.id)
+        setTimeout(() => {
+            navigate('/dashboard');
+          }, 500);
 
     };
 
@@ -58,9 +60,6 @@ const LeftNav = ({ }) => {
     // console.log(me)
     const role = me.role
 
-    setTimeout(() => {
-        updateUser(me._id);
-      }, 1000);
 
     const logout = (event)=>{
         event.preventDefault();

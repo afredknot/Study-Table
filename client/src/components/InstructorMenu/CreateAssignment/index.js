@@ -15,7 +15,6 @@ const CreateAssignment = () => {
     assignmentTitle: '',
     assignmentDescription: '',
     assignmentDueDate: '',
-    courseId: sessionStorage.getItem('course')
   });
   const [createAssignment, { error, data }] = useMutation(CREATE_ASSIGNMENT);
 
@@ -44,7 +43,7 @@ const CreateAssignment = () => {
   const sendAssignment = async() => {
     try {
       const { data } = await createAssignment({
-        variables: { ...formState}
+        variables: { ...formState, courseId: course}
       });
 
     } catch (e) {
