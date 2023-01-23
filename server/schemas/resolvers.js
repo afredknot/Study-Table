@@ -502,7 +502,7 @@ const resolvers = {
       if (context.user) {
         const assignment =  await Assignment.findOneAndUpdate(
           { _id: assignmentId},
-          
+          await
           { 
             $pull: { [`${currentStatus}`]: context.user._id }, 
             $addToSet: { [`${newStatus}`]: context.user._id } 
