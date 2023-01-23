@@ -1,28 +1,22 @@
 import React, { useState } from 'react';
+import { useProviderContext } from '../../utils/providerContext';
 import "./style.css";
 
-const Header = ({title}) => {
+const Header = ({ title }) => {
 
-  // const [searchValue, setSearchValue] = useState('');
+  const { modalVisibility, setVisibility } = useProviderContext();
 
-  // const handleSearch = (e) => {
-  //   setSearchValue(e.target.value);
-  // }
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(`Searching for: ${searchValue}`);
-  //   // MAKE QUERY HERE
-  // }
-  
-      // <form onSubmit={handleSubmit}>
-      //   <input type="text" value={searchValue} onChange={handleSearch} placeholder="Search..."/>
-      //   <button type="submit">Search</button>
-      // </form>
+  const closeModal = () => setVisibility(!modalVisibility);
 
   return (
     <header>
-      <h1 className ="pageTitle">Study Table</h1>
+      <h1 className="pageTitle">Study Table</h1>
+      {modalVisibility && (
+        <div className='modal'>
+          <p>Feature coming soon! For now this is just a placeholder!</p>
+          <button onClick={closeModal}>Okay!</button>
+        </div>
+      )}
     </header>
   );
 }
