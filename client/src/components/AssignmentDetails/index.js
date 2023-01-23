@@ -46,7 +46,7 @@ const AssignmentDetails = () => {
                         <h3>Assignment Details</h3>
                         {/* <StatusDropdown /> */}
                     </div>
-                        <AssistanceDropdown deets={assignmentDetails}/>
+                        {/* <AssistanceDropdown deets={assignmentDetails}/> */}
 
                     {/* Content */}
                     <div id={assignmentDetails._id} className='assignmentContent'>

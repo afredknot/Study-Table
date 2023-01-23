@@ -43,10 +43,22 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    padding-left: 2rem;
+    /* align-items: center; */
 }
 
 .icon{
     background-color: rgba(19, 2, 117, 0.308);
     border-radius: 5%;
+    height: 25vh;
+}
+
+.icon-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 2rem;
+
 }

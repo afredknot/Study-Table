@@ -5,7 +5,11 @@ import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_COURSE } from '../../../utils/mutations';
 import { QUERY_INSTRUCTORS } from '../../../utils/queries';
 
+import { useProviderContext } from "../../../utils/providerContext";
+
 const CreateCourse = () => {
+
+  const { user } = useProviderContext();
 
   const [asssistantSelected, setAssistantSelected] = useState();
 
@@ -42,6 +46,7 @@ const CreateCourse = () => {
     } catch (e) {
       console.error(e);
     }
+    window.location.reload()
   };
 
   return (
@@ -76,12 +81,16 @@ const CreateCourse = () => {
                   id="instructor-datalist" 
                   onChange={(e) => setAssistantSelected(e.target.value)}>
                   
-                    {allInstructors.map((instructor) => (
-                      <option 
-                      key={instructor._id}  
-                      value={instructor._id}>{instructor.firstName} {instructor.lastName} 
+                    {allInstructors.map((instructor) => {
+                      console.log(user)
+                      console.log(instructor._id)
+                      if (instructor._id !=user){
+                        return <option 
+                          key={instructor._id}  
+                          value={instructor._id}>{instructor.firstName} {instructor.lastName} 
                         </option>
-                      ))}
+                      }}
+                    )}
                   
                   </select>
 

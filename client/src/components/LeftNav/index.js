@@ -45,6 +45,7 @@ const LeftNav = ({ }) => {
     useEffect(() => {
         setIsMenuOpen(!isMenuOpen);
         updateMyRole(role)
+        updateUser(me._id)
     }, [course]);
     
     const handleCourseSelect = function (e) {

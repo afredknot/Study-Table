@@ -12,7 +12,7 @@ const Header = ({ title }) => {
 
   return (
     <header>
-      <Link to="/landing">
+      <Link to="/">
         <h1 className="pageTitle">Study Table</h1>
         </Link>
       {modalVisibility && (

@@ -8,6 +8,7 @@ import CreateCourse from '../components/InstructorMenu/CreateCourse';
 import InstructorDashboard from '../components/InstructorDashboard';
 
 import { useProviderContext } from "../utils/providerContext";
+import Students from '../components/InstructorMenu/Students';
 
 const Dashboard = ({ course }) => {
 
@@ -19,7 +20,10 @@ const Dashboard = ({ course }) => {
       <TicketSelector />
       <NewsCard />
       {myRole === 'instructor' ? ( 
+        <>
         <InstructorDashboard />
+        <Students />
+        </>
       ) : <></>
       }
     </main>
