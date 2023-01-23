@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ApolloClient,
   InMemoryCache,
@@ -44,13 +44,22 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+
 function App() {
+  const [modalVisibility, setVisibility] = useState(false)
+  
+  function showResponseModal(){
+    setVisibility(!modalVisibility)
+    console.log('blah')
+  }
   return (
     <ApolloProvider client={client}>
       <Router>
         <div className="appContainer flex-column justify-flex-start min-100-vh">
           <ContextProvider>
             <Header />
+            <div className={`${(modalVisibility)? 'visible': 'hidden'} `}>I am text, fear me</div>
+            <button onClick={showResponseModal}>Click me</button>
              <LeftNav />
               <Routes>
                 <Route path="/" element={<LandingPage />} />
