@@ -23,7 +23,7 @@ you can also go to 'https://secret-taiga-82685.herokuapp.com/' to see a working 
 
 ## Usage
 When you come to the signup page, create either an instructor or student profile. 
-![](./images/studytable-landingpage.png)
+![](./images/landingpage.png)
 
 As an instructor you can add a class, add students and assignments to each class. In addition you can see the status of the students progress if they are completed with an assignment or if they are still working on it.
 As a student you can see the assignments that have been assigned to you and interact with other students in a comment board and be able to offer help or ask for help depending on where you are in the process of the assignment.
