@@ -91,7 +91,7 @@ const AssistanceDropdown = (deets) => {
 
         <h4>My status: {display}</h4>
 
-      <select  value={myHelpStatus} id ="statusSelector" onChange={handleChange} >
+      <select  defaultValue={myHelpStatus} id ="statusSelector" onChange={handleChange} >
         <option value="studentDefaultStatus" style={{ color: "red" }}>I'm currently working on this independently</option>
         <option value="requestingHelp" style={{ color: "orange" }}>I'd like some assistance</option>
         <option value="offeringAssistance" style={{ color: "green" }}>Happy to help others</option>
