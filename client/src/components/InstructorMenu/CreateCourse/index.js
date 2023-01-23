@@ -84,7 +84,7 @@ const CreateCourse = () => {
                     {allInstructors.map((instructor) => {
                       console.log(user)
                       console.log(instructor._id)
-                      if (instructor._id !=user){
+                      if (instructor._id !==user){
                         return <option 
                           key={instructor._id}  
                           value={instructor._id}>{instructor.firstName} {instructor.lastName} 
