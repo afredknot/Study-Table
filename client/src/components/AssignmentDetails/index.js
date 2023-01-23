@@ -8,7 +8,7 @@ import { useProviderContext } from "../../utils/providerContext";
 import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { QUERY_ASSIGNMENT } from '../../utils/queries';
-
+import dayjs from 'dayjs';
 
 const AssignmentDetails = () => {
 
@@ -46,15 +46,15 @@ const AssignmentDetails = () => {
                         <h3>Assignment Details</h3>
                         {/* <StatusDropdown /> */}
                     </div>
-                        <AssistanceDropdown deets={assignmentDetails}/>
+                        {/* <AssistanceDropdown deets={assignmentDetails}/> */}
 
                     {/* Content */}
                     <div id={assignmentDetails._id} className='assignmentContent'>
                         <div className="titleField">
                             <h3>{assignmentDetails.assignmentTitle}</h3>
-                            <p>due date here</p>
+                            {/* <p>due date here</p> */}
                             {/* NEED TO DO DATE FORMATTING */}
-                            {/* <p> {assignmentDetails.assignmentDueDate}</p> */}
+                            <p>Due: {dayjs(assignmentDetails.assignmentDueDate).format("MMMM DD, 2023")}</p>
                         </div>
                         <p className="description"> {assignmentDetails.assignmentDescription}</p>
                     </div>
@@ -74,21 +74,21 @@ const AssignmentDetails = () => {
                     </div>
 
                     {/* Help Tickets */}
-                    <div className="ticketContainer">
-                        <h3>Tickets</h3>
+                    <div >
 
                     
                 {data && (
-                    <div className = "selectors">
+                    <div className="ticketContainer">
+                        <h3>Tickets</h3>
                         <ul>
                             {assignmentDetails.helpTickets.map((helpTicket) => (
-                            <li key={helpTicket._id} onClick={handleTicketSelect}>
+                            <li className= "ticketLine" key={helpTicket._id} onClick={handleTicketSelect}>
                                 <h4 id={helpTicket._id} className="associatedAssignment">{assignment.assignmentTitle}</h4>
-                                <p className="tagAssi">{helpTicket.topic}</p>
-                                <p className="tagAssi">{helpTicket.problemDescription}</p>
+                                <p className="ticketTopic">{helpTicket.topic}</p>
+                                <p className="ticketDescription">{helpTicket.problemDescription}</p>
                                 <a href={helpTicket.githubRepo} ><p className="tagAssi">{helpTicket.githubRepo}</p> </a>
-                                <p className="tagAuth">{helpTicket.student.username}</p>
-                                <p className="tagDur">{helpTicket.createdAt}</p>
+                                <p className="ticketAuth">{helpTicket.student.username}</p>
+                                <p className="ticketDate">{helpTicket.createdAt}</p>
                             </li>
                             ))}
                         </ul>
@@ -97,7 +97,7 @@ const AssignmentDetails = () => {
 
 
 
-                        <h3>Students Without Assistance Status</h3>
+                        {/* <h3>Students Without Assistance Status</h3>
                         <ul className="">
                             {assignmentDetails.studentDefaultStatus.map((student) => (
                                 <li key={student._id}>
@@ -122,7 +122,7 @@ const AssignmentDetails = () => {
                                     <p className="tagAuth">{student.username}</p>
                                 </li>
                             ))}
-                        </ul>
+                        </ul> */}
                     </div>
                 </div>
             )}

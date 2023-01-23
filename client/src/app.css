@@ -26,6 +26,12 @@
 
 }
 
+.pageTitle, 
+.pageTitle:hover{
+  text-decoration: none;
+  color: var(--text)
+}
+
 .dashboard {
   display: flex;
   align-items: center;
@@ -114,6 +120,7 @@ footer {
   width: auto;
   height: auto
 }
+
 
 .student-list {
   margin: 0 auto;

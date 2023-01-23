@@ -16,9 +16,8 @@ import { Link } from 'react-router-dom';
 
 const LeftNav = ({ }) => {
     const navigate = useNavigate();
-    const { course, updateCourse, user, updateUser, myRole, updateMyRole } = useProviderContext();
+    const { courseTitle, updateCourseTitle, course, updateCourse, user, updateUser, myRole, updateMyRole, modalVisibility, setVisibility, setIsMenuOpen, isMenuOpen} = useProviderContext();
 
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [initialPosition, setInitialPosition] = useState(0)
 
     const handleMenuClick = () => {
@@ -43,11 +42,12 @@ const LeftNav = ({ }) => {
     };
 
     useEffect(() => {
-        setIsMenuOpen(!isMenuOpen);
         updateMyRole(role)
+        updateUser(me._id)
     }, [course]);
     
     const handleCourseSelect = function (e) {
+        setIsMenuOpen(!isMenuOpen);
         updateCourse(e.target.id)
         setTimeout(() => {
             navigate('/dashboard');
@@ -68,7 +68,9 @@ const LeftNav = ({ }) => {
 
     };
 
-    // console.log(me)
+    function openInstructorTools() {
+        setVisibility("instructor");
+    }
 
     return (
         <nav
@@ -87,16 +89,10 @@ const LeftNav = ({ }) => {
                         <SettingsMenu />
                     </div>
 
-                    {/*----------------------- MAKE THIS A BUTTON TO OPEN MODAL TO CREATE COURSE --------------------*/}
+                    {role === 'instructor' && (
+                        <button onClick={openInstructorTools}>Instructor Tools</button>
+                    )}
 
-                    {/* {role === 'instructor' && (
-                        <ul className='courseList'>
-
-                            <li className='course'>Add a Course</li>
-                        </ul>
-                    )} */}
-
-                    {/* ----------------------------------- */}
 
                     <ul className='courseList'>
 

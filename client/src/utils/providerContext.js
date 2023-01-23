@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createContext, useContext } from 'react';
 
-import { useMutation, useQuery } from '@apollo/client';
-
-import { ADD_COMMENT, ADD_REPLY, CHANGE_ASSISTANCE_STATUS, CHANGE_PROGRESS_STATUS, UPDATE_HELP_TICKET } from './mutations';
-import { QUERY_ASSIGNMENT, QUERY_COURSE, QUERY_TICKET } from './queries';
-
-
 const ProviderContext = createContext();
 
 export const useProviderContext = () => useContext(ProviderContext);
@@ -18,6 +12,9 @@ export const ContextProvider = ({ children }) => {
 
     const [course, updateCourse] = useState(sessionStorage.getItem('course') || '');
         useEffect(() => window.sessionStorage.setItem(`course`, course), [course]);
+
+    const [courseTitle, updateCourseTitle] = useState(sessionStorage.getItem('courseTitle') || '');
+        useEffect(() => window.sessionStorage.setItem(`courseTitle`, courseTitle), [courseTitle]);   
 
     const [assignment, updateAssignment] = useState(sessionStorage.getItem('assignment') || '');
         useEffect(() => window.sessionStorage.setItem(`assignment`, assignment), [assignment]);
@@ -35,9 +32,11 @@ export const ContextProvider = ({ children }) => {
         useEffect(() => window.sessionStorage.setItem(`myRole`, myRole), [myRole]);
 
     const [modalVisibility, setVisibility] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
     return (
-        <ProviderContext.Provider value={{ user, course, assignment, ticket, comment, reply, myRole, modalVisibility, updateUser, updateCourse, updateAssignment, updateTicket, updateComment, updateReply, updateMyRole, setVisibility }} >
+        <ProviderContext.Provider value={{ user, course, courseTitle, assignment, ticket, comment, reply, myRole, modalVisibility, isMenuOpen, updateUser, updateCourse, updateCourseTitle, updateAssignment, updateTicket, updateComment, updateReply, updateMyRole, setVisibility, setIsMenuOpen }} >
             {children}
         </ProviderContext.Provider>
     )

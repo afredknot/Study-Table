@@ -18,6 +18,7 @@ import LeftNav from './components/LeftNav';
 import TicketView from './pages/TicketView';
 import AssignmentView from './pages/AssignmentView';
 import { ContextProvider, useProviderContext } from './utils/providerContext';
+import Blur from './components/Blur';
 // import ThemeProvider from 'react-bootstrap/ThemeProvider';
 
 // Construct our main GraphQL API endpoint
@@ -54,6 +55,7 @@ function App() {
           <ContextProvider>
             <Header />
             <LeftNav />
+            <Blur />
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/dashboard" element={<Dashboard />} />

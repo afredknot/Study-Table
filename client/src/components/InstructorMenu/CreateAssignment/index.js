@@ -73,7 +73,7 @@ const CreateAssignment = () => {
                   value={formState.assignmentTitle}
                   onChange={handleChange}
                 />
-                <input
+                <textarea
                   className="form-input"
                   placeholder="Assignment Description"
                   name="assignmentDescription"
