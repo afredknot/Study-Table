@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createContext, useContext } from 'react';
 
-import { useMutation, useQuery } from '@apollo/client';
-
-import { ADD_COMMENT, ADD_REPLY, CHANGE_ASSISTANCE_STATUS, CHANGE_PROGRESS_STATUS, UPDATE_HELP_TICKET } from './mutations';
-import { QUERY_ASSIGNMENT, QUERY_COURSE, QUERY_TICKET } from './queries';
-
-
 const ProviderContext = createContext();
 
 export const useProviderContext = () => useContext(ProviderContext);
