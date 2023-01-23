@@ -74,7 +74,11 @@ const LeftNav = ({ }) => {
     }
 
     function openInstructorTools() {
-        setVisibility("instructor");
+        if (modalVisibility == "instructor") {
+            setVisibility(false);
+        } else {
+            setVisibility("instructor");
+        }
     }
 
     return (

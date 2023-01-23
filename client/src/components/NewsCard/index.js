@@ -32,7 +32,7 @@ const NewsCard = ({ announcements }) => {
                 <li className="article">
                     <div>
                         <h4>Code Concept!</h4>
-                        <p>We set out with the goal to create an app called "Study Table". We wanted an app that helps students manage their homework and collaborate with their peers and instructors. With this app, students can set statuses on their assignments, create help tickets when they get stuck and view those tickets created by their fellow students. The design goal with the app is to help students overcome the fear of reaching out for help and being judged for their current knowledge or progress in assignments. With Study Table students can work together to achieve their educational goalsm making the learning process more efficient and enjoyable.</p>
+                        <p>We set out with the goal to create an app called "Study Table". We wanted an app that helps students manage their homework and collaborate with their peers and instructors. With this app, students can create help tickets when they get stuck and view those tickets created by their fellow students. The design goal with the app is to help students overcome the fear of reaching out for help and being judged for their current knowledge or progress in assignments. With Study Table students can work together to achieve their educational goalsm making the learning process more efficient and enjoyable.</p>
                     </div>
                 </li>
             </ul>
