@@ -38,6 +38,7 @@ const AddStudentToCourse = (courseId) => {
     } catch (e) {
       console.error(e);
     }
+    // window.location.reload()
   };
 
   return (
@@ -53,8 +54,9 @@ const AddStudentToCourse = (courseId) => {
                 <select 
                 className="form-input"
                 name="students" 
+                // placeholder="Find a Student"
                 id="students-datalist" onChange={(e) => setUserSelected(e.target.value)}>
-                
+                <option value="">Find a Student</option>
                   {allStudents.map((student) => (
                     <option key={student._id}  value={student._id}>{student.firstName} {student.lastName} </option>
                   ))}

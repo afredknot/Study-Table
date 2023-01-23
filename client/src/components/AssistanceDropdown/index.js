@@ -51,30 +51,31 @@ const AssistanceDropdown = (deets) => {
 
     useEffect(() => {
         sendUpdate()
-        checkMyStatus();
-    }, [assignmentDetails, status]);
-
+    }, []);
+    
     const handleChange = async (e) => {
         await setStatus(e.target.value);
-
+        
     };
-
+    
     const sendUpdate = async() => {
         
         try {
             const { data } = await changeAssistanceStatus({
-            variables: {
-                assignmentId: assignment,
-                currentStatus: myHelpStatus,
-                newStatus: status,
-            },
+                variables: {
+                    assignmentId: assignment,
+                    currentStatus: myHelpStatus,
+                    newStatus: status,
+                },
             });
-        
+            
         } catch (err) {
             console.error(err);
         }
-
+        
+        // checkMyStatus();
         // window.location.reload()
+        
         }
 
 

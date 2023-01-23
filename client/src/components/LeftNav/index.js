@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 
 const LeftNav = ({ }) => {
     const navigate = useNavigate();
-    const { course, updateCourse, user, updateUser, myRole, updateMyRole, modalVisibility, setVisibility, setIsMenuOpen, isMenuOpen} = useProviderContext();
+    const { courseTitle, updateCourseTitle, course, updateCourse, user, updateUser, myRole, updateMyRole, modalVisibility, setVisibility, setIsMenuOpen, isMenuOpen} = useProviderContext();
 
     const [initialPosition, setInitialPosition] = useState(0)
 
@@ -42,11 +42,12 @@ const LeftNav = ({ }) => {
     };
 
     useEffect(() => {
-        setIsMenuOpen(!isMenuOpen);
         updateMyRole(role)
+        updateUser(me._id)
     }, [course]);
     
     const handleCourseSelect = function (e) {
+        setIsMenuOpen(!isMenuOpen);
         updateCourse(e.target.id)
         setTimeout(() => {
             navigate('/dashboard');
