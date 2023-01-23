@@ -37,13 +37,13 @@ const CommentForm = () => {
           // helpTicketId: ticket
         },
       });
-
+      
     } catch (e) {
       console.error(e);
     }
-
     setComment("");
     setButtonDisplay(false)
+    window.location.reload();
   }
 
   const toggleButtons = () => {

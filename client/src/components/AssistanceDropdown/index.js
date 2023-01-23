@@ -3,6 +3,7 @@ import { useProviderContext } from "../../utils/providerContext";
 import { useMutation } from '@apollo/client';
 import { CHANGE_ASSISTANCE_STATUS, CHANGE_PROGRESS_STATUS } from '../../utils/mutations';
 
+
 const AssistanceDropdown = (deets) => {
 
     const [changeAssistanceStatus, { error, data }] = useMutation(CHANGE_ASSISTANCE_STATUS);
@@ -48,21 +49,13 @@ const AssistanceDropdown = (deets) => {
     const [status, setStatus] = useState('');
     
 
-    // ! this useEffect needs attention
     useEffect(() => {
-        console.log(`status: ${status}`)
         sendUpdate()
-           
-        checkMyStatus(assignmentDetails);
+        checkMyStatus();
     }, [assignmentDetails, status]);
 
     const handleChange = async (e) => {
-        
         await setStatus(e.target.value);
-
-
-// !------------------- This is working, but triggering too quick - need to have setstatus as separate function i think
-
 
     };
 
@@ -81,6 +74,7 @@ const AssistanceDropdown = (deets) => {
             console.error(err);
         }
 
+        // window.location.reload()
         }
 
 
@@ -91,7 +85,7 @@ const AssistanceDropdown = (deets) => {
 
         <h4>My status: {display}</h4>
 
-      <select  value={myHelpStatus} id ="statusSelector" onChange={handleChange} >
+      <select  defaultValue={myHelpStatus} id ="statusSelector" onChange={handleChange} >
         <option value="studentDefaultStatus" style={{ color: "red" }}>I'm currently working on this independently</option>
         <option value="requestingHelp" style={{ color: "orange" }}>I'd like some assistance</option>
         <option value="offeringAssistance" style={{ color: "green" }}>Happy to help others</option>
