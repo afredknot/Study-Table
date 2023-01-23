@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createContext, useContext } from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
@@ -13,218 +13,31 @@ export const useProviderContext = () => useContext(ProviderContext);
 
 export const ContextProvider = ({ children }) => {
 
-    const [user, updateUser] = useState("");
-    const [course, updateCourse] = useState("");
-    const [assignment, updateAssignment] = useState("");
-    const [ticket, updateTicket] = useState("");
-    const [comment, updateComment] = useState("");
-    const [reply, updateReply] = useState("");
-    const [myRole, updateMyRole] = useState("");
-        
-//         functions: {
+    const [user, updateUser] = useState(sessionStorage.getItem('user') || '');
+        useEffect(() => window.sessionStorage.setItem(`user`, user), [user]);
 
-//         // query individual assignment and assignment tickets
-//         HandleAssignmentSelect: function(assignmentId) {
-            
-//             const { loading, data } = useQuery(QUERY_ASSIGNMENT, {
-//                 variables: { assignmentId: assignmentId },
-//             });
+    const [course, updateCourse] = useState(sessionStorage.getItem('course') || '');
+        useEffect(() => window.sessionStorage.setItem(`course`, course), [course]);
 
-//             const assignment = data?.assignment || {};
-//             console.log(assignment)
-//             console.log("Clicked Assignment!");
-//         },
-        
-        
+    const [assignment, updateAssignment] = useState(sessionStorage.getItem('assignment') || '');
+        useEffect(() => window.sessionStorage.setItem(`assignment`, assignment), [assignment]);
 
+    const [ticket, updateTicket] = useState(sessionStorage.getItem('ticket') || '');
+        useEffect(() => window.sessionStorage.setItem(`ticket`, ticket), [ticket]);
 
+    const [comment, updateComment] = useState(sessionStorage.getItem('comment') || '');
+        useEffect(() => window.sessionStorage.setItem(`comment`, comment), [comment]);
 
-//         // // query individual ticket and get details
-//         // handleTicketSelect: function(helpTicketId) {
-//         //     const { loading, data } = useQuery(QUERY_TICKET, {
-//         //         variables: { id: helpTicketId },
-//         //     });
+    const [reply, updateReply] = useState(sessionStorage.getItem('reply') || '');
+        useEffect(() => window.sessionStorage.setItem(`reply`, reply), [reply]);
 
-//         //     const ticket = data?.helpTicket || {};
-//         //     console.log(ticket)
-//         //     console.log("Clicked Ticket");
-//         // },
+    const [myRole, updateMyRole] = useState(sessionStorage.getItem('myRole') || '');
+        useEffect(() => window.sessionStorage.setItem(`myRole`, myRole), [myRole]);
 
-//         CreateComment: function(assignmentId, helpTicketId) {
-//             const [commentState, setCommentState] = useState('');
-//             const [addComment, { error, data }] = useMutation(ADD_COMMENT);
-            
-//             // const handleChange = (event) => {
-//             //     const { name, value } = event.target;
-//             //     setCommentState({comment});
-//             // };
-            
-//             // const handleFormSubmit = async (event) => {
-//             //     event.preventDefault();
-//                 try {
-//                     const { data } = addComment({
-//                         variables: { 
-//                             assignmentId: "63c8a1e1003d5a5cd2a758a4",
-//                             helpTicketId,
-//                             commentText: "Test Comment"
-//                         },
-//                     });
-//                 } catch (e) {
-//                     console.error(e);
-//                 }
-//             // };
-//         },
-
-//         // createReply: function(commentId) {
-//         //     const [replyState, setReplyState] = useState('');
-//         //     const [addReply, { error, data }] = useMutation(ADD_REPLY);
-            
-//         //     const handleChange = (event) => {
-//         //         const { name, value } = event.target;
-//         //         setCommentState({reply});
-//         //         };
-            
-//         //         const handleFormSubmit = async (event) => {
-//         //         event.preventDefault();
-            
-//         //         try {
-//         //             const { data } = await addReply({
-//         //             variables: { 
-//         //                 commentId,
-//         //                 replyText: replyState
-//         //                 },
-//         //             });
-            
-//         //         } catch (e) {
-//         //             console.error(e);
-//         //         }
-//         //     };
-//         // },
-
-//         ChangeProgressStatus: function( {currentProgressStatus, assignmentId} ) {
-            
-//             //   progress statuses are: "studentProgressNotStarted", "studentProgressWorking", and "studentProgressCompleted"
-            
-//             const [newProgressStatus, setNewProgressStatus] = useState('');
-//             const [changeProgressStatus, { error }] = useMutation(CHANGE_PROGRESS_STATUS);
-
-//             const handleFormSubmit = async (event) => {
-//                 event.preventDefault();
-            
-//                 try {
-//                     const { data } = await changeProgressStatus({
-//                     variables: {
-//                         assignmentId,
-//                         currentProgressStatus,
-//                         newProgressStatus,
-//                     },
-//                     });
-            
-//                 } catch (err) {
-//                     console.error(err);
-//                 }
-//             };
-//         },
-
-    
-//         // changeAssistanceStatus: function( {currentAssistanceStatus, assignmentId} ) {
-//         //     //   progress statuses are: "studentDefaultStatus", "requestingHelp", and "offeringAssistance"
-            
-//         //     const [newAssistanceStatus, setNewAssistanceStatus] = useState('');
-//         //     const [changeAssistanceStatus, { error }] = useMutation(CHANGE_ASSISTANCE_STATUS);
-
-//         //     const handleFormSubmit = async (event) => {
-//         //         event.preventDefault();
-            
-//         //         try {
-//         //             const { data } = await changeAssistanceStatus({
-//         //             variables: {
-//         //                 assignmentId,
-//         //                 currentAssistanceStatus,
-//         //                 newAssistanceStatus,
-//         //             },
-//         //             });
-            
-//         //         } catch (err) {
-//         //             console.error(err);
-//         //         }
-//         //     };
-//         // },
-
-        
-//         // updateHelpTicket: function( { helpTicketId } ) {
-//         //     // ticketOpen/ticketStatus are Boolean where true=open ticket
-
-//         //     const [topic, setSubject] = useState("");
-//         //     const [repo, setRepo] = useState("");
-//         //     const [body, setBody] = useState("");
-//         //     const [ticketOpen, setTicketOpen] = useState(true);
-
-//         //     const [updateHelpTicket, { error, data }] = useMutation(UPDATE_HELP_TICKET);
-          
-//         //     const handleChange = (e) => {
-//         //       switch(e.target.id) {
-//         //         case "1":
-//         //             setSubject(e.target.value);
-//         //             break;
-//         //         case "2":
-//         //             setRepo(e.target.value);
-//         //             break;
-//         //         case "3":
-//         //             setBody(e.target.value);
-//         //             break;
-//         //         case "4":
-//         //             setTicketOpen(e.target.value);
-//         //             break;
-//         //         };
-//         //     };
-          
-//         //     const handleSubmit = async(e) => {
-//         //       e.preventDefault();
-//         //       // SUBMITTED DATA
-//         //       try {
-//         //         const { data } = await updateHelpTicket({
-//         //           variables: {
-//         //             helpTicketId: helpTicketId,
-//         //             topic: topic,
-//         //             githubRpo: repo,
-//         //             problemDescription: body,
-//         //             ticketStatus: ticketOpen
-//         //           },
-//         //         });
-          
-//         //       } catch (e) {
-//         //         console.error(e);
-//         //       }
-          
-//         //       // MUTATE HERE
-//         //       setSubject("");
-//         //       setRepo("");
-//         //       setBody("");
-//         //       // send success message and return to ???
-//         //     };
-//         // },
-
-//         // viewProfile: function() {
-//         //     console.log(user);
-//         //     // ??? QUERY_ME
-
-//         // },
-
-//         // handleChange: function(event) {
-//         //     console.log(event.target);
-//         // },
-//         useAMutation: function (mutation, options){
-//             const result = useMutation(mutation, options);
-//             return result
-//         },
-//     }   
-//   }     
-  
-return (
-    <ProviderContext.Provider value={{user, course, assignment, ticket, comment, reply, myRole, updateUser, updateCourse, updateAssignment, updateTicket, updateComment, updateReply, updateMyRole}} >
-        {children}
-    </ProviderContext.Provider>
-)
+    return (
+        <ProviderContext.Provider value={{ user, course, assignment, ticket, comment, reply, myRole, updateUser, updateCourse, updateAssignment, updateTicket, updateComment, updateReply, updateMyRole }} >
+            {children}
+        </ProviderContext.Provider>
+    )
 }
 
