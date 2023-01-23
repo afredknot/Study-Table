@@ -45,6 +45,7 @@ export const QUERY_USERS = gql`
 export const QUERY_USER = gql`
   query user($id: ID!) {
     user(_id: $id) {
+      _id
       username
       role
       firstName
@@ -201,6 +202,7 @@ export const QUERY_COURSE = gql`
   query course($courseId: ID!) {
     course(courseId: $courseId) {
       courseTitle
+      _id
       assignments {
         assignmentTitle
         assignmentDueDate
