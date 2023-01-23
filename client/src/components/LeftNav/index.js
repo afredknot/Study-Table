@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 
 const LeftNav = ({ }) => {
     const navigate = useNavigate();
-    const { courseTitle, updateCourseTitle, course, updateCourse, user, updateUser, myRole, updateMyRole, modalVisibility, setVisibility, setIsMenuOpen, isMenuOpen} = useProviderContext();
+    const { courseTitle, updateCourseTitle, course, updateCourse, user, updateUser, myRole, updateMyRole, modalVisibility, setVisibility, setIsMenuOpen, isMenuOpen } = useProviderContext();
 
     const [initialPosition, setInitialPosition] = useState(0)
 
@@ -45,13 +45,13 @@ const LeftNav = ({ }) => {
         updateMyRole(role)
         updateUser(me._id)
     }, [course]);
-    
+
     const handleCourseSelect = function (e) {
         setIsMenuOpen(!isMenuOpen);
         updateCourse(e.target.id)
         setTimeout(() => {
             navigate('/dashboard');
-          }, 500);
+        }, 500);
 
     };
 
@@ -67,6 +67,11 @@ const LeftNav = ({ }) => {
         setIsMenuOpen(!isMenuOpen);
 
     };
+
+    const login = () => {
+        navigate("/login");
+        setIsMenuOpen(!isMenuOpen);
+    }
 
     function openInstructorTools() {
         setVisibility("instructor");
@@ -90,7 +95,7 @@ const LeftNav = ({ }) => {
                     </div>
 
                     {role === 'instructor' && (
-                        <button onClick={openInstructorTools}>Instructor Tools</button>
+                        <button className="logButton" onClick={openInstructorTools}>Instructor Tools</button>
                     )}
 
 
@@ -123,13 +128,11 @@ const LeftNav = ({ }) => {
 
                         <div> {Auth.loggedIn() ? (
                             <>
-                                <button className="logButton" onClick={logout}> Log Out </button>
+                                <button className="logButton" onClick={logout}>Log Out</button>
                             </>
                         ) : (
                             <>
-                                <Link className="logButton" onClick={handleMenuClick} to="/login">
-                                    Login
-                                </Link>
+                                <button className="logButton" onClick={login}>Login</button>
                             </>
                         )}
 
