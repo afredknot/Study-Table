@@ -73,14 +73,14 @@ const CreateCourse = () => {
                   value={formState.courseDescription}
                   onChange={handleChange}
                 />
-                <h4 className="card-header bg-dark text-light p-2">Choose a TA</h4>
+                {/* <h4 className="card-header bg-dark text-light p-2">Choose a TA</h4> */}
                 {data && (
                   <select 
                   className="form-input"
                   name="instructors" 
                   id="instructor-datalist" 
                   onChange={(e) => setAssistantSelected(e.target.value)}>
-                  
+                  <option value="">Add a TA</option>
                     {allInstructors.map((instructor) => {
                       console.log(user)
                       console.log(instructor._id)
