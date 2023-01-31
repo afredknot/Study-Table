@@ -43,7 +43,10 @@ https://secret-taiga-82685.herokuapp.com/
 # Contributors
 Study Table was developed and will have continued improvement by the following group
 
-Michael Frabott -- https://github.com/mfrabott
-Tom Fallara -- https://github.com/TomFallara
-Nathaniel Fritz -- https://github.com/Dalidorn/
-Daniel Nelson -- https://github.com/afredknot
+Michael Frabott - FullStack -- https://github.com/mfrabott
+
+Tom Fallara - BackEnd -- https://github.com/TomFallara
+
+Nathaniel Fritz - FrontEnd -- https://github.com/Dalidorn
+
+Daniel Nelson - FullStack & DevOps -- https://github.com/afredknot
